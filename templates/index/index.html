@@ -1,0 +1,155 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+    The Challenge
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index/resources/css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="hero-box">
+            <h1>The Challenge</h1>
+            <p class="introduction">
+                Welcome to <strong>The Challenge</strong>, a gauntlet of 14 mathematics questions that
+                are to be solved within 15 minutes.
+                <br><br>
+                <em>Ready to begin?</em>
+                <br>
+                <button class="start-button" id="start-button"><strong>Start The Challenge</strong></button>
+                <br><br>
+                <em>Scroll down to read more about The Challenge</em>
+            </p>
+            <span id="mobile-error"></span>
+        </div>
+    </div>
+
+    <div class="information-box">
+        <div class="row">
+            <h2>Information About The Challenge</h2>
+            <p class="information">
+                There will be 14 questions in <strong>The Challenge</strong>. This means that you will have an average
+                of
+                approximately 64.3 seconds to solve each question in the 15 minutes (900 seconds) given to you. All four
+                movements of <a href="https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)#Suite_No._1,_Op._46"
+                                target="_blank">Edvard Grieg's Peer Gynt Suite No. 1, Op. 46</a> will be
+                played during this time.
+                <br><br>
+                However, expect that the questions' difficulty to increase as you progress.
+                <br><br>
+                The following are the 14 questions' testing points:
+            </p>
+            <ol class="information">
+                <li>Just simple adding/subtracting.</li>
+                <li>Harder addition/subtraction/multiplication/division question.</li>
+                <li>Simple "solving for $x$" problem. Note that $x$ is in a linear equation.</li>
+                <li>Factorising <strong>or</strong> expanding of some identities.</li>
+                <li>Determine the $r$<sup>th</sup> term of a binomial expansion. It is guaranteed that the value of $n$
+                    in
+                    $\left(ax^p \pm \frac{c}{dx^q}\right)^n$ <strong>will not exceed 8</strong>.
+                </li>
+                <li>Solve an equation involving surds.</li>
+                <li>Simple logarithm-cum-modulus equation.</li>
+                <li>Determine values of $a$, $b$ and $c$ in the expression $y = a \sin\left(\frac xb\right) + c$ or $y =
+                    a
+                    \cos\left(\frac xb\right) + c$ when given a graph of that function.
+                </li>
+                <li>Derivative of `sin x`, `cos x`, `tan x`, `e^x`, and `ln x`, together with sums and differences.</li>
+                <li>Definite integral of a polynomial. It is guaranteed that the degree of the polynomial will
+                    <strong>not</strong> exceed 5.
+                </li>
+                <li>Integral of `(ax + b)^n` for any rational $n$ (including negative $n$), `sin(ax + b)`, `cos(ax +
+                    b)`,
+                    $\sec^2x$ and/or `e^(ax + b)`, together with constant multiples, sums and differences.
+                </li>
+                <li>Identify, using the discriminant, which of the three given quadratic equations is possible to
+                    produce
+                    real roots. Also tests on solving quadratic equations.
+                </li>
+                <li>Combination of derivatives and solving of cubic equation for $x$. It is guaranteed that there will
+                    be at
+                    least one <em>trivial</em> solution, and that all solutions are integers.
+                </li>
+                <li>Simultaneous equations involving a linear equation (a chord of a circle) and the equation of that
+                    circle. It is guaranteed that there are two unique solutions for $x$ and $y$.
+                </li>
+            </ol>
+            <p class="information">
+                Some <a href="{{ url_for('static', filename='index/resources/others/practiceQuestions.pdf') }}"
+                        download>practice
+                questions</a> are provided for your reference, along with their answers.
+            </p>
+        </div>
+
+        <div class="row">
+            <h2>Information for Participants</h2>
+            <div class="information">
+                <ul>
+                    <li><strong>Do not reload the page when playing The Challenge.</strong></li>
+                    <li><strong>All answers are to be typed in the MathLex language, as specified
+                        <a href="http://mathlex.org/doc/language" target="_blank">here</a>.</strong> The following are
+                        several important pointers when entering your answer:
+                        <ul>
+                            <li>To enter $ax$ you will need to enter the string <code>a*x</code> into the input
+                                field.
+                            </li>
+                            <li>To enter a fraction like $\frac pq$ you will need to enter the string <code>p/q</code>
+                                into the input field.</li>
+                            <li>To enter $\sqrt{ax+b}$ you will need to enter the string <code>sqrt(a*x+b)</code> into
+                                the input field.
+                            </li>
+                            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string
+                                <code>(sec(a*x+b)**2)</code> or <code>(sec(a*x+b)^2)</code> into the input field.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>It is entirely possible for mathematics equations to not render properly. <strong>If this occurs
+                        to you, reload and try The Challenge again.</strong></li>
+                    <li>Answers which are not exact are to be rounded to 3 decimal places.
+                        <ul>
+                            <li><strong>Exception</strong>: For question 5 leave all coefficients in
+                                <strong>exact</strong> form. This includes the term which does not include an $x$ in it
+                                (i.e. the term independent of $x$).
+                            </li>
+                            <li><strong>Exception</strong>: For questions 9, 10 and 11 all coefficients of $x$ are to be
+                                in <strong>exact</strong> form.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>A (scientific) calculator is to be used, whenever it is appropriate to do so.</li>
+                    <li>The working for the answers is <strong>optional</strong>. Only the final answer will be checked.
+                        <ul>
+                            <li>However, you are advised to prepare a blank sheet of A4 or US Letter paper for the rough
+                                working for the questions.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Please ensure that <strong>audio is not disabled</strong> on this site, as music will be played.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="licenses-box">
+                <h2>Licenses Of Software Used</h2>
+                <p>
+                    Please click on <a href="{{ url_for('licenses') }}">this link</a> to go to the page where all the
+                    licences are stored.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with &heartsuit; by <a href="https://github.com/Ryan-Kan" target="_blank">Ryan Kan</a>. &copy;
+            Copyright Ryan Kan</p>
+    </footer>
+
+{% endblock %}
+
+{% block body_scripts %}
+    <script src="{{ url_for('static', filename='index/resources/js/index.js') }}"></script>
+{% endblock %}

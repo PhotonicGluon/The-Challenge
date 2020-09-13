@@ -1,0 +1,88 @@
+* {
+    font-family: "Arial", sans-serif;
+}
+
+html {
+    text-rendering: optimizeLegibility;
+    font-size: 20px; /* This is the global font size */
+}
+
+code {
+    padding: 1px 5px;
+    background: #e4e6e8;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+h2 {
+    margin-top: 8px;
+}
+
+footer {
+    padding: 10px 0 10px 0;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #28b062;
+    color: white;
+}
+
+footer a {
+    color: white;
+}
+
+.header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../img/header-background.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.hero-box {
+    position: absolute;
+    width: 100%; /* Width is 100% of the screen's width */
+    top: 50%; /* 50% from the top */
+    transform: translate(0%, -50%);
+    text-align: center;
+    color: white;
+}
+
+#mobile-error {
+    color: #f44336;
+}
+
+.introduction {
+    text-align: center;
+}
+
+.start-button {
+    border: 0;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 5px;
+    color: white;
+}
+
+.start-button:enabled {
+    background-color: #28b062;
+}
+
+.start-button:disabled {
+    background-color: #999;
+}
+
+.information-box {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.information {
+    text-align: justify;
+}

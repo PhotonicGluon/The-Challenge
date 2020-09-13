@@ -1,0 +1,127 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+    Licenses - The Challenge
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index/resources/css/licenses.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1>Licenses</h1>
+        <p class="long-copy">The following are the licences of all the CSS and Javascript files used in this
+            project.</p>
+    </div>
+
+    <div class="row">
+        <div class="col span-1-of-2 box">
+            <h2><code>progressbar.min.js</code> (MIT License)</h2>
+            <p class="long-copy">
+                The MIT License (MIT)<br><br>
+
+                Copyright (c) 2015 Kimmo Brunfeldt<br><br>
+
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:<br><br>
+
+                The above copyright notice and this permission notice shall be included in
+                all copies or substantial portions of the Software.<br><br>
+
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                THE SOFTWARE.
+            </p>
+        </div>
+        <div class="col span-1-of-2 box">
+            <h2>Ionicons (MIT License)</h2>
+            <p class="long-copy">
+                The MIT License (MIT)<br><br>
+
+                Copyright (c) 2015-present Ionic (http://ionic.io/)<br><br>
+
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:<br><br>
+
+                The above copyright notice and this permission notice shall be included in
+                all copies or substantial portions of the Software.<br><br>
+
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                THE SOFTWARE.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col span-1-of-2 box">
+            <h2><code>normalize.css</code> (MIT License)</h2>
+            <p class="long-copy">
+                The MIT License (MIT)<br><br>
+
+                Copyright © Nicolas Gallagher and Jonathan Neal<br><br>
+
+                Permission is hereby granted, free of charge, to any person obtaining a copy of
+                this software and associated documentation files (the "Software"), to deal in
+                the Software without restriction, including without limitation the rights to
+                use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+                of the Software, and to permit persons to whom the Software is furnished to do
+                so, subject to the following conditions:<br><br>
+
+                The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.<br><br>
+
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>Songs</h1>
+        <p class="long-copy">
+            The songs used in The Challenge, which are the movements of
+            <a href="https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)#Suite_No._1,_Op._46" target="_blank">Edvard Grieg's
+                Peer Gynt Suite No. 1, Op. 46</a>, are <strong>in the public domain</strong>.
+        </p>
+    </div>
+    <div class="row">
+        <h1>Software Which Licenses' Could Not Be Found</h1>
+        <p class="long-copy">
+            Despite my best efforts, I, <a href="https://github.com/Ryan-Kan" target="_blank">Ryan Kan</a>, am not able
+            to find the following software's licenses. If you do have a license, I would be pleased to amend this page
+            as soon as possible.
+        </p>
+        <ul>
+            <li>Responsive Grid System (<a href="http://www.responsivegridsystem.com/">http://www.responsivegridsystem.com/</a>)
+            </li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Made with &heartsuit; by <a href="https://github.com/Ryan-Kan" target="_blank">Ryan Kan</a>. &copy;
+            Copyright Ryan Kan</p>
+    </footer>
+{% endblock %}

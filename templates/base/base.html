@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Define The Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='base/resources/img/favicon.png') }}">
+
+    <!-- Include Vendors' CSS files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/grid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/ionicons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/normalize.css') }}">
+
+    <!-- Include My CSS files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/resources/css/base.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <!-- Load Header Scripts -->
+    <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true
+              },
+              TeX: {
+                equationNumbers: {
+                    autoNumber: "AMS"
+                    }
+                }
+            });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src={{ url_for('static', filename='base/vendors/js/progressbar.min.js') }}></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='base/vendors/js/jquery.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/script.js') }}"></script>
+
+    {% block header_scripts %}{% endblock %}
+</head>
+
+<body>
+{% block content %}{% endblock %}
+
+<!-- Scripts -->
+{% block body_scripts %}{% endblock %}
+
+<!-- Display any alerts -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                console.log("{{ message }}");
+                create_alert("{{ message }}", document.body);  // Will show an alert
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</body>
+
+</html>

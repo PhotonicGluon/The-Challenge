@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% block title %}The Challenge{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='the_challenge/resources/css/questions.css') }}">
+{% endblock %}
+
+{% block header_scripts %}
+    <script>
+        const QUESTIONS_AND_ANSWERS = JSON.parse({{ session["RunData"]|tojson|safe }});
+        const Q8_IMAGE_SOURCE = "{{ url_for('static', filename='others/q8') }}/" + `Q8_${getUUIDCookie()}.png`;
+    </script>
+{% endblock %}
+
+{% block content %}
+    <audio id="audio"
+           preload="auto"
+           src="{{ url_for('static', filename='audio-v2.mp3') }}">
+
+        <p>Your browser does not support the audio element.</p>
+    </audio>
+
+    <audio id="success-audio"
+           preload="auto"
+           src="{{ url_for('static', filename='the_challenge/vendors/audio/success.mp3') }}">
+
+        <p>Your browser does not support the audio element.</p>
+    </audio>
+
+    <div class="head-box">
+        <div class="max-width-1080">
+            <h1 class="float-left">The Challenge</h1>
+            <div class="float-right" id="loading-bar"></div>
+        </div>
+    </div>
+
+        <div class="body-container max-width-1080">
+            <div class="question-container" id="question-container"></div>
+            <div class="submit-button">
+                <button id="submit">Submit Answer</button>
+            </div>
+        </div>
+{% endblock %}
+
+{% block body_scripts %}
+    <script src="{{ url_for('static', filename='the_challenge/vendors/js/mathlex.js') }}"></script>
+    <script src="{{ url_for('static', filename='the_challenge/resources/js/questions.js') }}"></script>
+{% endblock %}

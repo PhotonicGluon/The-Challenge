@@ -1,0 +1,39 @@
+* {
+    font-family: "Arial", sans-serif;
+}
+
+input[type="button"] {
+    border: 0;
+    width: 400px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 5px;
+    color: white;
+}
+
+input[type="button"]:enabled {
+    background-color: #28b062;
+}
+
+span {
+    font-size: 10pt;
+}
+.page {
+    position: absolute;
+    width: 1080px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.page img {
+    width: 10%;
+    height: 10%;
+}
+
+@media print {
+    input[type="button"] {
+        display: none;
+    }
+}

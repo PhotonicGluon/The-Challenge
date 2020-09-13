@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+
+{% block title %}Loading...{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='the_challenge/resources/css/loading.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="loading-box">
+        <div class="preparing-questions">
+            <h1>Preparing Questions...</h1>
+        </div>
+        <div id="loading-bar"></div>
+    </div>
+
+    <audio id="audio"
+           preload="auto"
+           src="{{ url_for('static', filename='audio-v2.mp3') }}">
+
+        <p>Your browser does not support the audio element.</p>
+    </audio>
+{% endblock %}
+
+{% block body_scripts %}
+    <script src="{{ url_for('static', filename='the_challenge/resources/js/loading.js') }}"></script>
+{% endblock %}

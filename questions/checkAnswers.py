@@ -2,7 +2,7 @@
 checkAnswers.py
 
 Created on 2020-09-11
-Updated on 2020-09-11
+Updated on 2020-09-18
 
 Copyright Ryan Kan 2020
 
@@ -75,7 +75,8 @@ def check_user_answer(user_answer, calculated_answer):
 
     Args:
         user_answer (Union[str, int, float, List[Union[int, float]]], Tuple[Union[int, float]]]): The user's answer.
-        calculated_answer (Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]]): The calculated answer.
+        calculated_answer (Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]]): The calculated
+                                                                                                        answer.
 
     Returns:
         bool: Returns True then the user's answer is correct. If it is wrong it will return False instead.
@@ -83,7 +84,6 @@ def check_user_answer(user_answer, calculated_answer):
 
     # CONSTANTS
     testcases = [math.pi, math.e, 2 * math.sin(0.3 * np.pi)]  # pi, e, φ (golden ratio)
-    print(calculated_answer)
 
     # COMPUTATION
     # Determine the type of the calculated answer

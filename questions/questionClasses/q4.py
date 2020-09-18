@@ -2,7 +2,7 @@
 q4.py
 
 Created on 2020-08-21
-Updated on 2020-09-10
+Updated on 2020-09-18
 
 Copyright Ryan Kan 2020
 
@@ -54,10 +54,10 @@ class Q4(Question):
         exp2 = parse_expr(exp2)
 
         # Substitute some multiples of x and y as A and B
-        a1 = self.random.randint(1, 9) * w
-        b1 = self.random.randint(1, 9) * x
-        a2 = self.random.randint(1, 9) * y
-        b2 = self.random.randint(1, 9) * z
+        a1 = self.random.randint(2, 9) * w
+        b1 = self.random.randint(2, 9) * x
+        a2 = self.random.randint(2, 9) * y
+        b2 = self.random.randint(2, 9) * z
 
         exp1 = exp1.subs(a, a1).subs(b, b1)
         exp2 = exp2.subs(a, a2).subs(b, b2)

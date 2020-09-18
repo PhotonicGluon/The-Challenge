@@ -2,7 +2,7 @@
 q7.py
 
 Created on 2020-08-21
-Updated on 2020-09-10
+Updated on 2020-09-18
 
 Copyright Ryan Kan 2020
 
@@ -25,10 +25,10 @@ class Q7(Question):
 
     def calculations(self):
         # Generate the constants' values
-        a = self.random.randint(1, 9)
+        a = self.random.randint(2, 9)
         b = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
         c = self.random.randint(2, 10)
-        d = self.random.randint(1, 9)
+        d = self.random.randint(2, 9)
         e = self.random.randint(-9, 9)
         f = self.random.randint(1, 10)
 
@@ -57,4 +57,3 @@ if __name__ == "__main__":
     question.calculations()
     print(question.generate_question())
     print("[ANSWER]", question.generate_answer())
-    print(question.check_user_answer([1, 2, 3, 4], [2, 1, 4, 3]))

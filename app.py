@@ -80,7 +80,21 @@ def check_image_deletion_time(loop_on):
 
 
 # PAGES
-# Secret Pages
+# 'Functional' Pages
+@app.route("/secret/check_connection")
+def check_connection():
+    # Get the page's arguments
+    key = request.args.get("key", None, type=str)
+
+    # Check the key
+    if key == "connection":
+        # Since the user is able to access this page they are online
+        return "Connected"
+    else:
+        # Redirect back to index
+        return redirect(url_for("index"))
+
+
 @app.route("/secret/start_challenge")
 def start_challenge():
     # Get the page's arguments

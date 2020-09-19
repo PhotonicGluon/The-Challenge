@@ -2,18 +2,21 @@
 q4.py
 
 Created on 2020-08-21
-Updated on 2020-09-18
+Updated on 2020-09-19
 
 Copyright Ryan Kan 2020
 
 Description: A file which holds the designated question class.
+
+Todo:
+    - Find a way to ensure that the user actually expanded/factorised the question's expressions.
 """
 
 # IMPORTS
 from sympy import latex, symbols
 from sympy.parsing.sympy_parser import parse_expr
 
-from questions.questionClasses import Question
+from questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

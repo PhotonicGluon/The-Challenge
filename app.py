@@ -19,9 +19,6 @@ socketIO = SocketIO(app)
 IMAGE_DELETION_TIME_FILE = "JSON_Files/Image_Deletion_Time.json"  # This will store all the image deletion times
 SUCCESS_TIMES_FILE = "JSON_Files/Success_Times.json"  # This will store all the success times
 
-# GLOBAL VARIABLES
-questionBank = None
-
 
 # FUNCTIONS
 def clear_user_data():
@@ -243,7 +240,6 @@ def load_challenge():
 
 @app.route("/the-challenge")
 def the_challenge():
-    # return render_template("the_challenge/questions.html")
     if "starting_challenge" in session and session["starting_challenge"]:
         session["starting_challenge"] = False  # Reset the flag
         return render_template("the_challenge/questions.html")
@@ -275,25 +271,29 @@ def success_specific(userid):
 
 # SocketIO Pages
 @socketIO.on("Heartbeat")
-def heartbeat(uid):
-    # Get the UUID
-    uuid_received = uid["uuid"]
-    # print(f"Heartbeat data received: {uuid_received}")
+def heartbeat(heartbeat_data):
+    # Check if the `heartbeat_data` has info in it
+    if len(list(heartbeat_data)) != 0:
+        # Get the UUID
+        uuid_received = heartbeat_data["uuid"]
+        # print(f"Heartbeat data received: {uuid_received}")
 
-    # Extend the time to delete the image file
-    with open(IMAGE_DELETION_TIME_FILE, "r") as infile:
-        if len(infile.read()) <= 5:
-            infile.seek(0)  # Move file pointer to the front of the file
-            image_deletion_time = json.load(infile)
-        else:
-            image_deletion_time = {}
-        infile.close()
+        # Extend the time to delete the image file
+        with open(IMAGE_DELETION_TIME_FILE, "r") as infile:
+            if len(infile.read()) <= 5:
+                infile.seek(0)  # Move file pointer to the front of the file
+                image_deletion_time = json.load(infile)
+            else:
+                image_deletion_time = {}
+            infile.close()
 
-    image_deletion_time[uuid_received] = time.time() + 60 * 5  # Extend the time by 5 minutes
+        image_deletion_time[uuid_received] = time.time() + 60 * 5  # Extend the time by 5 minutes
 
-    with open(IMAGE_DELETION_TIME_FILE, "w") as outfile:
-        json.dump(image_deletion_time, outfile)
-        outfile.close()
+        with open(IMAGE_DELETION_TIME_FILE, "w") as outfile:
+            json.dump(image_deletion_time, outfile)
+            outfile.close()
+    else:
+        print("A user tried to send a heartbeat but their cookies were disabled.")
 
 
 # Root Pages
@@ -326,14 +326,14 @@ def page_not_found(e):
 if __name__ == "__main__":
     print("Starting server.")
     # Define the image deletion checker function
-    imageDeletionCheckerOn = Value("b", True)
-    imageDeletionChecker = Process(target=check_image_deletion_time, args=(imageDeletionCheckerOn,))
+    image_deletion_checker_on = Value("b", True)
+    image_deletion_checker = Process(target=check_image_deletion_time, args=(image_deletion_checker_on,))
 
     # Start checking for deletable images
-    imageDeletionChecker.start()
+    image_deletion_checker.start()
 
     # Run the app
     socketIO.run(app)
 
     # Join all processes
-    imageDeletionChecker.join()
+    image_deletion_checker.join()

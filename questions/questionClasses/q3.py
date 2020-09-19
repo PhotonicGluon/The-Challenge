@@ -2,7 +2,7 @@
 q3.py
 
 Created on 2020-08-21
-Updated on 2020-09-10
+Updated on 2020-09-19
 
 Copyright Ryan Kan 2020
 
@@ -10,7 +10,7 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from questions.questionClasses import Question
+from questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

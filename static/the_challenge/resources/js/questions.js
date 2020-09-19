@@ -72,7 +72,7 @@ $(document).ready(async () => {
             let slideContent = `<div class="slide">`
             if (questionNo === 8) {
                 // Add the image above the slide content
-                slideContent += `<img id="q8-img" src="${Q8_IMAGE_SOURCE}?${Date.now()}" alt="Question 8 Image">`
+                slideContent += `<img id="q8-img" src="${Q8_IMAGE_SOURCE}?${Date.now()}" width=600 height=350 alt="Question 8 Image">`
             }
 
             // Add this question and its input fields to the output
@@ -98,10 +98,6 @@ $(document).ready(async () => {
 
     function showNextSlide() {
         showSlide(currentSlide + 1);
-    }
-
-    function showPreviousSlide() {
-        showSlide(currentSlide - 1);
     }
 
     // Build quiz

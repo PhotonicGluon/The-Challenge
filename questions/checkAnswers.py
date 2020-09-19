@@ -86,6 +86,9 @@ def check_user_answer(user_answer, calculated_answer):
     testcases = [math.pi, math.e, 2 * math.sin(0.3 * np.pi)]  # pi, e, φ (golden ratio)
 
     # COMPUTATION
+    # Output the correct answer
+    print(calculated_answer)
+
     # Determine the type of the calculated answer
     if isinstance(calculated_answer, tuple):
         # Check if the user's answers is equal to the calculated answers

@@ -2,7 +2,7 @@
 q6.py
 
 Created on 2020-08-21
-Updated on 2020-09-10
+Updated on 2020-09-19
 
 Copyright Ryan Kan 2020
 
@@ -15,7 +15,7 @@ import math
 from sympy import latex
 from sympy.parsing.sympy_parser import parse_expr
 
-from questions.questionClasses import Question
+from questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

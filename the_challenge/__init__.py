@@ -1,3 +1,14 @@
+"""
+__init__.py
+
+Created on 2020-09-19
+Updated on 2020-09-20
+
+Copyright Ryan Kan 2020
+
+Description: This file contains the main Flask application for The Challenge.
+"""
+
 # IMPORTS
 import os
 import time
@@ -16,8 +27,9 @@ app.secret_key = b"1123581321345589144"
 socketIO = SocketIO(app)
 
 # CONSTANTS
-IMAGE_DELETION_TIME_FILE = os.path.join(app.instance_path, "Image_Deletion_Times.json")
+IMAGE_DELETION_TIMES_FILE = os.path.join(app.instance_path, "Image_Deletion_Times.json")
 SUCCESS_TIMES_FILE = os.path.join(app.instance_path, "Success_Times.json")
+Q8_IMAGES_FOLDER = os.path.join(app.instance_path, "Q8_Images")
 
 # PRE-SERVER STARTING CODE
 # Ensure that the instance folder exists
@@ -26,12 +38,28 @@ try:
 except OSError:
     pass
 
+# Ensure that both the `IMAGE_DELETION_TIMES_FILE` and `SUCCESS_TIMES_FILE` exist
+if not os.path.isfile(IMAGE_DELETION_TIMES_FILE):
+    # Create the file
+    with open(IMAGE_DELETION_TIMES_FILE, "w+") as tempFile:
+        json.dump({}, tempFile)
+        tempFile.close()
+
+if not os.path.isfile(SUCCESS_TIMES_FILE):
+    # Create the file
+    with open(SUCCESS_TIMES_FILE, "w+") as tempFile:
+        json.dump({}, tempFile)
+        tempFile.close()
+
+# Ensure that the `Q8_IMAGES_FOLDER` exists
+if not os.path.isdir(Q8_IMAGES_FOLDER):
+    os.mkdir(Q8_IMAGES_FOLDER)
 
 # FUNCTIONS
 def clear_user_data():
     if request.cookies.get("ChallengeUUID"):
         try:
-            os.remove(f"static/others/q8/Q8_{request.cookies.get('ChallengeUUID')}.png")  # Remove this image
+            os.remove(os.path.join(Q8_IMAGES_FOLDER, f"Q8_{request.cookies.get('ChallengeUUID')}.png"))  # Remove image
         except FileNotFoundError:
             pass
 
@@ -51,7 +79,7 @@ def check_image_deletion_time(loop_on):
             print("Image Deletion Check")
 
             # Open the JSON file to get all the image deletion times
-            with open(IMAGE_DELETION_TIME_FILE, "r") as f:
+            with open(IMAGE_DELETION_TIMES_FILE, "r") as f:
                 image_deletion_time = json.load(f)
                 f.close()
 
@@ -62,9 +90,8 @@ def check_image_deletion_time(loop_on):
 
                 if due_to_delete < 0:  # It is already due to delete
                     try:
-                        # Remove the image
-                        os.remove(f"static/others/q8/Q8_{unique_id}.png")  # Remove the image
-                        print(f"\t- Deleted `{unique_id}`'s Q8 image (timeout)")
+                        os.remove(os.path.join(Q8_IMAGES_FOLDER, f"Q8_{unique_id}.png"))
+                        print(f"\t- Deleted `{unique_id}`'s Question 8 image (timeout)")
 
                         # Add that id to the list of `deleted_ids`
                         deleted_ids.append(unique_id)
@@ -76,14 +103,14 @@ def check_image_deletion_time(loop_on):
                 image_deletion_time.pop(uid)
 
             # Update the JSON file
-            with open(IMAGE_DELETION_TIME_FILE, "w") as outfile:
+            with open(IMAGE_DELETION_TIMES_FILE, "w") as outfile:
                 json.dump(image_deletion_time, outfile)
                 outfile.close()
 
         time.sleep(60)  # Check again after 60 seconds
 
 
-# PAGES
+# WEBSITE'S PAGES
 # 'Functional' Pages
 @app.route("/secret/check_connection")
 def check_connection():
@@ -105,7 +132,7 @@ def start_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "".join([chr(950 + x) for x in [2 * 3, 3 * 5, 13, 2 * 7, 3, 2 ** 2, 2 * 11]]):
+    if key == "μυστικό":
         # Clear data
         clear_user_data()
 
@@ -122,19 +149,19 @@ def setup_questions():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "".join(chr(x) for x in [6 ** 2, 2 ** 2 * 3 * 17 * 41, 2 ** 2 * 241, 3 ** 2 * 13, 17 ** 2 * 29]):
+    if key == "$€τu₽":
         # Setup question bank
-        question_bank = QuestionBank(q8_file_path=f"static/others/q8/Q8_{request.cookies.get('ChallengeUUID')}.png")
+        question_bank = QuestionBank(q8_file_path=os.path.join(Q8_IMAGES_FOLDER, f"Q8_{request.cookies.get('ChallengeUUID')}.png"))
 
         # Setup the questions
-        questions, input_field_prefixes, answers = question_bank.setup_questions()
+        generated_questions, input_field_prefixes, answers = question_bank.setup_questions()
 
         # Save `questions` and `answers` to the session
-        run_data = {"questions": questions, "prefixes": input_field_prefixes, "answers": answers}
+        run_data = {"questions": generated_questions, "prefixes": input_field_prefixes, "answers": answers}
         session["RunData"] = json.dumps(run_data)
 
         # Return the json object
-        return jsonify(questions=questions)
+        return jsonify(questions=generated_questions)
 
     else:
         return redirect(url_for("index"))
@@ -146,7 +173,7 @@ def redirect_to_the_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "".join([chr(158 ** 2 + 36 + x) for x in [19 ** 2, 11 ** 2 - 9][::-1]][::-1]):
+    if key == "挑战":
         session["starting_challenge"] = True
         return url_for("the_challenge")
 
@@ -286,7 +313,7 @@ def heartbeat(heartbeat_data):
         # print(f"Heartbeat data received: {uuid_received}")
 
         # Extend the time to delete the image file
-        with open(IMAGE_DELETION_TIME_FILE, "r") as infile:
+        with open(IMAGE_DELETION_TIMES_FILE, "r") as infile:
             if len(infile.read()) <= 5:
                 infile.seek(0)  # Move file pointer to the front of the file
                 image_deletion_time = json.load(infile)
@@ -296,7 +323,7 @@ def heartbeat(heartbeat_data):
 
         image_deletion_time[uuid_received] = time.time() + 60 * 5  # Extend the time by 5 minutes
 
-        with open(IMAGE_DELETION_TIME_FILE, "w") as outfile:
+        with open(IMAGE_DELETION_TIMES_FILE, "w") as outfile:
             json.dump(image_deletion_time, outfile)
             outfile.close()
     else:
@@ -326,7 +353,7 @@ def licenses():
 @app.errorhandler(404)
 def page_not_found(e):
     # Note that we set the 404 status explicitly
-    _ = e
+    del e
     return render_template("base/404.html"), 404
 
 

@@ -1,9 +1,0 @@
-SETTING UP THE uWSGI SERVER
----------------------------
-1. Install all requirements in "requirements.txt".
-2. Install "OpenSSL" or "libssl-dev".
-3. Run the following command:
-    ```
-    CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-binary :all:
-    ```
-   The command installs `uwsgi` with ssl support.

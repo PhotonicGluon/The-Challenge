@@ -1,0 +1,40 @@
+                                        SETTING UP THE PRODUCTION SERVER
+------------------------------------------------------------------------------------------------------------------------
+1. Open a console/terminal.
+1. Create the folder `FOLDER_PATH` to place all the server things in using the following command:
+    ```
+    mkdir FOLDER_PATH
+    cd FOLDER_PATH
+    ```
+2. Create a virtual environment using the following command:
+    ```
+    python3 -m venv venv --prompt NAME_OF_VENV
+    ```
+3. Activate the environment by running:
+    ```
+    source venv/bin/activate
+    ```
+    you are now inside the virtual environment.
+4. Obtain the latest "wheel" file of "The Challenge", `WHEEL_FILE`, and place it in `FOLDER_PATH`. It should have a name
+   which satisfies the following format:
+    "The_Challenge-[VERSION]-py3-none-any.whl"
+5. Install "The Challenge" by running:
+    ```
+    pip install WHEEL_FILE -U
+    ```
+   Check that the installation was successful by executing the following command:
+    ```
+    python3 -c "import the_challenge;print('Successful')"
+    ```
+   If the output was 'Successful' it was installed successfully; if not it was not installed successfully.
+6. Install "OpenSSL".
+    - How to install it is dependent on the system.
+7. Install uWSGI with WebSocket support using the following command:
+    ```
+    CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-binary :all:
+    ```
+8. Start the uWSGI server using the following commands:
+    ```
+    export PRODUCTION_SERVER_PORT=PORT_NUMBER
+    uwsgi --http :$PRODUCTION_SERVER_PORT --gevent 1000 --http-websockets --master --module "the_challenge:app"
+    ```

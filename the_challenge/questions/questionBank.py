@@ -12,7 +12,7 @@ Description: A class which handles the functions of all the questions.
 # IMPORTS
 from random import seed
 
-from questions import *
+from the_challenge.questions import *
 
 
 # CLASSES

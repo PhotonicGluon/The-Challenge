@@ -1,0 +1,3 @@
+graft the_challenge/static
+graft the_challenge/templates
+global-exclude *.pyc

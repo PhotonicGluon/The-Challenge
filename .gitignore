@@ -126,9 +126,8 @@ dmypy.json
 
 # Folders to be excluded
 **/.idea/
-static/others/q8
+the_challenge/static/others/q8
 
 # Files to be excluded
 **/.DS_Store
-JSON_Files/Image_Deletion_Time.json
 The Challenge - Practice Questions.pages

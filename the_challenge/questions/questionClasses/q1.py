@@ -1,5 +1,5 @@
 """
-q2.py
+q1.py
 
 Created on 2020-08-21
 Updated on 2020-09-19
@@ -10,14 +10,14 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES
-class Q2(Question):
+class Q1(Question):
     """
-    Q2:
-    Harder addition/subtraction/multiplication/division question.
+    Q1:
+    Just simple adding/subtracting.
     """
 
     def calculations(self):
@@ -25,15 +25,14 @@ class Q2(Question):
         operators = ["+", "-", "*", "/"]
 
         # CALCULATIONS
-        a = self.random.randint(100, 999)
-        b = self.random.randint(100, 999)
-        c = self.random.randint(100, 999)
+        a = self.random.randint(1, 20)
+        b = self.random.randint(1, 20)
 
-        self.question = f"{a} {self.random.choice(operators)} {b} {self.random.choice(operators)} {c}"
+        self.question = f"{a} {self.random.choice(operators)} {b}"
         self.answer = round(eval(self.question), 3)
 
     def generate_question(self):
-        string = f"State the value of:$${self.question.replace('*', chr(92) + 'times').replace('/', chr(92) + 'div')}$$"
+        string = f"State the value of:$${self.question.replace('*', chr(92) + 'times').replace('/', chr(92) + 'div')}$$"  # Note: chr(92) = "\"
         return string
 
     def generate_answer(self):
@@ -45,7 +44,7 @@ class Q2(Question):
 
 # DEBUG CODE
 if __name__ == "__main__":
-    question = Q2(seed_value=1123581321)
+    question = Q1(seed_value=1123581321)
     question.calculations()
     print(question.generate_question())
     print("[ANSWER]", question.generate_answer())

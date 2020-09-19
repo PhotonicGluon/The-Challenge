@@ -16,7 +16,7 @@ Todo:
 from sympy import latex, symbols
 from sympy.parsing.sympy_parser import parse_expr
 
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

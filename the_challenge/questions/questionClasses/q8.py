@@ -13,7 +13,7 @@ Description: A file which holds the designated question class.
 import numpy as np
 import plotly.graph_objects as go
 
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

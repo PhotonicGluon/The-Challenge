@@ -12,7 +12,7 @@ Description: A file which holds the designated question class.
 # IMPORTS
 from sympy import latex, symbols, integrate, sin, cos, sec, exp
 
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

@@ -10,7 +10,7 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

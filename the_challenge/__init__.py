@@ -8,16 +8,23 @@ import simplejson as json
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response
 from flask_socketio import SocketIO
 
-from questions import QuestionBank, process_user_answer, check_user_answer
+from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
 
 # FLASK SETUP
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 app.secret_key = b"1123581321345589144"
 socketIO = SocketIO(app)
 
 # CONSTANTS
-IMAGE_DELETION_TIME_FILE = "JSON_Files/Image_Deletion_Time.json"  # This will store all the image deletion times
-SUCCESS_TIMES_FILE = "JSON_Files/Success_Times.json"  # This will store all the success times
+IMAGE_DELETION_TIME_FILE = os.path.join(app.instance_path, "Image_Deletion_Times.json")
+SUCCESS_TIMES_FILE = os.path.join(app.instance_path, "Success_Times.json")
+
+# PRE-SERVER STARTING CODE
+# Ensure that the instance folder exists
+try:
+    os.makedirs(app.instance_path)
+except OSError:
+    pass
 
 
 # FUNCTIONS
@@ -323,7 +330,8 @@ def page_not_found(e):
     return render_template("base/404.html"), 404
 
 
-if __name__ == "__main__":
+# APP FACTORY FUNCTION
+def init_app():
     print("Starting server.")
     # Define the image deletion checker function
     image_deletion_checker_on = Value("b", True)
@@ -337,3 +345,7 @@ if __name__ == "__main__":
 
     # Join all processes
     image_deletion_checker.join()
+
+
+if __name__ == "__main__":
+    init_app()

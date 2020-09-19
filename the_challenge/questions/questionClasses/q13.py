@@ -13,7 +13,7 @@ Description: A file which holds the designated question class.
 from sympy import latex, integrate, expand
 from sympy.parsing.sympy_parser import parse_expr
 
-from questions.questionClasses.questionBaseClass import Question
+from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
 # CLASSES

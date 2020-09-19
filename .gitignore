@@ -126,6 +126,7 @@ dmypy.json
 
 # Folders to be excluded
 **/.idea/
+static/others/q8
 
 # Files to be excluded
 **/.DS_Store

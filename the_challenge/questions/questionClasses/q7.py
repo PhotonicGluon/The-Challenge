@@ -2,7 +2,7 @@
 q7.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -13,6 +13,7 @@ Description: A file which holds the designated question class.
 from sympy import latex
 from sympy.parsing.sympy_parser import parse_expr
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -36,8 +37,8 @@ class Q7(Question):
         self.question = latex(parse_expr(f"{a} * Abs({b} * log({d}*x, {c}) + {e}) - {f}")).replace("log", "ln") + " = 0"
 
         # Generate the answer
-        ans1 = round(float(parse_expr(f"1/{d} * {c}**((-{f}/{a} - {e}) / {b})")), 3)
-        ans2 = round(float(parse_expr(f"1/{d} * {c}**(({f}/{a} - {e}) / {b})")), 3)
+        ans1 = mathematical_round(float(parse_expr(f"1/{d} * {c}**((-{f}/{a} - {e}) / {b})")), 3)
+        ans2 = mathematical_round(float(parse_expr(f"1/{d} * {c}**(({f}/{a} - {e}) / {b})")), 3)
 
         self.answer = [ans1, ans2]
 

@@ -2,7 +2,7 @@
 q12.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -17,6 +17,7 @@ from fractions import Fraction
 from sympy import latex
 from sympy.parsing.sympy_parser import parse_expr
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -62,7 +63,7 @@ class Q12(Question):
         return string
 
     def generate_answer(self):
-        return [round(min(self.answer), 3), round(max(self.answer), 3)]
+        return [mathematical_round(min(self.answer), 3), mathematical_round(max(self.answer), 3)]
 
     def answer_input_fields_prefix(self):
         return ["$x_1=$", "$x_2=$"]

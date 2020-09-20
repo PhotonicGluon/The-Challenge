@@ -2,7 +2,7 @@
 checkAnswers.py
 
 Created on 2020-09-11
-Updated on 2020-09-18
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -74,9 +74,8 @@ def check_user_answer(user_answer, calculated_answer):
     This method checks the user's answer with the calculated answer.
 
     Args:
-        user_answer (Union[str, int, float, List[Union[int, float]]], Tuple[Union[int, float]]]): The user's answer.
-        calculated_answer (Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]]): The calculated
-                                                                                                        answer.
+        user_answer (Union[str, int, float, List[Union[int, float]]], Tuple[Union[int, float]]])
+        calculated_answer (Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]])
 
     Returns:
         bool: Returns True then the user's answer is correct. If it is wrong it will return False instead.
@@ -87,7 +86,7 @@ def check_user_answer(user_answer, calculated_answer):
 
     # COMPUTATION
     # Output the correct answer
-    print(calculated_answer)
+    print("Correct answer:", calculated_answer)
 
     # Determine the type of the calculated answer
     if isinstance(calculated_answer, tuple):
@@ -130,10 +129,10 @@ def check_user_answer(user_answer, calculated_answer):
                 evaluated = (evaluated.subs(variable, testcases[(i + j) % len(testcases)])).evalf()
 
             # Round the final answer to 3 decimal places
-            calculated_values.append(round(evaluated, 3))
+            calculated_values.append(round(evaluated, 3))  # NOTE: 'Mathematical' rounding does not need to be used here
 
         # Parse the user's LaTeX input
-        parsed_user_answer = parse_latex(handle_latex_preprocessing(user_answer))
+        parsed_user_answer = parse_latex(str(handle_latex_preprocessing(user_answer)))  # Cast to string just in case
 
         # Get all free variables in the user's expression
         user_answer_variables = list(parsed_user_answer.atoms(Symbol))

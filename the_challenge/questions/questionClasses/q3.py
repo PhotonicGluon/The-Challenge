@@ -2,7 +2,7 @@
 q3.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -10,6 +10,7 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -32,7 +33,7 @@ class Q3(Question):
         s = self.random.choice(operators)  # Choose a sign
 
         self.question = f"{a} x {s} {b} = {c}"
-        self.answer = round((-eval(f"{s}{b}") + c) / a, 3)
+        self.answer = mathematical_round((-eval(f"{s}{b}") + c) / a, 3)
 
     def generate_question(self):
         string = f"Solve for $x$:$${self.question}$$"

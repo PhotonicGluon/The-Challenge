@@ -2,7 +2,7 @@
 q10.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -13,6 +13,7 @@ Description: A file which holds the designated question class.
 from sympy import latex, integrate
 from sympy.parsing.sympy_parser import parse_expr
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -55,7 +56,7 @@ class Q10(Question):
         a = self.random.randint(integral_limits[0], integral_limits[1] - 1)  # Lower limit
         b = self.random.randint(a + 1, integral_limits[1])  # Upper limit
 
-        ans = round(float(integral.subs("x", b) - integral.subs("x", a)), 3)
+        ans = mathematical_round(float(integral.subs("x", b) - integral.subs("x", a)), 3)
 
         # Set the values of `self.question` and `self.answer`
         self.question = [latex(polynomial), a, b]

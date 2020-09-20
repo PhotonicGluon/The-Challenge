@@ -2,7 +2,7 @@
 q1.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -10,6 +10,7 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -29,7 +30,7 @@ class Q1(Question):
         b = self.random.randint(1, 20)
 
         self.question = f"{a} {self.random.choice(operators)} {b}"
-        self.answer = round(eval(self.question), 3)
+        self.answer = mathematical_round(eval(self.question), 3)
 
     def generate_question(self):
         string = f"State the value of:$${self.question.replace('*', chr(92) + 'times').replace('/', chr(92) + 'div')}$$"  # Note: chr(92) = "\"

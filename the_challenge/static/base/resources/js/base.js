@@ -99,13 +99,4 @@ $(document).ready(() => {
         });
     });
     window.addEventListener("offline", () => create_alert("You are not connected to the internet. Please check your connection."));
-
-    // Setup heartbeat system
-    let socket = io();  // Setup SocketIO port
-    let uniqueID = getUUIDCookie();
-
-    socket.emit("Heartbeat", {uuid: uniqueID});
-    setInterval(() => {
-        socket.emit("Heartbeat", {uuid: uniqueID});
-    }, 120 * 1000);  // Perform a heartbeat every 120 seconds
 });

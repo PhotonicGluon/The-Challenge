@@ -1,39 +1,69 @@
                                         SETTING UP THE PRODUCTION SERVER
 ------------------------------------------------------------------------------------------------------------------------
-1. Open a console/terminal.
-1. Create the folder `FOLDER_PATH` to place all the server things in using the following command:
-    ```
-    mkdir FOLDER_PATH
-    cd FOLDER_PATH
-    ```
-2. Create a virtual environment using the following command:
-    ```
-    python3 -m venv venv --prompt NAME_OF_VENV
-    ```
-3. Activate the environment by running:
-    ```
-    source venv/bin/activate
-    ```
+1.  Open a console/terminal.
+
+2.  Create the folder `FOLDER_PATH` to place all the server things in using the following command:
+        ```
+        mkdir FOLDER_PATH
+        cd FOLDER_PATH
+        ```
+
+3.  Create a virtual environment using the following command:
+        ```
+        python3 -m venv venv --prompt NAME_OF_VENV
+        ```
+
+4.  Activate the environment by running:
+        ```
+        source venv/bin/activate
+        ```
     you are now inside the virtual environment.
-4. Obtain the latest "wheel" file of "The Challenge", `WHEEL_FILE`, and place it in `FOLDER_PATH`. It should have a name
-   which satisfies the following format:
-    "The_Challenge-[VERSION]-py3-none-any.whl"
-5. Install "The Challenge" by running:
-    ```
-    pip install WHEEL_FILE -U
-    ```
-   Check that the installation was successful by executing the following command:
-    ```
-    python3 -c "import the_challenge;print('Successful')"
-    ```
-   If the output was 'Successful' it was installed successfully; if not it was not installed successfully.
-6. Install "OpenSSL".
-    - How to install it is dependent on the system.
-7. Install uWSGI with WebSocket support using the following command:
-    ```
-    CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-binary :all:
-    ```
-8. Start the uWSGI server using the following commands:
+
+5.  Update pip by running the following command:
+        ```
+        python -m pip install -U pip
+        ```
+
+6.  Obtain the latest "wheel" file of "The Challenge", `WHEEL_FILE`, and place it in `FOLDER_PATH`. It should have a name
+    which satisfies the following format:
+        "The_Challenge-[VERSION]-py3-none-any.whl"
+
+7.  Install "The Challenge" by running:
+        ```
+        pip install WHEEL_FILE -U
+        ```
+    Check that the installation was successful by executing the following command:
+        ```
+        python3 -c "import the_challenge;print('Successful')"
+        ```
+    If the last output was 'Successful' it was installed successfully; if not it was not installed successfully.
+
+8.  Install "OpenSSL".
+        - How to install it is dependent on the system.
+
+9.  Install uWSGI with WebSocket support using the following command:
+        ```
+        CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-binary :all:
+        ```
+
+10. Run the following commands:
+        ```
+        cd venv/var
+        mkdir "the_challenge-instance"
+        cd "the_challenge-instance"
+        secretKey=$(python -c 'import secrets;print(bytes(str(secrets.token_bytes(32)), "utf-8")[2:-1])')
+        printf "\"\"\"\nconfig.py\n\nDescription: The configuration for this particular instance.\n\"\"\"\n\nSECRET_KEY = $secretKey" > config.py
+        ```
+    This is what the above commands did:
+        a. Created an instance folder ("the_challenge-instance")
+        b. Created a configuration file that is unique to your instance.
+        c. Created a pseudorandom secret key for the instance.
+
+11. Navigate back to the root directory by running this command:
+        ```
+        cd ../../..
+        ```
+12. Start the uWSGI server using the following commands:
     ```
     export PRODUCTION_SERVER_PORT=PORT_NUMBER
     uwsgi --http :$PRODUCTION_SERVER_PORT --gevent 1000 --http-websockets --master --module "the_challenge:app"

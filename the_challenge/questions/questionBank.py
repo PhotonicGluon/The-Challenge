@@ -17,7 +17,7 @@ from the_challenge.questions import *
 
 # CLASSES
 class QuestionBank:
-    def __init__(self, seed_value=None, q8_file_path="static/Q8_{unique_user_id}.png"):
+    def __init__(self, seed_value=None):
         """
         Initialise the question bank.
 
@@ -37,7 +37,7 @@ class QuestionBank:
             Q5(seed_value),
             Q6(seed_value),
             Q7(seed_value),
-            Q8(seed_value, figure_file_path=q8_file_path),
+            Q8(seed_value),
             Q9(seed_value),
             Q10(seed_value),
             Q11(seed_value),
@@ -77,6 +77,6 @@ class QuestionBank:
 
 # DEBUG CODE
 if __name__ == "__main__":
-    questionBank = QuestionBank(seed_value="Theorem", q8_file_path="../static/Q8_testing.png")
+    questionBank = QuestionBank(seed_value="Theorem")
     questions = questionBank.setup_questions()
     print(questions)

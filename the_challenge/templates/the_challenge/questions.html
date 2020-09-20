@@ -10,7 +10,8 @@
 {% block header_scripts %}
     <script>
         const QUESTIONS_AND_ANSWERS = JSON.parse({{ session["RunData"]|tojson|safe }});
-        const Q8_IMAGE_SOURCE = "{{ url_for('static', filename='others/q8') }}/" + `Q8_${getUUIDCookie()}.png`;
+        const Q8_IMAGE_SOURCE = "{{ session["Q8_Image"] }}";
+        console.log(Q8_IMAGE_SOURCE);
     </script>
 {% endblock %}
 

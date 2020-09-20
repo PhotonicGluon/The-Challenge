@@ -2,7 +2,7 @@
 q6.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -27,9 +27,9 @@ class Q6(Question):
 
     def calculations(self):
         # Determine the constants a, b, c and d
-        a = self.random.randint(1, 10)
-        b = self.random.randint(1, 10)
-        c = self.random.randint(1, 100)
+        a = self.random.randint(2, 10)
+        b = self.random.randint(2, 10)
+        c = self.random.randint(2, 100)
         d = self.random.randint(math.ceil(math.sqrt(c)), 20)
 
         # Form the surd equation

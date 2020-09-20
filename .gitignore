@@ -127,6 +127,7 @@ dmypy.json
 # Folders to be excluded
 **/.idea/
 the_challenge/static/others/q8
+flask_session/
 
 # Files to be excluded
 **/.DS_Store

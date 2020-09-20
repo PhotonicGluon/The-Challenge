@@ -2,7 +2,7 @@
 q8.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-20
 
 Copyright Ryan Kan 2020
 
@@ -10,6 +10,8 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
+import base64
+
 import numpy as np
 import plotly.graph_objects as go
 
@@ -23,10 +25,6 @@ class Q8(Question):
     Determine values of a, b and c in the expression `y = a * sin(x/b) + c` or `y = a * cos(x/b) + c` when given a
     graph of that function.
     """
-
-    def __init__(self, seed_value=None, figure_file_path="Q8.png"):
-        super().__init__(seed_value=seed_value)
-        self.figure_file_path = figure_file_path
 
     def calculations(self):
         # Generate values for a, b and c
@@ -57,8 +55,9 @@ class Q8(Question):
         # Plot the function
         fig.add_trace(go.Scatter(x=x, y=func))
 
-        # Save the plot to an image file
-        fig.write_image(self.figure_file_path, width=600, height=350, scale=2)
+        # Export the plot as a base 64 string
+        image_data = fig.to_image(width=600, height=350, scale=2)
+        image_data = str(base64.b64encode(image_data))[2:-1]
 
         # Choose the correct equation to display for the question
         if sin_or_cos == np.sin:
@@ -67,14 +66,14 @@ class Q8(Question):
             eqn = r"y = a \cos\left(\frac{x}{b}\right) + c"
 
         # Set values for `self.question` and `self.answer`
-        self.question = [eqn, self.figure_file_path]
+        self.question = [eqn, image_data]
         self.answer = (a, b, c)
 
-    def generate_question(self, show_graph=False):
+    def generate_question(self):
         string = f"Determine the values of $a$, $b$ and $c$ in $${self.question[0]}$$ given the graph of that " \
                  f"equation as shown above."
 
-        return string
+        return string, self.question[1]
 
     def generate_answer(self):
         return self.answer
@@ -91,5 +90,5 @@ class Q8(Question):
 if __name__ == "__main__":
     question = Q8(seed_value=1123581321)
     question.calculations()
-    print(question.generate_question())
+    print(question.generate_question()[0])
     print("[ANSWER]", question.generate_answer())

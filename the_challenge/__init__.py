@@ -11,25 +11,24 @@ Description: This file contains the main Flask application for The Challenge.
 
 # IMPORTS
 import os
-import time
 import uuid
-from multiprocessing import Process, Value
 
 import simplejson as json
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response
-from flask_socketio import SocketIO
+from flask_session import Session
 
 from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
 
 # FLASK SETUP
-app = Flask(__name__, instance_relative_config=True)
-app.secret_key = b"1123581321345589144"
-socketIO = SocketIO(app)
+# Define basic things
+app = Flask(__name__)
+app.config.from_pyfile("config_base.py")
+
+# Setup session `sess`
+sess = Session()
 
 # CONSTANTS
-IMAGE_DELETION_TIMES_FILE = os.path.join(app.instance_path, "Image_Deletion_Times.json")
 SUCCESS_TIMES_FILE = os.path.join(app.instance_path, "Success_Times.json")
-Q8_IMAGES_FOLDER = os.path.join(app.instance_path, "Q8_Images")
 
 # PRE-SERVER STARTING CODE
 # Ensure that the instance folder exists
@@ -38,31 +37,26 @@ try:
 except OSError:
     pass
 
-# Ensure that both the `IMAGE_DELETION_TIMES_FILE` and `SUCCESS_TIMES_FILE` exist
-if not os.path.isfile(IMAGE_DELETION_TIMES_FILE):
-    # Create the file
-    with open(IMAGE_DELETION_TIMES_FILE, "w+") as tempFile:
-        json.dump({}, tempFile)
-        tempFile.close()
-
+# Ensure that the `SUCCESS_TIMES_FILE` exist
 if not os.path.isfile(SUCCESS_TIMES_FILE):
     # Create the file
     with open(SUCCESS_TIMES_FILE, "w+") as tempFile:
         json.dump({}, tempFile)
         tempFile.close()
 
-# Ensure that the `Q8_IMAGES_FOLDER` exists
-if not os.path.isdir(Q8_IMAGES_FOLDER):
-    os.mkdir(Q8_IMAGES_FOLDER)
+# FLASK SETUP (CONTINUED)
+# Get the instance's `config.py` file
+try:
+    app.config.from_pyfile(os.path.join(app.instance_path, "config.py"))
+except OSError:
+    print("The instance's `config.py` file was not found. Using default settings. (INSECURE!)")
+
+# Initialise plugins
+sess.init_app(app)
+
 
 # FUNCTIONS
 def clear_user_data():
-    if request.cookies.get("ChallengeUUID"):
-        try:
-            os.remove(os.path.join(Q8_IMAGES_FOLDER, f"Q8_{request.cookies.get('ChallengeUUID')}.png"))  # Remove image
-        except FileNotFoundError:
-            pass
-
     if "quiz_starting" in session:
         session.pop("quiz_starting")
 
@@ -71,43 +65,6 @@ def clear_user_data():
 
     if "challenge_won" in session:
         session.pop("challenge_won")
-
-
-def check_image_deletion_time(loop_on):
-    while True:
-        if loop_on:
-            print("Image Deletion Check")
-
-            # Open the JSON file to get all the image deletion times
-            with open(IMAGE_DELETION_TIMES_FILE, "r") as f:
-                image_deletion_time = json.load(f)
-                f.close()
-
-            # Extract all IDs which are in that file
-            deleted_ids = []
-            for unique_id in image_deletion_time:
-                due_to_delete = image_deletion_time[unique_id] - time.time()
-
-                if due_to_delete < 0:  # It is already due to delete
-                    try:
-                        os.remove(os.path.join(Q8_IMAGES_FOLDER, f"Q8_{unique_id}.png"))
-                        print(f"\t- Deleted `{unique_id}`'s Question 8 image (timeout)")
-
-                        # Add that id to the list of `deleted_ids`
-                        deleted_ids.append(unique_id)
-                    except FileNotFoundError:
-                        pass
-
-            # Delete all entries which has a UUID that is in `deleted_ids`
-            for uid in deleted_ids:
-                image_deletion_time.pop(uid)
-
-            # Update the JSON file
-            with open(IMAGE_DELETION_TIMES_FILE, "w") as outfile:
-                json.dump(image_deletion_time, outfile)
-                outfile.close()
-
-        time.sleep(60)  # Check again after 60 seconds
 
 
 # WEBSITE'S PAGES
@@ -151,14 +108,21 @@ def setup_questions():
     # Check the key
     if key == "$€τu₽":
         # Setup question bank
-        question_bank = QuestionBank(q8_file_path=os.path.join(Q8_IMAGES_FOLDER, f"Q8_{request.cookies.get('ChallengeUUID')}.png"))
+        question_bank = QuestionBank()
 
         # Setup the questions
         generated_questions, input_field_prefixes, answers = question_bank.setup_questions()
 
+        # Get the image from Q8
+        q8_image_data = generated_questions[7][1]
+
+        # Fix that entry to be only the question string
+        generated_questions[7] = generated_questions[7][0]
+
         # Save `questions` and `answers` to the session
         run_data = {"questions": generated_questions, "prefixes": input_field_prefixes, "answers": answers}
         session["RunData"] = json.dumps(run_data)
+        session["Q8_Image"] = q8_image_data
 
         # Return the json object
         return jsonify(questions=generated_questions)
@@ -303,33 +267,6 @@ def success_specific(userid):
     return render_template("the_challenge/success.html", uuid=userid, time=success_time)
 
 
-# SocketIO Pages
-@socketIO.on("Heartbeat")
-def heartbeat(heartbeat_data):
-    # Check if the `heartbeat_data` has info in it
-    if len(list(heartbeat_data)) != 0:
-        # Get the UUID
-        uuid_received = heartbeat_data["uuid"]
-        # print(f"Heartbeat data received: {uuid_received}")
-
-        # Extend the time to delete the image file
-        with open(IMAGE_DELETION_TIMES_FILE, "r") as infile:
-            if len(infile.read()) <= 5:
-                infile.seek(0)  # Move file pointer to the front of the file
-                image_deletion_time = json.load(infile)
-            else:
-                image_deletion_time = {}
-            infile.close()
-
-        image_deletion_time[uuid_received] = time.time() + 60 * 5  # Extend the time by 5 minutes
-
-        with open(IMAGE_DELETION_TIMES_FILE, "w") as outfile:
-            json.dump(image_deletion_time, outfile)
-            outfile.close()
-    else:
-        print("A user tried to send a heartbeat but their cookies were disabled.")
-
-
 # Root Pages
 @app.route("/")
 def index():
@@ -353,25 +290,14 @@ def licenses():
 @app.errorhandler(404)
 def page_not_found(e):
     # Note that we set the 404 status explicitly
-    del e
+    _ = e
     return render_template("base/404.html"), 404
 
 
 # APP FACTORY FUNCTION
 def init_app():
     print("Starting server.")
-    # Define the image deletion checker function
-    image_deletion_checker_on = Value("b", True)
-    image_deletion_checker = Process(target=check_image_deletion_time, args=(image_deletion_checker_on,))
-
-    # Start checking for deletable images
-    image_deletion_checker.start()
-
-    # Run the app
-    socketIO.run(app)
-
-    # Join all processes
-    image_deletion_checker.join()
+    app.run()
 
 
 if __name__ == "__main__":

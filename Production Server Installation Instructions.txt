@@ -1,5 +1,6 @@
                                         SETTING UP THE PRODUCTION SERVER
 ------------------------------------------------------------------------------------------------------------------------
+A.  SETTING UP UWSGI
 1.  Open a console/terminal.
 
 2.  Create the folder `FOLDER_PATH` to place all the server things in using the following command:
@@ -24,9 +25,12 @@
         python -m pip install -U pip
         ```
 
-6.  Obtain the latest "wheel" file of "The Challenge", `WHEEL_FILE`, and place it in `FOLDER_PATH`. It should have a name
-    which satisfies the following format:
-        "The_Challenge-[VERSION]-py3-none-any.whl"
+6.  Obtain, and uncompress, the file named "The-Challenge-Production-Server.tar.gz". This will contain all the necessary
+    files needed to set up the production server.
+    - Inside the uncompressed directory will be a wheel (.whl) file with a name similar to:
+        "The_Challenge-[VERSION]-py3-none-any.whl".
+      This file will be referenced later as `WHEEL_FILE`.
+    Copy all the files inside the "tar.gz" file to the main directory.
 
 7.  Install "The Challenge" by running:
         ```
@@ -39,7 +43,7 @@
     If the last output was 'Successful' it was installed successfully; if not it was not installed successfully.
 
 8.  Install "OpenSSL".
-        - How to install it is dependent on the system.
+    - How to install it is dependent on the system.
 
 9.  Install uWSGI with WebSocket support using the following command:
         ```
@@ -63,8 +67,84 @@
         ```
         cd ../../..
         ```
+
 12. Start the uWSGI server using the following commands:
     ```
-    export PRODUCTION_SERVER_PORT=PORT_NUMBER
-    uwsgi --http :$PRODUCTION_SERVER_PORT --gevent 1000 --http-websockets --master --module "the_challenge:app"
+    uwsgi --ini "uWSGI_Configuration.ini"
     ```
+
+B.  SETTING UP NGINX
+1.  Install Nginx.
+    - For Mac, install it using Homebrew by running this command:
+        ```
+        brew install nginx
+        ```
+    - For Ubuntu, run the following commands:
+        ```
+        sudo apt update
+        sudo apt install nginx
+        ```
+
+2.  Navigate to the Nginx directory.
+    - For Mac, run the following commands:
+        ```
+        cd
+        cd /usr/local/etc/nginx
+        ```
+    - For Ubuntu, run the following commands:
+        ```
+        cd
+        cd /etc/nginx/
+        ```
+
+3.  Create two directories, "sites-available" and "sites-enabled", by running:
+        ```
+        mkdir -p "sites-available"
+        mkdir -p "sites-enabled"
+        ```
+
+4.  Navigate into the "sites-available" directory:
+        ```
+        cd "sites-available"
+        ```
+
+5.  Create a file, "The-Challenge.conf", there:
+        ```
+        echo > "The-Challenge.conf"
+        ```
+
+6.  Edit "The-Challenge.conf" to so that it contains the following:
+        """
+        server {
+            listen 80;  # This will be the port to listen from
+            server_name localhost ADD_DOMAIN_NAME_HERE;
+
+            location / {
+                include uwsgi_params;
+                uwsgi_pass unix:///tmp/the-challenge.sock;  # This socket port is from section A step 12
+            }
+        }
+        """
+
+7.  Symlink "The-Challenge.conf" to the "sites-enabled" directory:
+        ```
+        sudo ln -sf "$(pwd)/The-Challenge.conf" "$(dirname $(pwd))/sites-enabled/The-Challenge.conf"
+        ```
+
+8.  Test for syntax errors by running:
+        ```
+        sudo nginx -t
+        ```
+    If this returns without indicating any issues, restart the Nginx process to read the new configuration:
+      - On Mac, run:
+        ```
+        sudo nginx -s reload
+        ```
+      - On Ubuntu, run:
+        ```
+        sudo systemctl restart nginx
+        ```
+
+C.  Creating a systemd service
+Follow the steps mentioned here:
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04#step-5-%E2%80%94-creating-a-systemd-unit-file

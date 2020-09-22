@@ -2,7 +2,7 @@
 q12.py
 
 Created on 2020-08-21
-Updated on 2020-09-20
+Updated on 2020-09-22
 
 Copyright Ryan Kan 2020
 
@@ -35,7 +35,7 @@ class Q12(Question):
 
     def calculations(self):
         # Generate the three discriminants. `discriminant1` will form the equation with real roots.
-        discriminant1 = self.random.choice([0, self.random.randint(1, self.discriminant_upper_limit) ** 2])
+        discriminant1 = self.random.randint(1, self.discriminant_upper_limit) ** 2
         discriminant2 = -self.random.randint(1, self.discriminant_upper_limit) ** 2
         discriminant3 = -self.random.randint(1, self.discriminant_upper_limit) ** 2
 

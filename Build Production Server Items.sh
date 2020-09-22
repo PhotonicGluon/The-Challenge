@@ -7,7 +7,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 
 # Constants
-COMPRESSED_DIRECTORY_NAME="The Challenge Production Server Items"
+COMPRESSED_DIRECTORY_NAME="The Challenge - Server Items"
 
 # Ensure that the current working directory is this script's directory
 cd "$(dirname "$0")" || exit
@@ -38,7 +38,8 @@ cp "uWSGI_Configuration.ini" "$COMPRESSED_DIRECTORY_NAME"
 echo
 echo "Compressing files"
 tar -czvf "The-Challenge-Production-Server.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
-echo "Done!"
+mv "The-Challenge-Production-Server.tar.gz" "./dist"
+echo "Done! You can find the package in the 'dist' folder."
 
 # Delete the temporary folder
 rm -rf "$COMPRESSED_DIRECTORY_NAME"

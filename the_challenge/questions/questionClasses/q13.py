@@ -2,7 +2,7 @@
 q13.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-09-22
 
 Copyright Ryan Kan 2020
 
@@ -28,7 +28,10 @@ class Q13(Question):
         # Generate the three (expected) solutions
         sol1 = self.random.choice([-1, 1, -2, 2])
         sol2 = self.random.choice([self.random.randint(3, 10), self.random.randint(-10, -3)])
-        sol3 = self.random.choice([self.random.randint(3, 10), self.random.randint(-10, -3)])
+
+        possible_sol3 = [x for x in range(3, 11)] + [-x for x in range(3, 11)]
+        possible_sol3.remove(sol2)
+        sol3 = self.random.choice(possible_sol3)  # Prevent the third solution from being the same as the second one
 
         self.answer = [sol1, sol2, sol3]
 

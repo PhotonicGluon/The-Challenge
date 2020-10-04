@@ -34,12 +34,13 @@ cd .. || exit
 cp "Production Server Installation Instructions.txt" "$COMPRESSED_DIRECTORY_NAME"
 cp "uWSGI_Configuration.ini" "$COMPRESSED_DIRECTORY_NAME"
 
-# Compress all items inside "temp_compile"
+# Compress all items inside the "$COMPRESSED_DIRECTORY_NAME" directory
 echo
 echo "Compressing files"
 tar -czvf "The-Challenge-Production-Server.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
 mv "The-Challenge-Production-Server.tar.gz" "./dist"
 echo "Done! You can find the package in the 'dist' folder."
 
-# Delete the temporary folder
+# Delete temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"
+rm -rf "build"

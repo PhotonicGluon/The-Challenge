@@ -2,7 +2,7 @@
 setup.py
 
 Created on 2020-09-19
-Updated on 2020-09-20
+Updated on 2020-09-26
 """
 
 from setuptools import find_packages, setup
@@ -12,8 +12,9 @@ setup(
     version=open("VERSION", "r").read().strip(),
     description=" A Web Project About Solving Mathematics Problems",
     author="Ryan Kan",
-    author_email="ryankanonnkit@gmail.com",
-    project_url={"Source Code": "https://github.com/Ryan-Kan/The-Challenge"},
+    author_email="ryankanok@gmail.com",
+    url="https://github.com/Ryan-Kan/The-Challenge",
+    python_requires='~=3.8',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

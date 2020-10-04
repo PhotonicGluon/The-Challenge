@@ -1,4 +1,5 @@
 const DURATION_OF_THE_CHALLENGE = 900;  // In seconds
+const STARTING_QUESTION_NO = 1;  // Default is 1
 
 $(document).ready(async () => {
     // Get DOM objects
@@ -105,7 +106,7 @@ $(document).ready(async () => {
 
     // Pagination
     const slides = $.find(".slide");
-    let currentSlide = 0;
+    let currentSlide = STARTING_QUESTION_NO - 1;
 
     // Prepare input fields' math displays
     function prepareInputFields() {

@@ -44,3 +44,4 @@ echo "Done! You can find the package in the 'dist' folder."
 # Delete temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"
 rm -rf "build"
+rm -rf "The_Challenge.egg-info"

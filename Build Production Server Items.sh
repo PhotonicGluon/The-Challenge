@@ -7,7 +7,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 
 # Constants
-COMPRESSED_DIRECTORY_NAME="The Challenge - Server Items"
+COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 
 # Ensure that the current working directory is this script's directory
 cd "$(dirname "$0")" || exit
@@ -34,14 +34,17 @@ cd .. || exit
 cp "Production Server Installation Instructions.txt" "$COMPRESSED_DIRECTORY_NAME"
 cp "uWSGI_Configuration.ini" "$COMPRESSED_DIRECTORY_NAME"
 
+# Get the current version of The Challenge
+version=$(head -n 1 "VERSION")
+
 # Compress all items inside the "$COMPRESSED_DIRECTORY_NAME" directory
 echo
 echo "Compressing files"
-tar -czvf "The-Challenge-Production-Server.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
-mv "The-Challenge-Production-Server.tar.gz" "./dist"
-echo "Done! You can find the package in the 'dist' folder."
+tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
+echo "Done! You can find 'The-Challenge-Production-Server.tar.gz' in the current working directory."
 
 # Delete temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"
+rm -rf "dist"
 rm -rf "build"
 rm -rf "The_Challenge.egg-info"

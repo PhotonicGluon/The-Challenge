@@ -1,48 +1,65 @@
                                         SETTING UP THE PRODUCTION SERVER
 ------------------------------------------------------------------------------------------------------------------------
-A.  SETTING UP UWSGI
+A.  PRELIMINARIES
+1.  If you haven't already, extract the contents of "The-Challenge-Production-Server.tar.gz".
+
+2.  If a directory was not automatically created, you are recommended to create one to store all the files of this
+    compressed file.
+    - Once you have done so, you should move all the extracted files to that directory.
+
+IMPORTANT: READ THE WHOLE STEP FIRST BEFORE RUNNING ANY COMMANDS. THERE MAY BE SOME COMMANDS THAT MAY NEED TO BE RUN
+           BEFORE RUNNING THE MAIN COMMAND.
+
+B.  SETTING UP UWSGI
 1.  Open a console/terminal.
 
-2.  Create the folder `FOLDER_PATH` to place all the server things in using the following command:
+2.  Navigate to the folder which contains all the items of The Challenge.
+    - If the path to the folder is `FOLDER_PATH`, then run:
         ```
-        mkdir FOLDER_PATH
         cd FOLDER_PATH
         ```
+    - IMPORTANT: Ensure that the `FOLDER_PATH` contains NO SPACES. If there are spaces, you should replace ALL of them
+      with an underscore "_" or a dash/hyphen "-".
 
-3.  Create a virtual environment using the following command:
+3.  Create a virtual environment (venv) using the following command:
         ```
-        python3 -m venv venv --prompt NAME_OF_VENV
+        python3 -m venv venv --prompt NAME_OF_VIRTUAL_ENV
         ```
+    - On Ubuntu/Linux, you may need to run:
+        ```
+        sudo apt-get install python3-venv
+        ```
+      before creating the virtual environment.
 
 4.  Activate the environment by running:
         ```
         source venv/bin/activate
         ```
-    you are now inside the virtual environment.
+    You should now see the prefix "(NAME_OF_VIRTUAL_ENV)" on the terminal. If this is the case, you are inside the venv.
 
-5.  Update pip by running the following command:
+5.  Update the virtual environment's pip by running the following command:
         ```
         python -m pip install -U pip
         ```
 
-6.  Obtain, and uncompress, the file named "The-Challenge-Production-Server.tar.gz". This will contain all the necessary
-    files needed to set up the production server.
-    - Inside the uncompressed directory will be a wheel (.whl) file with a name similar to:
-        "The_Challenge-[VERSION]-py3-none-any.whl".
-      This file will be referenced later as `WHEEL_FILE`.
-    Copy all the files inside the "tar.gz" file to the main directory.
-
-7.  Install "The Challenge" by running:
+6.  Inside the main folder (which contains the "venv" folder) should be a file which ends in ".whl". This is the
+    `WHEEL_FILE` which will be referenced below.
+    First install wheel by running:
         ```
-        pip install WHEEL_FILE -U
+        pip install -U wheel
         ```
+    Install "The Challenge" by running:
+        ```
+        pip install -U WHEEL_FILE
+        ```
+    This may take some time.
     Check that the installation was successful by executing the following command:
         ```
-        python3 -c "import the_challenge;print('Successful')"
+        python3 -c "import the_challenge;print('Successfully Installed')"
         ```
-    If the last output was 'Successful' it was installed successfully; if not it was not installed successfully.
+    If the last line of the output was 'Successfully Installed' it was installed successfully.
 
-8.  Install "OpenSSL".
+7.  Install "OpenSSL".
     - On Mac, run:
         ```
         brew install openssl
@@ -53,39 +70,66 @@ A.  SETTING UP UWSGI
         sudo apt-get install libssl-dev
         ```
 
-9.  Install uWSGI with WebSocket support using the following command:
+8.  This only applies if you are on Ubuntu.
+    Install pcre using:
         ```
-        CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-binary :all:
+        sudo apt-get install libpcre3 libpcre3-dev
         ```
-    - Please note that for Ubuntu that the python development headers must be installed:
+    The python development headers must also be installed:
         ```
         sudo apt-get install python3.8-dev
         ```
+    Finally, a C compiler must also be installed. It is recommended to install gcc:
+        ```
+        sudo apt install gcc
+        ```
+
+9.  Install uWSGI with WebSocket support using the following command:
+        ```
+        CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi==2.0.19.1 -Iv --no-binary :all:
+        ```
+    - IMPORTANT: Check that uWSGI was successfully installed by searching for the phrase:
+        """
+        Successfully installed uwsgi-2.0.19.1
+        """
+      in the terminal output.
 
 10. Run the following commands:
         ```
-        cd venv/var
+        cd venv
+        mkdir var
+        cd var
         mkdir "the_challenge-instance"
         cd "the_challenge-instance"
         secretKey=$(python -c 'import secrets;print(bytes(str(secrets.token_bytes(32)), "utf-8")[2:-1])')
-        printf "\"\"\"\nconfig.py\n\nDescription: The configuration for this particular instance.\n\"\"\"\n\nSECRET_KEY = $secretKey" > config.py
+        printf "\"\"\"\nconfig.py\n\nDescription: The configuration for this particular instance.\n\"\"\"\n\nSECRET_KEY = $secretKey \n" > config.py
+        secretKey=$(python -c 'import secrets;print(bytes(str(secrets.token_bytes(32)), "utf-8")[2:-1])')
+        printf "\"\"\"\nconfig.py\n\nDescription: The configuration for this particular instance.\n\"\"\"\n\nSECRET_KEY = $secretKey \n" > config.py
         ```
     This is what the above commands did:
         a. Created an instance folder ("the_challenge-instance")
         b. Created a configuration file that is unique to your instance.
-        c. Created a pseudorandom secret key for the instance.
+        c. Created a pseudorandom secret key for the instance. It was ran twice to ensure that there was no error in the
+           secret key generation.
+    - Make sure to check that the file "config.py" contains a FULL key. This means that the "SECRET_KEY" variable
+      contains EXACTLY ONE PAIR of starting and ending quotes (' '). You can do this from the terminal by running:
+        ```
+        cat config.py
+        ```
 
-11. Navigate back to the root directory by running this command:
+10. Navigate back to the root directory by running this command:
         ```
         cd ../../..
         ```
 
-12. Start the uWSGI server using the following commands:
-    ```
-    uwsgi --ini "uWSGI_Configuration.ini"
-    ```
+11. Start the uWSGI server using the following commands:
+        ```
+        uwsgi --ini "uWSGI_Configuration.ini"
+        ```
+    You can terminate the process by pressing CONTROL + C.
 
-B.  SETTING UP NGINX
+
+C.  SETTING UP NGINX
 1.  Install Nginx.
     - For Mac, install it using Homebrew by running this command:
         ```
@@ -122,30 +166,66 @@ B.  SETTING UP NGINX
 
 5.  Create a file, "The-Challenge.conf", there:
         ```
-        echo > "The-Challenge.conf"
+        echo | sudo tee "The-Challenge.conf"
         ```
 
-6.  Edit "The-Challenge.conf" to so that it contains the following:
+6.  Install vim, which is a text editor.
+        ```
+        sudo apt-get install vim
+        ```
+
+7.  This only applies if you are on Ubuntu.
+    Edit the main "nginx.conf" file by running:
+        ```
+        sudo vim "../nginx.conf"
+        ```
+    If the first line of the file reads:
+        """
+        user www-data;
+        """
+    then CHANGE that line to:
+        """
+        user YOUR_USER_THAT_YOU_ARE_LOGGED_IN_AS;
+        """
+    Save that file.
+    Next, we want to remove the default page on port 80. To do this, run (while still in the "sites-available"
+    directory):
+        ```
+        sudo rm "../sites-enabled/default"
+        ```
+
+
+8.  To start editing the file, run:
+        ```
+        sudo vim "The-Challenge.conf"
+        ```
+    Edit "The-Challenge.conf" to so that it contains the following:
         """
         server {
             listen 80;  # This will be the port to listen from
-            server_name localhost ADD_DOMAIN_NAME_HERE;
+            server_name The-Challenge;
 
             location / {
                 include uwsgi_params;
-                uwsgi_pass unix:///tmp/the-challenge.sock;  # This socket port is from section A step 12
+                uwsgi_pass unix:///tmp/the-challenge.sock;  # This socket port is in the 'uWSGI_Configuration.ini' file
+                                                            # from section A step 11
             }
         }
         """
 
-7.  Symlink "The-Challenge.conf" to the "sites-enabled" directory:
+9.  Symlink "The-Challenge.conf" to the "sites-enabled" directory:
         ```
         sudo ln -sf "$(pwd)/The-Challenge.conf" "$(dirname $(pwd))/sites-enabled/The-Challenge.conf"
         ```
 
-8.  Test for syntax errors by running:
+10.  Test for syntax errors in the Nginx files.
+      - On Mac, run:
         ```
         sudo nginx -t
+        ```
+      - On Ubuntu, run:
+        ```
+        sudo service nginx configtest
         ```
     If this returns without indicating any issues, restart the Nginx process to read the new configuration:
       - On Mac, run:
@@ -154,9 +234,56 @@ B.  SETTING UP NGINX
         ```
       - On Ubuntu, run:
         ```
-        sudo systemctl restart nginx
+        sudo service nginx restart
         ```
 
-C.  Creating a systemd service
-Follow the steps mentioned here:
-https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04#step-5-%E2%80%94-creating-a-systemd-unit-file
+
+D.  CREATING A SYSTEMD SERVICE
+These instructions ONLY APPLY TO UBUNTU SERVERS.
+1.  While you are still in the virtual environment, run:
+        ```
+        echo $PATH
+        ```
+    Copy the output of the command to the clipboard. Let the output be represented by the variable
+    `PATH_STRING_FROM_STEP_1`. We will need this for later.
+
+2.  Create a unit file ending in .service within the /etc/systemd/system directory to begin:
+        ```
+        sudo vim /etc/systemd/system/the-challenge.service
+        ```
+
+3.  Edit the file so that it contains the following:
+        """
+        [Unit]
+        Description=uWSGI instance to serve The Challenge
+        After=network.target
+
+        [Service]
+        User=YOUR_USERNAME_HERE
+        Group=www-data
+        WorkingDirectory=/home/YOUR_USERNAME_HERE/PATH_TO_WORKING_DIRECTORY
+        Environment="PATH=PATH_STRING_FROM_STEP_1"
+        ExecStart=/home/YOUR_USERNAME_HERE/PATH_TO_WORKING_DIRECTORY/venv/bin/uwsgi --ini uWSGI_Configuration.ini
+
+        [Install]
+        WantedBy=multi-user.target
+        """
+    Save and close the file.
+
+4.  Now, start and enable the newly created service:
+        ```
+        sudo systemctl start the-challenge
+        sudo systemctl enable the-challenge
+        ```
+    Check that the service is running by running:
+        ```
+        sudo systemctl status the-challenge
+        ```
+    In the output, one line should be "Active: active (running) since...". If you see this, you have successfully
+    created the service.
+
+5.  To restart the systemd service, run:
+        ```
+        sudo systemctl daemon-reload
+        sudo systemctl restart the-challenge
+        ```

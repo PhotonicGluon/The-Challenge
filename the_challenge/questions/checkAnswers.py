@@ -2,7 +2,7 @@
 checkAnswers.py
 
 Created on 2020-09-11
-Updated on 2020-10-04
+Updated on 2020-10-06
 
 Copyright Ryan Kan 2020
 
@@ -10,8 +10,11 @@ Description: Contains all functions to process and check the users' answers
 """
 
 # IMPORTS
+import math
 from itertools import permutations
 
+import numpy as np
+from sympy import Symbol
 from sympy.parsing.latex import parse_latex
 
 
@@ -78,6 +81,9 @@ def check_user_answer(user_answer, calculated_answer):
         bool: Returns True then the user's answer is correct. If it is wrong it will return False instead.
     """
 
+    # CONSTANTS
+    testcases = [math.pi, math.e, 2 * math.sin(0.3 * np.pi)]  # pi, e, φ (golden ratio)
+
     # COMPUTATION
     # Output the correct answer
     print("Correct answer:", calculated_answer)
@@ -109,14 +115,46 @@ def check_user_answer(user_answer, calculated_answer):
             return False
 
     else:  # Strings
-        # Parse the correct answer's LaTeX data
+        # Parse the correct answer
         calculated_answer = parse_latex(handle_latex_preprocessing(calculated_answer))
 
-        # Parse the user's LaTeX input
-        parsed_user_answer = parse_latex(str(handle_latex_preprocessing(user_answer)))  # Cast to string just in case
+        # Get all free variables in the calculated expression
+        calculated_answer_variables = list(calculated_answer.atoms(Symbol))
 
-        # Compare the two answers
-        if parsed_user_answer.equals(calculated_answer):
+        # Substitute testcases into the calculated answer
+        calculated_values = []
+        for i in range(len(testcases)):
+            # Set `evaluated` to `calculated_answer`
+            evaluated = calculated_answer
+
+            # Substitute a value for each variable
+            for j, variable in enumerate(calculated_answer_variables):
+                evaluated = (evaluated.subs(variable, testcases[(i + j) % len(testcases)])).evalf()
+
+            # Round the final answer to 3 decimal places
+            calculated_values.append(round(evaluated, 3))  # NOTE: 'Mathematical' rounding does not need to be used here
+
+        # Parse the user's LaTeX input
+        user_answer = parse_latex(handle_latex_preprocessing(str(user_answer)))  # Cast to string just in case
+
+        # Get all free variables in the user's expression
+        user_answer_variables = list(user_answer.atoms(Symbol))
+
+        # Substitute testcases into the calculated answer
+        user_values = []
+        for i in range(len(testcases)):
+            # Set `evaluated` to `calculated_answer`
+            evaluated = user_answer
+
+            # Substitute a value for each variable
+            for j, variable in enumerate(user_answer_variables):
+                evaluated = (evaluated.subs(variable, testcases[(i + j) % len(testcases)])).evalf()
+
+            # Round the final answer to 3 decimal places
+            user_values.append(round(evaluated, 3))
+
+        # Compare the calculated testcase values
+        if calculated_values == user_values:
             return True
         else:
             return False

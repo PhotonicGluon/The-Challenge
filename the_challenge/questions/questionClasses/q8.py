@@ -2,7 +2,7 @@
 q8.py
 
 Created on 2020-08-21
-Updated on 2020-09-20
+Updated on 2020-10-06
 
 Copyright Ryan Kan 2020
 
@@ -15,6 +15,7 @@ import base64
 import numpy as np
 import plotly.graph_objects as go
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -30,7 +31,7 @@ class Q8(Question):
         # Generate values for a, b and c
         a = self.random.choice([self.random.randint(-5, -1), self.random.randint(1, 5)])
         b = self.random.randint(1, 4)
-        c = self.random.randint(-10, 10)
+        c = self.random.choice([self.random.randint(1, 10), -self.random.randint(1, 10)])
 
         # Choose a function to plot
         sin_or_cos = self.random.choice([np.sin, np.cos])
@@ -67,11 +68,11 @@ class Q8(Question):
 
         # Set values for `self.question` and `self.answer`
         self.question = [eqn, image_data]
-        self.answer = (a, b, c)
+        self.answer = mathematical_round((a * b) / c, 3)
 
     def generate_question(self):
         string = f"Determine the values of $a$, $b$ and $c$ in $${self.question[0]}$$ given the graph of that " \
-                 f"equation as shown above."
+                 "equation as shown above. Hence state the value of $a \\times b \\div c$."
 
         return string, self.question[1]
 
@@ -79,7 +80,7 @@ class Q8(Question):
         return self.answer
 
     def answer_input_fields_prefix(self):
-        return ["$a=$", "$b=$", "$c=$"]
+        return ["Answer:"]
 
     @staticmethod
     def deg2rad(deg):

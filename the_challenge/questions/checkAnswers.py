@@ -89,14 +89,7 @@ def check_user_answer(user_answer, calculated_answer):
     print("Correct answer:", calculated_answer)
 
     # Determine the type of the calculated answer
-    if isinstance(calculated_answer, tuple):
-        # Check if the user's answers is equal to the calculated answers
-        if user_answer == calculated_answer:
-            return True
-        else:
-            return False
-
-    elif isinstance(calculated_answer, list):
+    if isinstance(calculated_answer, list):
         # Check if the user's answer is equal to one of the permutations of the list
         all_permutations = [list(x) for x in list(permutations(calculated_answer))]
         for permutation in all_permutations:
@@ -105,9 +98,6 @@ def check_user_answer(user_answer, calculated_answer):
         return False
 
     elif isinstance(calculated_answer, int) or isinstance(calculated_answer, float):
-        # For debugging purposes, output the calculated answer
-        print("Correct answer:", calculated_answer)
-
         # Check if the user's answer is equal to the calculated answer
         if user_answer == calculated_answer:
             return True

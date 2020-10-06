@@ -2,7 +2,7 @@
 questionBank.py
 
 Created on 2020-08-26
-Updated on 2020-09-10
+Updated on 2020-10-06
 
 Copyright Ryan Kan 2020
 
@@ -78,5 +78,4 @@ class QuestionBank:
 # DEBUG CODE
 if __name__ == "__main__":
     questionBank = QuestionBank(seed_value="Theorem")
-    questions = questionBank.setup_questions()
-    print(questions)
+    questions, prefixes, answers = questionBank.setup_questions()

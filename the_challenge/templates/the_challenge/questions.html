@@ -11,14 +11,13 @@
     <script>
         const QUESTIONS_AND_ANSWERS = JSON.parse({{ session["RunData"]|tojson|safe }});
         const Q8_IMAGE_SOURCE = "{{ session["Q8_Image"] }}";
-        console.log(Q8_IMAGE_SOURCE);
     </script>
 {% endblock %}
 
 {% block content %}
     <audio id="audio"
            preload="auto"
-           src="{{ url_for('static', filename='audio-v2.mp3') }}">
+           src="{{ url_for('static', filename='the_challenge/resources/audio/audio-questions.mp3') }}">
 
         <p>Your browser does not support the audio element.</p>
     </audio>

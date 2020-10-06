@@ -239,9 +239,6 @@ $(document).ready(async () => {
 
         // Audio
         let myAudio = document.getElementById("audio");  // Get the DOM element
-        if (myAudio.currentTime < 5) {
-            myAudio.currentTime = 5;
-        }
         myAudio.play();
 
         // Start the progress bar

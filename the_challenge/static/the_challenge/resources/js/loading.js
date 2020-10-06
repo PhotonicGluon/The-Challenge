@@ -20,13 +20,11 @@ $(document).ready(async () => {
             color: "#28b062"
         },
         to: {color: "#28b062"},
-        text: {value: "0"},
         step: function (state, bar, _) {
             bar.path.setAttribute("stroke", state.color);
-            bar.setText(toDecimalPlace(5 * (1 - bar.value()), 2) + "s");
         },
         strokeWidth: 10,
-        easing: "linear",
+        easing: "easeInOut",
         duration: 5000,
         trailColor: "#ddd",
         trailWidth: 1,

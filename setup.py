@@ -2,14 +2,15 @@
 setup.py
 
 Created on 2020-09-19
-Updated on 2020-09-26
+Updated on 2020-10-06
 """
 
 from setuptools import find_packages, setup
+from the_challenge import __version__
 
 setup(
     name="The-Challenge",
-    version=open("VERSION", "r").read().strip(),
+    version=__version__,
     description=" A Web Project About Solving Mathematics Problems",
     author="Ryan Kan",
     author_email="ryankanok@gmail.com",

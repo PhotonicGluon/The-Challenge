@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-09-20
+Updated on 2020-10-06
 
 Copyright Ryan Kan 2020
 
@@ -18,6 +18,7 @@ from flask import Flask, request, redirect, url_for, render_template, session, j
 from flask_session import Session
 
 from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
+from the_challenge.version import __version__
 
 # FLASK SETUP
 # Define basic things
@@ -270,7 +271,7 @@ def success_specific(userid):
 # Root Pages
 @app.route("/")
 def index():
-    response = make_response(render_template("index/index.html"))
+    response = make_response(render_template("index/index.html", version=__version__))
     if not request.cookies.get("ChallengeUUID"):
         # Generate a unique UUID for the user and set it in a cookie
         response.set_cookie("ChallengeUUID", str(uuid.uuid4()), max_age=60 * 60 * 24 * 365 * 10)

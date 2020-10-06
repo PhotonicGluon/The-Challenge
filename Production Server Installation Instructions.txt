@@ -55,9 +55,9 @@ B.  SETTING UP UWSGI
     This may take some time.
     Check that the installation was successful by executing the following command:
         ```
-        python3 -c "import the_challenge;print('Successfully Installed')"
+        python3 -c "import the_challenge;print('Successfully installed The Challenge. (Version: {})'.format(the_challenge.__version__))"
         ```
-    If the last line of the output was 'Successfully Installed' it was installed successfully.
+    If the last line of the output was 'Successfully installed The Challenge' with a version number, it was installed successfully.
 
 7.  Install "OpenSSL".
     - On Mac, run:

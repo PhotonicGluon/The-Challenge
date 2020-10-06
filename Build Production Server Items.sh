@@ -35,13 +35,13 @@ cp "Production Server Installation Instructions.txt" "$COMPRESSED_DIRECTORY_NAME
 cp "uWSGI_Configuration.ini" "$COMPRESSED_DIRECTORY_NAME"
 
 # Get the current version of The Challenge
-version=$(head -n 1 "VERSION")
+version=$(python3 -c "import the_challenge;print(the_challenge.__version__)" | tail -n 1)
 
 # Compress all items inside the "$COMPRESSED_DIRECTORY_NAME" directory
 echo
 echo "Compressing files"
 tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
-echo "Done! You can find 'The-Challenge-Production-Server.tar.gz' in the current working directory."
+echo "Done!"
 
 # Delete temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"

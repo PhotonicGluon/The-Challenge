@@ -6,7 +6,7 @@ Updated on 2020-10-07
 
 Copyright Ryan Kan 2020
 
-Description: Contains all the command line commands.
+Description: Contains all the command line commands that could be run.
 """
 
 # IMPORTS
@@ -59,13 +59,13 @@ def update_the_challenge():
     # Check if local version is smaller than the GitHub version
     if local_version < most_recent_version:
         print(f"There is a new version, {most_recent_version}, available.")
-        print("Do you want to update to the new version?")
 
         while True:
+            print("Do you want to update to the new version?")
             want_to_update = input("[Y]es or [N]o: ").upper()
 
             if want_to_update not in ["Y", "N"]:
-                print("Please enter either 'Y' or 'N'.")
+                print("Please enter either 'Y' or 'N'.\n")
             elif want_to_update == "N":
                 print("Keeping local version. Quitting now.")
                 sys.exit()
@@ -111,10 +111,30 @@ def update_the_challenge():
         # Once found install it using pip
         os.system(f"pip install -U {latest_wheel_file}")
 
-        print("The Update was completed successfully. Quitting now.")
+        print("The update was completed successfully.")
 
     except IndexError:
         print("The latest distribution file cannot be found. Quitting now...")
+        sys.exit()
 
     # Clean up
     shutil.rmtree("./extracted")
+
+    # Offer to automatically restart the service
+    print("Only answer 'Y' to the following prompt if you (a) are on Ubuntu and (b) have a systemd service that "
+          "hosts The Challenge's server.")
+    while True:
+        print("Would you like to restart the systemd service?")
+        want_to_restart = input("[Y]es or [N]o: ").upper()
+
+        if want_to_restart not in ["Y", "N"]:
+            print("Please enter either 'Y' or 'N'.\n")
+        elif want_to_restart == "N":
+            print("Quitting now.")
+            sys.exit()
+        else:
+            print("Please enter the systemd service name.")
+            systemd_service_name = input("?> ")
+            os.system(f"sudo systemctl restart {systemd_service_name}")
+            print("The systemd service has been restarted. Quitting.")
+            break

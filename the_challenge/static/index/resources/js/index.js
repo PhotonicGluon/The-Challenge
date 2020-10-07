@@ -30,7 +30,7 @@ function checkIfCookieEnabled() {
     let ret = document.cookie.indexOf("cookie_test=") !== -1;
 
     // Delete the cookie
-    document.cookie = "cookie_test=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
+    document.cookie = "cookie_test=1; expires=Thu, 01-Jan-1970 00:00:00 GMT";
 
     return ret;
 }
@@ -48,6 +48,7 @@ $(document).ready(() => {
 
     // Check if start button should be disabled
     if (!cookieEnabled || !acceptableWindowSize || isMobile()) {
+        console.log("Unacceptable conditions; disabling button.");
         document.getElementById("start-button").disabled = true;
     }
 
@@ -63,8 +64,15 @@ $(document).ready(() => {
     $(window).resize(() => {
         // Check window size
         let acceptableWindowSize = checkWindowSize();
+        console.log(!cookieEnabled, !acceptableWindowSize, isMobile());
 
         // Check if can re-enable the start button
-        document.getElementById("start-button").disabled = !cookieEnabled || !acceptableWindowSize || isMobile();
+        if (!cookieEnabled || !acceptableWindowSize || isMobile()) {
+            console.log("Unacceptable conditions; disabling button.");
+            document.getElementById("start-button").disabled = true;
+        } else {
+            console.log("Acceptable conditions; enabling button.");
+            document.getElementById("start-button").disabled = false;
+        }
     });
 });

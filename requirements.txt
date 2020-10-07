@@ -7,4 +7,5 @@ numpy==1.19.2
 plotly==4.10.0
 simplejson==3.17.2
 sympy==1.6.2
-wheel
+requests==2.24.0
+wheel==0.35.1

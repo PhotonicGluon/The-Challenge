@@ -2,10 +2,11 @@
 setup.py
 
 Created on 2020-09-19
-Updated on 2020-10-06
+Updated on 2020-10-07
 """
 
 from setuptools import find_packages, setup
+
 from the_challenge import __version__
 
 setup(
@@ -19,5 +20,10 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=[x.strip() for x in open("requirements.txt", "r").readlines()]
+    install_requires=[x.strip() for x in open("requirements.txt", "r").readlines()],
+    entry_points={
+        "console_scripts": [
+            "update_the_challenge=the_challenge.command_line:update_the_challenge"
+        ]
+    }
 )

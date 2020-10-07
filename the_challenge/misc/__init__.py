@@ -1,1 +1,2 @@
 from .mathematicalRounding import mathematical_round
+from .updateTheChallenge import check_token, get_most_recent_version, check_internet_connection

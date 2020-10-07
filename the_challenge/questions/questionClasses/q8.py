@@ -2,7 +2,7 @@
 q8.py
 
 Created on 2020-08-21
-Updated on 2020-10-06
+Updated on 2020-10-07
 
 Copyright Ryan Kan 2020
 
@@ -14,8 +14,8 @@ import base64
 
 import numpy as np
 import plotly.graph_objects as go
+from sympy import latex, symbols
 
-from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -31,7 +31,7 @@ class Q8(Question):
         # Generate values for a, b and c
         a = self.random.choice([self.random.randint(-5, -1), self.random.randint(1, 5)])
         b = self.random.randint(1, 4)
-        c = self.random.choice([self.random.randint(1, 10), -self.random.randint(1, 10)])
+        c = self.random.randint(-10, 10)
 
         # Choose a function to plot
         sin_or_cos = self.random.choice([np.sin, np.cos])
@@ -66,13 +66,17 @@ class Q8(Question):
         else:
             eqn = r"y = a \cos\left(\frac{x}{b}\right) + c"
 
+        # Start forming the answer
+        x, y, z = symbols("x y z")
+        answer = 2 ** x * 3 ** y * 5 ** z
+
         # Set values for `self.question` and `self.answer`
         self.question = [eqn, image_data]
-        self.answer = mathematical_round((a * b) / c, 3)
+        self.answer = latex(answer.subs(x, a).subs(y, b).subs(z, c))
 
     def generate_question(self):
         string = f"Determine the values of $a$, $b$ and $c$ in $${self.question[0]}$$ given the graph of that " \
-                 "equation as shown above. Hence state the value of $a \\times b \\div c$."
+                 "equation as shown above, where $b > 0$. Hence state the exact value of $2^a \\times 3^b \\times 5^c$."
 
         return string, self.question[1]
 

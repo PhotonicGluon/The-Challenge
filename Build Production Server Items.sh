@@ -1,6 +1,17 @@
 #!/bin/bash
+#################################################################################
+# Build Production Server Items.sh                                              #
+#                                                                               #
+# Created on 2020-09-21                                                         #
+# Updated on 2020-10-07                                                         #
+#                                                                               #
+# Copyright Ryan Kan 2020                                                       #
+#                                                                               #
+# Description: A script that assists in building the files of The Challenge.    #
+#################################################################################
+
 # This file will run all the necessary commands to compile The-Challenge and to include all necessary files.
-echo "Starting..."
+echo "Starting the build script..."
 
 # Config
 export LANG=en_US.UTF-8
@@ -10,25 +21,24 @@ export LC_ALL=$LANG
 COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 
 # Ensure that the current working directory is this script's directory
-cd "$(dirname "$0")" || exit
+cd "$(dirname "$0")" || exit 1
 
-# Clear dist directory
+# Clear the dist directory
 rm -rf "dist"
 
 # Create a "compilation" directory
 mkdir "$COMPRESSED_DIRECTORY_NAME"
 
 # Compile "The Challenge"
-echo "Building The Challenge"
+echo "Building The Challenge..."
 python setup.py bdist_wheel
-echo "Built The Challenge"
+echo "Built The Challenge successfully."
 
 # Move the generated build file to a separate directory
-cd dist || exit
+cd dist || exit 1
 
-for entry in "."/*
-do
-  mv "$entry" ../"$COMPRESSED_DIRECTORY_NAME"
+for entry in "."/*; do
+    mv "$entry" ../"$COMPRESSED_DIRECTORY_NAME"
 done
 
 cd .. || exit
@@ -42,7 +52,7 @@ version=$(python3 -c "import the_challenge;print(the_challenge.__version__)" | t
 
 # Compress all items inside the "$COMPRESSED_DIRECTORY_NAME" directory
 echo
-echo "Compressing files"
+echo "Compressing the generated files..."
 tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
 echo "Done! The generated file can be found in the 'dist' folder."
 

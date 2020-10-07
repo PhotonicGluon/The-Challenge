@@ -64,7 +64,6 @@ $(document).ready(() => {
     $(window).resize(() => {
         // Check window size
         let acceptableWindowSize = checkWindowSize();
-        console.log(!cookieEnabled, !acceptableWindowSize, isMobile());
 
         // Check if can re-enable the start button
         if (!cookieEnabled || !acceptableWindowSize || isMobile()) {

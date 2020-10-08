@@ -2,7 +2,7 @@
 setup.py
 
 Created on 2020-09-19
-Updated on 2020-10-07
+Updated on 2020-10-08
 """
 
 from setuptools import find_packages, setup
@@ -23,7 +23,7 @@ setup(
     install_requires=[x.strip() for x in open("requirements.txt", "r").readlines()],
     entry_points={
         "console_scripts": [
-            "update_the_challenge=the_challenge.command_line:update_the_challenge"
+            "update_the_challenge=the_challenge.commandLine:update_the_challenge"
         ]
     }
 )

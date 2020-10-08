@@ -109,7 +109,7 @@ $(document).ready(async () => {
     let currentSlide = STARTING_QUESTION_NO - 1;
 
     // Load MathJax again
-    MathJax.Hub.Startup.onload();
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
     // Continue once MathJax has finished loading
     MathJax.Hub.Register.StartupHook("End", async function () {

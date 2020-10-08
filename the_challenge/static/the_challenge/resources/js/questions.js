@@ -18,7 +18,7 @@ $(document).ready(async () => {
         from: {color: "#28b062"},
         to: {color: "#d74f4f"},
         text: {
-            value: "0",
+            value: "∞",
             style: {
                 color: "#fff",
                 position: "absolute",
@@ -108,133 +108,138 @@ $(document).ready(async () => {
     const slides = $.find(".slide");
     let currentSlide = STARTING_QUESTION_NO - 1;
 
-    // Prepare input fields' math displays
-    function prepareInputFields() {
-        // Get all display boxes
-        let mjDisplayBoxes = {};
-        for (let q = 0; q < noQuestions; q++) {
-            let inputFieldPrefixes = QUESTIONS_AND_ANSWERS.prefixes[q];
-            inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
-                MathJax.Hub.Queue(() => {
-                    mjDisplayBoxes[`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
+    // Load MathJax again
+    MathJax.Hub.Startup.onload();
+
+    // Continue once MathJax has finished loading
+    MathJax.Hub.Register.StartupHook("End", async function () {
+        // Prepare input fields' math displays
+        function prepareInputFields() {
+            // Get all display boxes
+            let mjDisplayBoxes = {};
+            for (let q = 0; q < noQuestions; q++) {
+                let inputFieldPrefixes = QUESTIONS_AND_ANSWERS.prefixes[q];
+                inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
+                    MathJax.Hub.Queue(() => {
+                        mjDisplayBoxes[`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
+                    });
                 });
+            }
+
+            // "Live update" MathJax whenever a key is pressed
+            $(".math-input").on("keyup", (event) => { // When a keyboard key has been hit & the finger is removed, this code will run
+                let target = event.target;
+                let math = $(target).val(); // This gets the value of the inputted string
+                $(target).css("color", "black"); // Set the string's colour to black
+
+                // Get the id of the element
+                if (math.length > 0) { // If there is something typed in
+                    try {
+                        let tree = MathLex.parse(math); // Try to parse the math
+                        let latex = MathLex.render(tree, "latex"); // Render the math as latex
+
+                        MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], latex]);
+                    } catch (err) {
+                        $(target).css("color", "red");
+                    }
+
+                } else {
+                    // Clear display and output boxes if input is empty
+                    MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], ""]);
+                }
             });
         }
 
-        // "Live update" MathJax whenever a key is pressed
-        $(".math-input").on("keyup", (event) => { // When a keyboard key has been hit & the finger is removed, this code will run
-            let target = event.target;
-            let math = $(target).val(); // This gets the value of the inputted string
-            $(target).css("color", "black"); // Set the string's colour to black
+        prepareInputFields();
 
-            // Get the id of the element
-            if (math.length > 0) { // If there is something typed in
-                try {
-                    let tree = MathLex.parse(math); // Try to parse the math
-                    let latex = MathLex.render(tree, "latex"); // Render the math as latex
+        // Prepare Submit button functionality
+        submitButton.on("click", () => {
+            // Get the number of input fields for the current question
+            let currentPrefixes = QUESTIONS_AND_ANSWERS.prefixes[currentSlide];
+            let noInputFields = currentPrefixes.length;
 
-                    MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], latex]);
-                } catch (err) {
-                    $(target).css("color", "red");
-                }
-
-            } else {
-                // Clear display and output boxes if input is empty
-                MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], ""]);
+            // Form the input fields' ids
+            let inputFieldsIDs = [];
+            for (let i = 0; i < noInputFields; i++) {
+                inputFieldsIDs.push(`question_${currentSlide + 1}-iField_${i}`);
             }
-        });
-    }
 
-    prepareInputFields();
+            // Get data from the input fields
+            let userAnswer = [];
+            let checkAnswer = true;
 
-    // Prepare Submit button functionality
-    submitButton.on("click", () => {
-        // Get the number of input fields for the current question
-        let currentPrefixes = QUESTIONS_AND_ANSWERS.prefixes[currentSlide];
-        let noInputFields = currentPrefixes.length;
+            inputFieldsIDs.forEach((id) => {
+                let selector = $("#" + id);
+                let math = selector.val();
 
-        // Form the input fields' ids
-        let inputFieldsIDs = [];
-        for (let i = 0; i < noInputFields; i++) {
-            inputFieldsIDs.push(`question_${currentSlide + 1}-iField_${i}`);
-        }
+                if (math.length > 0) {
+                    try {
+                        // Parse the math input into latex
+                        let tree = MathLex.parse(math);
+                        let latexCode = MathLex.render(tree, "latex");
 
-        // Get data from the input fields
-        let userAnswer = [];
-        let checkAnswer = true;
+                        // Put the latex code into an array
+                        userAnswer.push(latexCode);
 
-        inputFieldsIDs.forEach((id) => {
-            let selector = $("#" + id);
-            let math = selector.val();
-
-            if (math.length > 0) {
-                try {
-                    // Parse the math input into latex
-                    let tree = MathLex.parse(math);
-                    let latexCode = MathLex.render(tree, "latex");
-
-                    // Put the latex code into an array
-                    userAnswer.push(latexCode);
-
-                } catch (err) {
-                    // Don't do anything
-                }
-            } else {
-                // Add a class that defines the shaking animation
-                selector.addClass("error");
-
-                // Remove the class after the animation completes
-                setTimeout(() => {
-                    selector.removeClass("error");
-                }, 300);  // 300 ms
-
-                // Change the flag of whether to check answers to false
-                checkAnswer = false;
-            }
-        });
-
-        // Submit latex value to server
-        if (checkAnswer) {
-            $.get("/secret/check-answer", {
-                key: "CHECK",
-                question_no: currentSlide + 1,
-                user_answer: userAnswer
-            }, (output) => {
-                let isCorrect = output["correct"];
-                if (isCorrect) {
-                    if (currentSlide + 1 === 14) {  // The last slide
-                        let timeLeft = DURATION_OF_THE_CHALLENGE * (1 - progressBar.value());
-                        $.get("/secret/success-handler", {
-                            key: "a-winner-is-you",
-                            user_id: getUUIDCookie(),
-                            time_remaining: timeLeft
-                        }, (output) => {
-                            window.location.replace(output);
-                        });
-                    } else {
-                        // Play success audio
-                        successAudio.play();
-
-                        // Move on to next question
-                        showNextSlide();
+                    } catch (err) {
+                        // Don't do anything
                     }
                 } else {
-                    // Make all bars shake
-                    inputFieldsIDs.forEach((id) => {
-                        let selector = $("#" + id);
-                        selector.addClass("error");
-                        setTimeout(() => {
-                            selector.removeClass("error");
-                        }, 300);
-                    });
+                    // Add a class that defines the shaking animation
+                    selector.addClass("error");
+
+                    // Remove the class after the animation completes
+                    setTimeout(() => {
+                        selector.removeClass("error");
+                    }, 300);  // 300 ms
+
+                    // Change the flag of whether to check answers to false
+                    checkAnswer = false;
                 }
             });
-        }
 
-    });
+            // Submit latex value to server
+            if (checkAnswer) {
+                $.get("/secret/check-answer", {
+                    key: "CHECK",
+                    question_no: currentSlide + 1,
+                    user_answer: userAnswer
+                }, (output) => {
+                    let isCorrect = output["correct"];
+                    if (isCorrect) {
+                        if (currentSlide + 1 === 14) {  // The last slide
+                            let timeLeft = DURATION_OF_THE_CHALLENGE * (1 - progressBar.value());
+                            $.get("/secret/success-handler", {
+                                key: "a-winner-is-you",
+                                user_id: getUUIDCookie(),
+                                time_remaining: timeLeft
+                            }, (output) => {
+                                window.location.replace(output);
+                            });
+                        } else {
+                            // Play success audio
+                            successAudio.play();
 
-    // Show the first slide
-    MathJax.Hub.Register.StartupHook("End", async function () {
+                            // Move on to next question
+                            showNextSlide();
+                        }
+                    } else {
+                        // Make all bars shake
+                        inputFieldsIDs.forEach((id) => {
+                            let selector = $("#" + id);
+                            selector.addClass("error");
+                            setTimeout(() => {
+                                selector.removeClass("error");
+                            }, 300);
+                        });
+                    }
+                });
+            }
+
+        });
+
+        // Show the first slide after MathJax has finally finished loading the equations
+
         showSlide(currentSlide);
 
         // Audio

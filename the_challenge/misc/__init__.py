@@ -1,2 +1,2 @@
 from .mathematicalRounding import mathematical_round
-from .updating_functions import check_token, get_most_recent_version, check_internet_connection
+from .updatingFunctions import check_token, get_most_recent_version, check_internet_connection

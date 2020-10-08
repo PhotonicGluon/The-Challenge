@@ -12,6 +12,9 @@
         const QUESTIONS_AND_ANSWERS = JSON.parse({{ session["RunData"]|tojson|safe }});
         const Q8_IMAGE_SOURCE = "{{ session["Q8_Image"] }}";
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 {% endblock %}
 
 {% block content %}

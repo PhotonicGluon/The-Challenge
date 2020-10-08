@@ -23,6 +23,12 @@ footer a {
     color: white;
 }
 
+.back-arrow-box {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
 .row {
     max-width: 1080px;
     margin: 0 auto;
@@ -30,7 +36,7 @@ footer a {
 
 .long-copy {
     line-height: 145%;
-    width: 70%;
-    margin-left: 15%;
+    width: 90%;
+    margin-left: 5%;
     text-align: justify;
 }

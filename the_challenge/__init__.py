@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-06
+Updated on 2020-10-08
 
 Copyright Ryan Kan 2020
 
@@ -23,7 +23,7 @@ from the_challenge.version import __version__
 # FLASK SETUP
 # Define basic things
 app = Flask(__name__)
-app.config.from_pyfile("config_base.py")
+app.config.from_pyfile("baseConfig.py")
 
 # Setup session `sess`
 sess = Session()

@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index/resources/css/index.css') }}">
 {% endblock %}
 
+{% block header_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+{% endblock %}
+
 {% block content %}
     <div class="header">
         <div class="hero-box">
@@ -104,7 +108,11 @@
                         </ul>
                     </li>
                     <li>It is entirely possible for mathematics equations to not render properly. <strong>If this occurs
-                        to you, reload and try The Challenge again.</strong></li>
+                        to you, reload and try The Challenge again.</strong>
+                        <ul>
+                            <li>However, with the recent update, this should no longer happen.</li>
+                        </ul>
+                    </li>
                     <li><strong>You are not permitted to refer to any assisting websites or hard-copy
                         documents.</strong></li>
                     <li>Answers which are not exact are to be rounded to 3 decimal places.
@@ -113,12 +121,24 @@
                                 <strong>exact</strong> form. This includes the term which does not include an $x$ in it
                                 (i.e. the term independent of $x$).
                             </li>
+                            <li><strong>Exception</strong>: For question 8 leave your answer in <strong>exact</strong>
+                            form.</li>
                             <li><strong>Exception</strong>: For questions 9, 10 and 11 all coefficients of $x$ are to be
                                 in <strong>exact</strong> form.
                             </li>
                         </ul>
                     </li>
-                    <li>A (scientific) calculator is to be used, whenever it is appropriate to do so.</li>
+                    <li>A (scientific) calculator is to be used, whenever it is appropriate to do so. The calculator
+                        should have the following minimum features:
+                        <ol>
+                            <li>Four arithmetic operations ($+$, $-$, $\times$, $\div$) including the order of
+                                operations and use of brackets</li>
+                            <li>Fractional function which retains the fraction in the form $\frac ab$ where $a$ and $b$
+                                are integers</li>
+                            <li>Square root ($\sqrt{\text{ }}$) and cube root ($\sqrt[3]{\text{ }}$) functions</li>
+                            <li>The value of Pi ($\pi$) as approximately <code>3.14159265359</code></li>
+                        </ol>
+                    </li>
                     <li>The working for the answers is <strong>optional</strong>. Only the final answer will be checked.
                         <ul>
                             <li>However, you are advised to prepare a blank sheet of A4 or US Letter paper for the rough
@@ -126,7 +146,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li>Please ensure that <strong>audio is not disabled</strong> on this site, as music will be played.
+                    <li>Please ensure that <strong>audio is not disabled</strong> on this site, as music will be played
+                        during the duration of The Challenge.
                     </li>
                 </ul>
             </div>

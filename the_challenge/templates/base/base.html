@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
+    <!-- Set meta tags -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Define title block -->
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Define The Favicon -->
@@ -29,6 +33,7 @@
                     }
                 }
             });
+
     </script>
 
     <script type="text/javascript" src={{ url_for('static', filename='base/vendors/js/progressbar.min.js') }}></script>

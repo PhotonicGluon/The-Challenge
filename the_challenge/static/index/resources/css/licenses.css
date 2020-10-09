@@ -40,3 +40,10 @@ footer a {
     margin-left: 5%;
     text-align: justify;
 }
+
+@media screen and (max-width: 1080px) {
+  .row, .back-arrow-box {
+      width: 90%;
+      margin: 0 auto;
+  }
+}

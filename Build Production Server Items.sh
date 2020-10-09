@@ -54,10 +54,10 @@ version=$(python3 -c "import the_challenge;print(the_challenge.__version__)" | t
 echo
 echo "Compressing the generated files..."
 tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
-echo "Done! The generated file can be found in the 'dist' folder."
 
 # Move generated tar file to the dist folder
 mv "The-Challenge-Production-Server_${version}.tar.gz" "dist"
+echo "Done! The generated file can be found in the 'dist' folder."
 
 # Delete temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"

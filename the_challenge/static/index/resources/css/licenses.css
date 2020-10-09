@@ -42,8 +42,8 @@ footer a {
 }
 
 @media screen and (max-width: 1080px) {
-  .row, .back-arrow-box {
+    .row, .back-arrow-box {
       width: 90%;
       margin: 0 auto;
-  }
+    }
 }

@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-10-08
+Updated on 2020-10-09
 
 Copyright Ryan Kan 2020
 
@@ -122,8 +122,8 @@ def update_the_challenge():
 
     # Offer to automatically restart the service
     print()
-    print("Only answer 'Y' to the following prompt if you (a) are on Ubuntu and (b) have a systemd service that "
-          "hosts The Challenge's server.")
+    print("Only answer 'Y' to the following prompt if you (a) are on Ubuntu; (b) have a systemd service that "
+          "hosts The Challenge's server; and (c) are an administrator that can use the 'sudo' command.")
     while True:
         print("Would you like to restart the systemd service?")
         want_to_restart = input("[Y]es or [N]o: ").upper()

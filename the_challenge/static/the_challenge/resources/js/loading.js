@@ -1,6 +1,6 @@
 async function loadQuestions() {
     let promise = new Promise((resolve, reject) => {
-        $.get("/secret/setup_questions", {key: "$€τu₽"}, (output) => {
+        $.get("/secret/setup_questions", {key: "537up-7h3-m47h-qu35710n5"}, (output) => {
             console.log(output);
             resolve(output);
         });
@@ -43,7 +43,7 @@ $(document).ready(async () => {
 
     // Redirect to question pages
     console.log("Redirecting to question pages.")
-    $.get("/secret/redirect-to-the-challenge", {key: "挑战"}, (output) => {
+    $.get("/secret/redirect-to-the-challenge", {key: "50m371m35-7h3-r34l-ch4ll3n63-15-70-r3d1r3c7-7h3-4773n710n-0f-50m30n3-3l53"}, (output) => {
         window.location.replace(output);
     });
 });

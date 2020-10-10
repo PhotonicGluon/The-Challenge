@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-08
+Updated on 2020-10-11
 
 Copyright Ryan Kan 2020
 
@@ -76,9 +76,9 @@ def check_connection():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "connection":
+    if key == "4r3-y0u-c0nn3c73d?":
         # Since the user is able to access this page they are online
-        return "Connected"
+        return "y0u-4r3-c0nn3c73d!"
     else:
         # Redirect back to index
         return redirect(url_for("index"))
@@ -90,7 +90,7 @@ def start_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "μυστικό":
+    if key == "71m3-70-574r7-7h3-ch4ll3n63":
         # Clear data
         clear_user_data()
 
@@ -107,7 +107,7 @@ def setup_questions():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "$€τu₽":
+    if key == "537up-7h3-m47h-qu35710n5":
         # Setup question bank
         question_bank = QuestionBank()
 
@@ -138,7 +138,7 @@ def redirect_to_the_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "挑战":
+    if key == "50m371m35-7h3-r34l-ch4ll3n63-15-70-r3d1r3c7-7h3-4773n710n-0f-50m30n3-3l53":
         session["starting_challenge"] = True
         return url_for("the_challenge")
 
@@ -154,7 +154,7 @@ def check_answer():
     user_answer = request.args.getlist("user_answer[]")  # Gets all the elements that has this tag and puts it in a list
 
     # Check the key
-    if key == "CHECK":
+    if key == "7h3-u53r-w4n75-70-ch3ck-7h31r-4n5w3r":
         # Get the correct answer
         answer = json.loads(session["RunData"])["answers"][question_no - 1]
 
@@ -177,7 +177,8 @@ def success_handler():
     time_remaining = request.args.get("time_remaining", None, type=float)
 
     # Check the key
-    if key == "a-winner-is-you":
+    if key == "c0n6r47ul4710n5!-4-7ru3-w1nn3r-15-y0u!-h0w-y0u-b347-7h3-ch4ll3n63-15-7ruly-4-my573ry-f0r-m3.-d0-y0u-" \
+              "w4n7-17-70-b3-h4rd3r?":
         # Save the time remaining to the JSON file
         with open(SUCCESS_TIMES_FILE, "r") as infile:
             if len(infile.read()) <= 5:
@@ -215,7 +216,7 @@ def failure():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "fail":
+    if key == "0h-n0-y0u-f41l3d":
         flash("You ran out of time! Try again.")
         return url_for("index")
 

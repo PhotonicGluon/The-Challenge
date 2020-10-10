@@ -109,7 +109,7 @@ $(document).ready(async () => {
     let currentSlide = STARTING_QUESTION_NO - 1;
 
     // Load MathJax again
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
     // Continue once MathJax has finished loading
     MathJax.Hub.Register.StartupHook("End", async function () {
@@ -201,7 +201,7 @@ $(document).ready(async () => {
             // Submit latex value to server
             if (checkAnswer) {
                 $.get("/secret/check-answer", {
-                    key: "CHECK",
+                    key: "7h3-u53r-w4n75-70-ch3ck-7h31r-4n5w3r",
                     question_no: currentSlide + 1,
                     user_answer: userAnswer
                 }, (output) => {
@@ -210,7 +210,7 @@ $(document).ready(async () => {
                         if (currentSlide + 1 === 14) {  // The last slide
                             let timeLeft = DURATION_OF_THE_CHALLENGE * (1 - progressBar.value());
                             $.get("/secret/success-handler", {
-                                key: "a-winner-is-you",
+                                key: "c0n6r47ul4710n5!-4-7ru3-w1nn3r-15-y0u!-h0w-y0u-b347-7h3-ch4ll3n63-15-7ruly-4-my573ry-f0r-m3.-d0-y0u-w4n7-17-70-b3-h4rd3r?",
                                 user_id: getUUIDCookie(),
                                 time_remaining: timeLeft
                             }, (output) => {
@@ -257,7 +257,7 @@ $(document).ready(async () => {
         await sleepFunc;  // If timer has yet to expire, wait until timer expires
 
         // If the user can't complete The Challenge in time, bring the user back to the home page
-        $.get("/secret/failure", {key: "fail"}, (output) => {
+        $.get("/secret/failure", {key: "0h-n0-y0u-f41l3d"}, (output) => {
             window.location.replace(output);
         });
     });

@@ -1,0 +1,12 @@
+                                             INSTALL JAVASCRIPT OBFUSCATOR
+------------------------------------------------------------------------------------------------------------------------
+1.  Install the NodeJS Package Manager (npm).
+    - Installation instructions can be found here: https://nodejs.org/en/
+2.  Install the javascript-obfuscator:
+        ```
+        npm install --save-dev javascript-obfuscator
+        ```
+3.  Link the javascript obfuscator to a command line by running:
+        ```
+        npm link javascript-obfuscator
+        ```

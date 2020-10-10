@@ -3,7 +3,7 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-10-07                                                         #
+# Updated on 2020-10-11                                                         #
 #                                                                               #
 # Copyright Ryan Kan 2020                                                       #
 #                                                                               #
@@ -20,8 +20,31 @@ export LC_ALL=$LANG
 # Constants
 COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 
+# Ask user whether or not to obfuscate Javascript scripts
+echo "'The Challenge' has an optional JavaScript Obfuscation System (JSOS) that can be activated."
+echo "If you do want to use the JSOS, ensure that the instructions in 'Handle Obfuscator Installation.txt' have been followed strictly."
+
+while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ]; do
+    echo "Do you want to obfuscate the Javascript scripts in the production server?"
+    echo "[Y]es or [N]o:"
+    read -r obfuscationAnswer
+
+    if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ]; then
+        echo "Please answer either 'Y' or 'N'. (With the capitalisation!)"
+        echo
+    fi
+done
+
 # Ensure that the current working directory is this script's directory
 cd "$(dirname "$0")" || exit 1
+
+# Run obfuscation commands (if selected)
+if [ "$obfuscationAnswer" = "Y" ]; then
+    # Obfuscate the files
+    echo "Obfuscating JavaScript files..."
+    python3 -c "import the_challenge; the_challenge.misc.obfuscate_js_files()"
+    echo "Obfuscation procedure completed!"
+fi
 
 # Clear the dist directory
 rm -rf "dist"
@@ -30,9 +53,19 @@ rm -rf "dist"
 mkdir "$COMPRESSED_DIRECTORY_NAME"
 
 # Compile "The Challenge"
+echo
 echo "Building The Challenge..."
 python setup.py bdist_wheel
 echo "Built The Challenge successfully."
+
+# Undo the obfuscation (if selected)
+if [ "$obfuscationAnswer" = "Y" ]; then
+    # Fix the names of the files
+    echo
+    echo "Undoing obfuscation renaming procedure..."
+    python3 -c "import the_challenge; the_challenge.misc.undo_obfuscation_renaming()"
+    echo "Done!"
+fi
 
 # Move the generated build file to a separate directory
 cd dist || exit 1
@@ -57,6 +90,7 @@ tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIREC
 
 # Move generated tar file to the dist folder
 mv "The-Challenge-Production-Server_${version}.tar.gz" "dist"
+echo
 echo "Done! The generated file can be found in the 'dist' folder."
 
 # Delete temporary folders

@@ -248,6 +248,9 @@ $(document).ready(async () => {
         // Start the progress bar
         progressBar.animate(1.0);
 
+        // Force change the height of the `body-container`
+        $(".question-container").height($(".active-slide").height());
+
         // Activate submit button
         submitButton.prop("disabled", false);
 

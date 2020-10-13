@@ -3,7 +3,7 @@ const STARTING_QUESTION_NO = 1;  // Default is 1
 
 $(document).ready(async () => {
     // Get DOM objects
-    const questionContainer = $("#question-container")[0];  // Get the individual `div` element, not the jQuery object
+    const questionContainer = $("#question-container");
     const submitButton = $("#submit");
 
     // Configure success audio
@@ -82,7 +82,7 @@ $(document).ready(async () => {
         }
 
         // Finally combine our output list into one string of HTML and put it on the page
-        questionContainer.innerHTML = output.join("");
+        questionContainer[0].innerHTML = output.join("");
     }
 
     function showSlide(n) {
@@ -90,8 +90,8 @@ $(document).ready(async () => {
         slides[currentSlide].classList.remove("active-slide");
         slides[n].classList.add("active-slide");
 
-        // Change the height of the `body-container` element to the height of the current question
-        $(".question-container").height($(".active-slide").height());
+        // Change the height of the `question-container` element to the height of the current question
+        questionContainer.height($(".active-slide").height());
 
         // Update the `currentSlide`
         currentSlide = n;
@@ -249,7 +249,7 @@ $(document).ready(async () => {
         progressBar.animate(1.0);
 
         // Force change the height of the `body-container`
-        $(".question-container").height($(".active-slide").height());
+        questionContainer.height($(".active-slide").height());
 
         // Activate submit button
         submitButton.prop("disabled", false);

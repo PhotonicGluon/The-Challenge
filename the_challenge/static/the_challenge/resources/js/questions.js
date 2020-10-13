@@ -238,13 +238,12 @@ $(document).ready(async () => {
 
         });
 
-        // Show the first slide after MathJax has finally finished loading the equations
-
-        showSlide(currentSlide);
-
-        // Audio
+        // Play the audio
         let myAudio = document.getElementById("audio");  // Get the DOM element
         myAudio.play();
+
+        // Show the first slide
+        showSlide(currentSlide);
 
         // Start the progress bar
         progressBar.animate(1.0);

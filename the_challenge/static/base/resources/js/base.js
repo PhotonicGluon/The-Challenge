@@ -89,8 +89,8 @@ $(document).ready(() => {
     // Setup network check system
     window.addEventListener("online", () => {
         // Try to get a response from the site
-        $.get("/secret/check_connection", {key: "4r3-y0u-c0nn3c73d?"}, (output) => {
-            // If false display network error
+        $.get("/secret/check-connection", {key: "4r3-y0u-c0nn3c73d"}, (output) => {
+            // If the response is incorrect display the "network error" alert
             if (output !== "y0u-4r3-c0nn3c73d!") {
                 create_alert("You are not connected to the webpage. Please check your connection.");
             } else {
@@ -98,5 +98,5 @@ $(document).ready(() => {
             }
         });
     });
-    window.addEventListener("offline", () => create_alert("You are not connected to the internet. Please check your connection."));
+    window.addEventListener("offline", () => create_alert("You are not connected to the webpage. Please check your connection."));
 });

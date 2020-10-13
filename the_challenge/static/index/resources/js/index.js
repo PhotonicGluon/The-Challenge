@@ -60,7 +60,7 @@ $(document).ready(() => {
     // Create a click event for the start button
     $("#start-button").on("click", () => {
         console.log("Start button clicked.")
-        $.get("/secret/start_challenge", {key: "71m3-70-574r7-7h3-ch4ll3n63"}, (output) => {
+        $.get("/secret/start-challenge", {key: "71m3-70-574r7-7h3-ch4ll3n63"}, (output) => {
             window.location.replace(output);
         });
     });

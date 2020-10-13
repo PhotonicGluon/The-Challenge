@@ -248,9 +248,6 @@ $(document).ready(async () => {
         // Start the progress bar
         progressBar.animate(1.0);
 
-        // Force change the height of the `body-container`
-        questionContainer.height(170);  // TODO: Try and find a more robust patch
-
         // Activate submit button
         submitButton.prop("disabled", false);
 

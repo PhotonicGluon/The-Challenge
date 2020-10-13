@@ -1,6 +1,6 @@
 async function loadQuestions() {
     let promise = new Promise((resolve, reject) => {
-        $.get("/secret/setup_questions", {key: "537up-7h3-m47h-qu35710n5"}, (output) => {
+        $.get("/secret/setup-questions", {key: "537up-7h3-m47h-qu35710n5"}, (output) => {
             console.log(output);
             resolve(output);
         });

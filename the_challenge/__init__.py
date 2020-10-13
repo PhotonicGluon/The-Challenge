@@ -70,13 +70,13 @@ def clear_user_data():
 
 # WEBSITE'S PAGES
 # 'Functional' Pages
-@app.route("/secret/check_connection")
+@app.route("/secret/check-connection", methods=["GET"])
 def check_connection():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "4r3-y0u-c0nn3c73d?":
+    if key == "4r3-y0u-c0nn3c73d":
         # Since the user is able to access this page they are online
         return "y0u-4r3-c0nn3c73d!"
     else:
@@ -84,7 +84,7 @@ def check_connection():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/start_challenge")
+@app.route("/secret/start-challenge", methods=["GET"])
 def start_challenge():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -101,7 +101,7 @@ def start_challenge():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/setup_questions")
+@app.route("/secret/setup-questions", methods=["GET"])
 def setup_questions():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -132,7 +132,7 @@ def setup_questions():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/redirect-to-the-challenge")
+@app.route("/secret/redirect-to-the-challenge", methods=["GET"])
 def redirect_to_the_challenge():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -146,7 +146,7 @@ def redirect_to_the_challenge():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/check-answer")
+@app.route("/secret/check-answer", methods=["GET"])
 def check_answer():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -169,7 +169,7 @@ def check_answer():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/success-handler")
+@app.route("/secret/success-handler", methods=["GET"])
 def success_handler():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -210,7 +210,7 @@ def success_handler():
         return redirect(url_for("index"))
 
 
-@app.route("/secret/failure")
+@app.route("/secret/failure", methods=["GET"])
 def failure():
     # Get the page's arguments
     key = request.args.get("key", None, type=str)
@@ -225,7 +225,7 @@ def failure():
 
 
 # Hidden Pages
-@app.route("/load_challenge")
+@app.route("/load-challenge")
 def load_challenge():
     if "quiz_starting" in session and session["quiz_starting"]:
         session["quiz_starting"] = False  # Reset the flag

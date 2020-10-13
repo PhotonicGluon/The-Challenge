@@ -22,18 +22,17 @@
 
     <!-- Load Header Scripts -->
     <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-              tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']],
-                processEscapes: true
-              },
-              TeX: {
-                equationNumbers: {
-                    autoNumber: "AMS"
-                    }
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            processEscapes: true
+          },
+          TeX: {
+            equationNumbers: {
+                autoNumber: "AMS"
                 }
-            });
-
+            }
+        });
     </script>
 
     <script type="text/javascript" src={{ url_for('static', filename='base/vendors/js/progressbar.min.js') }}></script>

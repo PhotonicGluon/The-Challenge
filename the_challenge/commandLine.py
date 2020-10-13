@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-10-09
+Updated on 2020-10-13
 
 Copyright Ryan Kan 2020
 
@@ -19,6 +19,7 @@ from base64 import b64decode
 
 import requests
 import simplejson as json
+from packaging import version
 
 from the_challenge import __version__
 from the_challenge.misc import check_token, get_most_recent_version, check_internet_connection
@@ -57,7 +58,7 @@ def update_the_challenge():
     local_version = __version__
 
     # Check if local version is smaller than the GitHub version
-    if local_version < most_recent_version:
+    if version.parse(local_version) < version.parse(most_recent_version):
         print(f"There is a new version, {most_recent_version}, available.")
 
         while True:

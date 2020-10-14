@@ -248,6 +248,10 @@ $(document).ready(async () => {
         // Start the progress bar
         progressBar.animate(1.0);
 
+        // Just in case, change the height of the question container to avoid the submit button issue from ever
+        // occurring again.
+        questionContainer.height(Math.max(170, questionContainer.height()));
+
         // Activate submit button
         submitButton.prop("disabled", false);
 

@@ -37,8 +37,10 @@
 
     <script type="text/javascript" src={{ url_for('static', filename='base/vendors/js/progressbar.min.js') }}></script>
     <script type="text/javascript" src="{{ url_for('static', filename='base/vendors/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='base/vendors/js/sha.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/base.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/base/totp.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/base/base.js') }}"></script>
 
     {% block header_scripts %}{% endblock %}
 </head>

@@ -1,6 +1,7 @@
-* {
-    font-family: "Arial", sans-serif;
+html {
+    text-rendering: optimizeLegibility;
     font-size: 14pt;
+    font-family: "Arial", sans-serif;
 }
 
 h1 {

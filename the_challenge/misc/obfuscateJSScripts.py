@@ -2,7 +2,7 @@
 obfuscateJSScripts.py
 
 Created on 2020-10-10
-Updated on 2020-10-11
+Updated on 2020-10-15
 
 Copyright Ryan Kan 2020
 
@@ -23,7 +23,8 @@ def obfuscate_js_script(path):
         path (str): Path to the javascript file.
     """
     os.system(f"javascript-obfuscator {path} --self-defending true --debug-protection true --split-strings true "
-              f"--numbers-to-expressions true --disable-console-output true --simplify true --dead-code-injection true "
+              f"--numbers-to-expressions true --disable-console-output true --dead-code-injection true "
+              f"--string-array-encoding 'base64' --dead-code-injection-threshold 0.5 "
               f"--output {path[:-3] + '-obfuscated.js'}")
 
 

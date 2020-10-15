@@ -1,10 +1,7 @@
-* {
-    font-family: "Arial", sans-serif;
-}
-
 html {
     text-rendering: optimizeLegibility;
     font-size: 20px; /* This is the global font size */
+    font-family: "Arial", sans-serif;
 }
 
 h1, h2 {

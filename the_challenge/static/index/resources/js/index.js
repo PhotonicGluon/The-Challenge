@@ -43,7 +43,7 @@ function checkIfCanStartTheChallenge() {
     } else if (!windowSizeOkay) {
         $("#error-text").html("You cannot play The Challenge when the screen width is too small.");
     } else {
-        $("#error-text").html("")
+        $("#error-text").html("")  // Clear the text field
     }
 
     // Check if can start the challenge
@@ -60,7 +60,8 @@ $(document).ready(() => {
     // Create a click event for the start button
     $("#start-button").on("click", () => {
         console.log("Start button clicked.")
-        $.get("/secret/start-challenge", {key: "71m3-70-574r7-7h3-ch4ll3n63"}, (output) => {
+        $.get("/secret/start-challenge", {key: generate_otp("START2CHALLENGE3")}, (output) => {
+            console.log(output);
             window.location.replace(output);
         });
     });

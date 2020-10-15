@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-13
+Updated on 2020-10-15
 
 Copyright Ryan Kan 2020
 
@@ -19,6 +19,7 @@ from flask_session import Session
 
 from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
 from the_challenge.version import __version__
+from the_challenge.misc import verify_otp
 
 # FLASK SETUP
 # Define basic things
@@ -90,7 +91,7 @@ def start_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "71m3-70-574r7-7h3-ch4ll3n63":
+    if verify_otp(key, "START2CHALLENGE3"):
         # Clear data
         clear_user_data()
 
@@ -107,7 +108,7 @@ def setup_questions():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "537up-7h3-m47h-qu35710n5":
+    if verify_otp(key, "SETUP2QUESTIONS3"):
         # Setup question bank
         question_bank = QuestionBank()
 
@@ -138,7 +139,7 @@ def redirect_to_the_challenge():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "50m371m35-7h3-r34l-ch4ll3n63-15-70-r3d1r3c7-7h3-4773n710n-0f-50m30n3-3l53":
+    if verify_otp(key, "REDIRECTING2TO3THE4CHALLENGE5NOW"):
         session["starting_challenge"] = True
         return url_for("the_challenge")
 
@@ -154,7 +155,7 @@ def check_answer():
     user_answer = request.args.getlist("user_answer[]")  # Gets all the elements that has this tag and puts it in a list
 
     # Check the key
-    if key == "7h3-u53r-w4n75-70-ch3ck-7h31r-4n5w3r":
+    if verify_otp(key, "I2WANT3TO4CHECK5MY6ANSWER7CAN2YOU3CHECK4"):
         # Get the correct answer
         answer = json.loads(session["RunData"])["answers"][question_no - 1]
 
@@ -177,11 +178,10 @@ def success_handler():
     time_remaining = request.args.get("time_remaining", None, type=float)
 
     # Check the key
-    if key == "c0n6r47ul4710n5!-4-7ru3-w1nn3r-15-y0u!-h0w-y0u-b347-7h3-ch4ll3n63-15-7ruly-4-my573ry-f0r-m3.-d0-y0u-" \
-              "w4n7-17-70-b3-h4rd3r?":
+    if verify_otp(key, "CONGRATULATIONS2YOU3COMPLETED4THE5CHALLENGE6YAY7"):
         # Save the time remaining to the JSON file
         with open(SUCCESS_TIMES_FILE, "r") as infile:
-            if len(infile.read()) <= 5:
+            if len(infile.read()) > 5:
                 infile.seek(0)  # Move file pointer to the front of the file
                 success_times = json.load(infile)
             else:

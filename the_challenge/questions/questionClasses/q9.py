@@ -2,7 +2,7 @@
 q9.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -25,12 +25,13 @@ class Q9(Question):
 
     def calculations(self):
         # CONSTANTS
+        no_functions_to_test = 3  # How many functions' derivatives should be tested?
         testable_functions = ["sin({} * x + {})", "cos({} * x + {})", "tan({} * x + {})", "exp({} * x + {})",
                               "log({} * x + {})"]
 
         # CALCULATIONS
         # Choose 3 functions to test
-        functions_to_test = self.random.sample(testable_functions, k=3)
+        functions_to_test = self.random.sample(testable_functions, k=no_functions_to_test)
 
         # Decide the "inner functions"' coefficients
         coefficients1 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
@@ -54,7 +55,7 @@ class Q9(Question):
     def generate_answer(self):
         return latex(self.answer).replace("log", "ln")
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["Answer:"]
 
 

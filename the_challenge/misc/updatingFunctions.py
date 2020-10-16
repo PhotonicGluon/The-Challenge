@@ -2,7 +2,7 @@
 updatingFunctions.py
 
 Created on 2020-10-07
-Updated on 2020-10-08
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -74,6 +74,7 @@ def get_most_recent_version(token):
 
     Returns:
         Union[None, str]: The most recent version.
+
         Union[None, dict]: The files of the most recent version.
     """
 

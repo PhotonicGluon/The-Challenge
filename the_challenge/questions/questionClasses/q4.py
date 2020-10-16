@@ -2,7 +2,7 @@
 q4.py
 
 Created on 2020-10-05
-Updated on 2020-10-05
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -32,7 +32,7 @@ class Q4(Question):
         x = symbols("x")
 
         # Generate polynomial
-        polynomial = 0 * x
+        polynomial = 0 * x  # Make it like an expression so that the IDEs will not complain
         for degree in range(no_terms_in_polynomial):  # The first term will be the constant term
             # Generate coefficients of the term
             coefficient = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
@@ -62,7 +62,7 @@ class Q4(Question):
     def generate_answer(self):
         return mathematical_round(float(self.answer), 3)
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["Answer:"]
 
 

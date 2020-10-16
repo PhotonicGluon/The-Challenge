@@ -1,5 +1,3 @@
-from .questionBaseClass import *
-
 from .q1 import Q1
 from .q2 import Q2
 from .q3 import Q3

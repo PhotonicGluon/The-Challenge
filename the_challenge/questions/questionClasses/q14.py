@@ -2,7 +2,7 @@
 q14.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -96,7 +96,7 @@ class Q14(Question):
     def generate_answer(self):
         return self.answer
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["$x_1=$", "$x_2=$"]
 
     @staticmethod

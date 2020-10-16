@@ -2,7 +2,7 @@
 questionBank.py
 
 Created on 2020-08-26
-Updated on 2020-10-06
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -22,7 +22,7 @@ class QuestionBank:
         Initialise the question bank.
 
         Args:
-            seed_value (Union[str, None]): The value to initialise the randomiser to.
+            seed_value (Union[str, None]):  The value to initialise the randomiser to.
         """
 
         # Set the randomiser to the seed
@@ -55,7 +55,7 @@ class QuestionBank:
         Sets up the questions in The Challenge.
 
         Returns:
-            List[str]: A list of stings, which are the questions.
+            List[str]:  A list of stings, which are the questions.
         """
 
         # Perform calculations for all questions
@@ -67,7 +67,7 @@ class QuestionBank:
             self.questions.append(question_class.generate_question())
 
             # Generate all the input fields' prefixes
-            self.input_field_prefixes.append(question_class.answer_input_fields_prefix())
+            self.input_field_prefixes.append(question_class.generate_input_fields_prefixes())
 
             # Generate the answers
             self.answers.append(question_class.generate_answer())

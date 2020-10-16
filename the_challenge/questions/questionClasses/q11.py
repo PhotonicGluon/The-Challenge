@@ -2,7 +2,7 @@
 q11.py
 
 Created on 2020-08-21
-Updated on 2020-09-19
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -25,14 +25,14 @@ class Q11(Question):
 
     def calculations(self):
         # CONSTANTS
+        no_functions_to_test = 3  # How many functions' derivatives should be tested?
         a, b, n, k, x = symbols("A B N K x")
         testable_functions = [k * (a * x + b) ** n, k * sin(a * x + b), k * cos(a * x + b), k * sec(x) ** 2,
                               k * exp(a * x + b)]
-        no_testable_functions = 3
 
         # CALCULATIONS
         # Choose the functions to test
-        functions_to_test = self.random.sample(testable_functions, k=no_testable_functions)
+        functions_to_test = self.random.sample(testable_functions, k=no_functions_to_test)
 
         # Assign the constants for each of the functions
         assigned_functions = []
@@ -66,7 +66,7 @@ class Q11(Question):
     def generate_answer(self):
         return latex(self.answer)
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["Answer:"]
 
 

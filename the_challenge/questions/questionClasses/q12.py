@@ -2,7 +2,7 @@
 q12.py
 
 Created on 2020-08-21
-Updated on 2020-10-07
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -65,7 +65,7 @@ class Q12(Question):
     def generate_answer(self):
         return [mathematical_round(min(self.answer), 3), mathematical_round(max(self.answer), 3)]
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["$x_1=$", "$x_2=$"]
 
     def get_coefficients(self, discriminant):

@@ -22,15 +22,17 @@ COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 
 # Ask user whether or not to obfuscate Javascript scripts
 echo "'The Challenge' has an optional JavaScript Obfuscation System that can be activated."
-echo "If you do want to use the JavaScript Obfuscation System, ensure that the instructions in 'Handle Obfuscator
-Installation.txt' have been followed strictly."
+echo "If you do want to use the Obfuscation System, ensure that the instructions in 'Handle Obfuscator Installation.txt'
+ have been followed strictly."
 
-while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] && [ "$obfuscationAnswer" != "n" ]; do
+while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
+[ "$obfuscationAnswer" != "n" ]; do
     echo "Do you want to obfuscate the Javascript scripts in the production server?"
     echo "[Y]es or [N]o:"
     read -r obfuscationAnswer
 
-    if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] && [ "$obfuscationAnswer" != "n" ]; then
+    if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
+    [ "$obfuscationAnswer" != "n" ]; then
         echo "Please answer either 'Y' or 'N'."
         echo
     fi

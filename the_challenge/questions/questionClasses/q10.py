@@ -2,7 +2,7 @@
 q10.py
 
 Created on 2020-08-21
-Updated on 2020-09-20
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -26,7 +26,7 @@ class Q10(Question):
 
     def calculations(self):
         # CONSTANTS
-        no_terms = 3
+        no_terms = 3  # How many terms should there be in the polynomial that the user has to integrate?
         power_range = [1, 5]  # If `power_range` = [a, b] then a <= p <= b where p is the degree of the term
         integral_limits = [-10, 10]  # If `integral_limits` = [a, b] then the limits of the integral are a to b.
 
@@ -71,7 +71,7 @@ class Q10(Question):
     def generate_answer(self):
         return self.answer
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["Answer:"]
 
 

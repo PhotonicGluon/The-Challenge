@@ -23,7 +23,9 @@ def pad_left(string, length, padding_character):
 
     Args:
         string (str):               The string that needs padding.
+
         length (int):               The length of the final string.
+
         padding_character (str):    The character that will be used to pad the left of the string.
 
     Returns:

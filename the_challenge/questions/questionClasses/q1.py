@@ -2,7 +2,7 @@
 q1.py
 
 Created on 2020-08-21
-Updated on 2020-09-20
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -33,13 +33,15 @@ class Q1(Question):
         self.answer = mathematical_round(eval(self.question), 3)
 
     def generate_question(self):
-        string = f"State the value of:$${self.question.replace('*', chr(92) + 'times').replace('/', chr(92) + 'div')}$$"  # Note: chr(92) = "\"
+        treated_expr = self.question.replace("*", "\\times").replace("/", "\\div")
+        string = f"State the value of:$${treated_expr}$$"
+
         return string
 
     def generate_answer(self):
         return self.answer
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         return ["Answer:"]
 
 

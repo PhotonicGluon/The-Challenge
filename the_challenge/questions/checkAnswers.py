@@ -2,7 +2,7 @@
 checkAnswers.py
 
 Created on 2020-09-11
-Updated on 2020-10-06
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -27,7 +27,7 @@ def handle_latex_preprocessing(latex_string):
         latex_string (str): The string with the LaTeX input.
 
     Returns:
-        str: The cleaned LaTeX string.
+        str:    The cleaned LaTeX string.
     """
 
     # Remove any unneeded tags
@@ -45,10 +45,10 @@ def process_user_answer(user_answer):
     This method preprocesses the user's answer for checking.
 
     Args:
-        user_answer (List[str]): The unprocessed answer.
+        user_answer (List[str]):    The unprocessed answer.
 
     Returns:
-        Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]: The processed answer
+        Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]:  The processed answer
     """
 
     processed_answer = []
@@ -74,8 +74,9 @@ def check_user_answer(user_answer, calculated_answer):
     This method checks the user's answer with the calculated answer.
 
     Args:
-        user_answer (Union[str, int, float, List[Union[int, float]]], Tuple[Union[int, float]]])
-        calculated_answer (Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]])
+        user_answer (Union[str, int, float, List[Union[int, float]]]):          The user's answer.
+
+        calculated_answer (Union[str, int, float, List[Union[int, float]]]):    The computed answer.
 
     Returns:
         bool: Returns True then the user's answer is correct. If it is wrong it will return False instead.

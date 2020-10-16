@@ -2,7 +2,7 @@
 questionBaseClass.py
 
 Created on 2020-08-21
-Updated on 2020-09-11
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -16,7 +16,7 @@ from random import Random
 # CLASSES
 class Question:
     """
-    The overarching Question class. Used to defined all the other questions.
+    The overarching Question class. Used to define all the other questions.
     """
 
     def __init__(self, seed_value=None):
@@ -35,14 +35,14 @@ class Question:
         """
 
         # This method is to be overwritten by the questions themselves.
-        return None
+        pass
 
     def generate_question(self):
         """
         This method returns the question stem of the question.
 
         Returns:
-            str: Question stem.
+            str:    The question stem.
         """
 
         # This method is to be overwritten by the questions themselves.
@@ -51,24 +51,22 @@ class Question:
     def generate_answer(self):
         """
         This method returns the answer of the question.
-        - Note that an answer in a LIST with square brackets [ ] means that all permutations of the sub-answers in the
-          list will be accepted as answers.
-        - Note that an answer in a TUPLE with rounded brackets ( ) means that it is the ONLY accepted answer.
-
+        -   Note that an answer in a LIST with square brackets [ ] means that all permutations of the sub-answers in the
+            list will be accepted as answers.
 
         Returns:
-            Union[int, float, str, List[Union[int, float]], Tuple[Union[int, float]]]: Answer.
+            Union[int, float, str, List[Union[int, float]]]:    The generated answer.
         """
 
         # This method is to be overwritten by the questions themselves.
         return None
 
-    def answer_input_fields_prefix(self):
+    def generate_input_fields_prefixes(self):
         """
         This method returns the prefixes to all the input fields for answers.
 
         Returns:
-            List[str]: List of prefix(es).
+            List[str]:  List of prefix(es) for the input fields.
         """
 
         # This method is to be overwritten by the questions themselves.

@@ -7,7 +7,7 @@
 ## What is The Challenge?
 The Challenge is a web app which creates 14 mathematics questions which is to be solved within 15 minutes, whilst the tune of [Edvard Grieg's Peer Gynt Suite No. 1, Op. 46](https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)#Suite_No._1,_Op._46) plays in the background.
 
-The 14 questions will test on different aspects of mathematics, ranging from simple arithemtic to algebra to lograithms to basic calculus.
+The 14 questions will test on different aspects of mathematics, ranging from simple arithmetic to algebra to logarithms to basic calculus.
 
 ## License
 This project is licensed under the MIT license.

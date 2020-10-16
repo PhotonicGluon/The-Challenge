@@ -3,7 +3,7 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-10-15                                                         #
+# Updated on 2020-10-16                                                         #
 #                                                                               #
 # Copyright Ryan Kan 2020                                                       #
 #                                                                               #
@@ -25,13 +25,13 @@ echo "'The Challenge' has an optional JavaScript Obfuscation System that can be 
 echo "If you do want to use the JavaScript Obfuscation System, ensure that the instructions in 'Handle Obfuscator
 Installation.txt' have been followed strictly."
 
-while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ]; do
+while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] && [ "$obfuscationAnswer" != "n" ]; do
     echo "Do you want to obfuscate the Javascript scripts in the production server?"
     echo "[Y]es or [N]o:"
     read -r obfuscationAnswer
 
-    if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ]; then
-        echo "Please answer either 'Y' or 'N'. (With the capitalisation!)"
+    if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] && [ "$obfuscationAnswer" != "n" ]; then
+        echo "Please answer either 'Y' or 'N'."
         echo
     fi
 done
@@ -40,8 +40,9 @@ done
 cd "$(dirname "$0")" || exit 1
 
 # Run obfuscation commands (if selected)
-if [ "$obfuscationAnswer" = "Y" ]; then
+if [ "$obfuscationAnswer" = "Y" ] || [ "$obfuscationAnswer" = "y" ]; then
     # Obfuscate the files
+    echo
     echo "Obfuscating JavaScript files..."
     python3 -c "import the_challenge; the_challenge.misc.obfuscate_js_files()"
     echo "Obfuscation procedure completed!"
@@ -60,7 +61,7 @@ python setup.py bdist_wheel
 echo "Built The Challenge successfully."
 
 # Undo the obfuscation (if selected)
-if [ "$obfuscationAnswer" = "Y" ]; then
+if [ "$obfuscationAnswer" = "Y" ] || [ "$obfuscationAnswer" = "y" ]; then
     # Fix the names of the files
     echo
     echo "Undoing obfuscation renaming procedure..."

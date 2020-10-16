@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-15
+Updated on 2020-10-16
 
 Copyright Ryan Kan 2020
 
@@ -14,12 +14,12 @@ import os
 import uuid
 
 import simplejson as json
-from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response
+from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response, abort
 from flask_session import Session
 
+from the_challenge.misc import verify_otp
 from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
 from the_challenge.version import __version__
-from the_challenge.misc import verify_otp
 
 # FLASK SETUP
 # Define basic things
@@ -81,8 +81,7 @@ def check_connection():
         # Since the user is able to access this page they are online
         return "y0u-4r3-c0nn3c73d!"
     else:
-        # Redirect back to index
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/start-challenge", methods=["GET"])
@@ -99,7 +98,7 @@ def start_challenge():
         session["quiz_starting"] = True
         return url_for("load_challenge")  # Load the url into the javascript script
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/setup-questions", methods=["GET"])
@@ -130,7 +129,7 @@ def setup_questions():
         return jsonify(questions=generated_questions)
 
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/redirect-to-the-challenge", methods=["GET"])
@@ -144,7 +143,7 @@ def redirect_to_the_challenge():
         return url_for("the_challenge")
 
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/check-answer", methods=["GET"])
@@ -167,7 +166,7 @@ def check_answer():
 
         return jsonify(correct=correct)
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/success-handler", methods=["GET"])
@@ -207,7 +206,7 @@ def success_handler():
         return url_for("success_specific", userid=user_id)
 
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 @app.route("/secret/failure", methods=["GET"])
@@ -221,7 +220,7 @@ def failure():
         return url_for("index")
 
     else:
-        return redirect(url_for("index"))
+        return abort(403)
 
 
 # Hidden Pages
@@ -289,10 +288,15 @@ def licenses():
 
 
 # Error pages
+@app.errorhandler(403)
+def forbidden(e):
+    _ = e  # Remove the error details from memory
+    return render_template("base/403.html"), 403
+
+
 @app.errorhandler(404)
 def page_not_found(e):
-    # Note that we set the 404 status explicitly
-    _ = e
+    _ = e  # Remove the error details from memory
     return render_template("base/404.html"), 404
 
 

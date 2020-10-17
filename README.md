@@ -1,6 +1,6 @@
 ![The-Challenge Cover Image](https://user-images.githubusercontent.com/25820201/93889162-7493a980-fd1b-11ea-98d9-c6604751ab25.png)
 
-<p style="text-align:center">
+<p align="center">
     <b>The Challenge</b>: A gauntlet of 14 mathematics questions that are to be solved within 15 minutes.
 </p>
 
@@ -43,17 +43,17 @@ The 14 questions will test on different aspects of mathematics, ranging from sim
     ```
 
 **(Optional)** If you want to use the JavaScript Obfuscator System that is built-into The Challenge, you will need to follow the following instructions.
-7. Install the NodeJS Package Manager (`npm`).
+1. Install the NodeJS Package Manager (`npm`).
     * Installation instructions can be found [here](https://nodejs.org/en/).
-8. Install the `javascript-obfuscator` package from the `npm` by running:
+2. Install the `javascript-obfuscator` package from the `npm` by running:
     ```bash
     npm install --save-dev javascript-obfuscator
     ```
-9. You now need to link the `javascript-obfuscator` package to the command line. Do this by running:
+3. You now need to link the `javascript-obfuscator` package to the command line. Do this by running:
     ```bash
     npm link javascript-obfuscator
     ```
-10. Check that the obfuscator is working by first creating a dummy JavaScript file:
+4. Check that the obfuscator is working by first creating a dummy JavaScript file:
     ```bash
     printf "function hi(){console.log('Hello World!');}hi();" >> sample.js
     ```

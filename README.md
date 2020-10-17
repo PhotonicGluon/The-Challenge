@@ -1,6 +1,6 @@
 ![The-Challenge Cover Image](https://user-images.githubusercontent.com/25820201/93889162-7493a980-fd1b-11ea-98d9-c6604751ab25.png)
 
-<p align="center">
+<p style="text-align:center">
     <b>The Challenge</b>: A gauntlet of 14 mathematics questions that are to be solved within 15 minutes.
 </p>
 
@@ -21,28 +21,49 @@ The 14 questions will test on different aspects of mathematics, ranging from sim
     * You can do so by clicking [this link](https://github.com/Ryan-Kan/The-Challenge/archive/master.zip)
 2. Extract the contents of that `.zip` file.
 3. Navigate to the root directory of The Challenge:
-    ```
+    ```bash
     cd PATH/TO/ROOT/DIRECTORY
     ```
 4. **(Optional)** You may choose to use a virtual environment to install the dependencies of The Challenge.
     * On Ubuntu/Linux, before creating the virtual environment, you may need to run:
-        ```
+        ```bash
         sudo apt-get install python3-venv
         ```
     * Create a virtual environment (`venv`) using the following command:
-        ```
+        ```bash
         python3 -m venv venv --prompt NAME_OF_VIRTUAL_ENV
         ```
 5. Install all dependencies of The Challenge by running:
-    ```
+    ```bash
     pip3 install -r requirements.txt
     ```
 6. You may run a **development** server by executing the file `the_challenge/__init__.py` or by running the command:
-    ```
+    ```bash
     python3 the_challenge/__init__.py
     ```
 
-## License
+**(Optional)** If you want to use the JavaScript Obfuscator System that is built-into The Challenge, you will need to follow the following instructions.
+7. Install the NodeJS Package Manager (`npm`).
+    * Installation instructions can be found [here](https://nodejs.org/en/).
+8. Install the `javascript-obfuscator` package from the `npm` by running:
+    ```bash
+    npm install --save-dev javascript-obfuscator
+    ```
+9. You now need to link the `javascript-obfuscator` package to the command line. Do this by running:
+    ```bash
+    npm link javascript-obfuscator
+    ```
+10. Check that the obfuscator is working by first creating a dummy JavaScript file:
+    ```bash
+    printf "function hi(){console.log('Hello World!');}hi();" >> sample.js
+    ```
+    and then by running:
+    ```bash
+    javascript-obfuscator sample.js
+    ```
+    If a file named `sample-obfuscated.js` was created, you are good to go. If not, review the steps again.
+
+## Licenses
 This project is licensed under the MIT license.
 
 The licenses of the software used can be found in the [`licenses.html`](the_challenge/templates/index/licenses.html) file.

@@ -9,15 +9,15 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Define The Favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='base/resources/img/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='resources/base/img/favicon.png') }}">
 
     <!-- Include Vendors' CSS files -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/grid.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/ionicons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/vendors/css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/css/grid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/css/ionicons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/css/normalize.css') }}">
 
     <!-- Include My CSS files -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base/resources/css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='resources/base/css/base.css') }}">
     {% block stylesheets %}{% endblock %}
 
     <!-- Load Header Scripts -->
@@ -35,12 +35,12 @@
         });
     </script>
 
-    <script type="text/javascript" src={{ url_for('static', filename='base/vendors/js/progressbar.min.js') }}></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='base/vendors/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='base/vendors/js/sha.min.js') }}"></script>
+    <script type="text/javascript" src={{ url_for('static', filename='vendors/js/progressbar.min.js') }}></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='vendors/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='vendors/js/sha.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/base/totp.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='base/resources/js/base/base.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='resources/base/js/totp.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='resources/base/js/base.js') }}"></script>
 
     {% block header_scripts %}{% endblock %}
 </head>

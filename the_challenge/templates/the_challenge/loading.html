@@ -3,7 +3,7 @@
 {% block title %}Loading...{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='the_challenge/resources/css/loading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resources/the_challenge/css/loading.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -16,12 +16,12 @@
 
     <audio id="audio"
            preload="auto"
-           src="{{ url_for('static', filename='the_challenge/resources/audio/audio-loading.mp3') }}">
+           src="{{ url_for('static', filename='resources/the_challenge/audio/audio-loading.mp3') }}">
 
         <p>Your browser does not support the audio element.</p>
     </audio>
 {% endblock %}
 
 {% block body_scripts %}
-    <script src="{{ url_for('static', filename='the_challenge/resources/js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='resources/the_challenge/js/loading.js') }}"></script>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Success: {{ uuid }}{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='the_challenge/resources/css/success.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resources/the_challenge/css/success.css') }}">
 {% endblock %}
 
 {% block header_scripts %}
@@ -20,7 +20,7 @@
 {% block content %}
     <div class="page">
         <div class="congrats" id="printableArea">
-        <img src="{{ url_for('static', filename='base/resources/img/favicon.png') }}" alt="The-Challenge-Logo">
+        <img src="{{ url_for('static', filename='resources/base/img/favicon.png') }}" alt="The-Challenge-Logo">
         <h1>Congratulations</h1>
         <h1>User <code>{{ uuid }}</code></h1>
         <h3>For Completing</h3>

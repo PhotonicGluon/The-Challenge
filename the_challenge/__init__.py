@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-16
+Updated on 2020-10-17
 
 Copyright Ryan Kan 2020
 
@@ -217,7 +217,7 @@ def failure():
     # Check the key
     if key == "0h-n0-y0u-f41l3d":
         flash("You ran out of time! Try again.")
-        return url_for("index")
+        return url_for("main_page")
 
     else:
         return abort(403)
@@ -234,7 +234,7 @@ def load_challenge():
             flash("Please do not reload the page when playing The Challenge.")
 
         clear_user_data()
-        return redirect(url_for("index"))
+        return redirect(url_for("main_page"))
 
 
 @app.route("/the-challenge")
@@ -247,7 +247,7 @@ def the_challenge():
             flash("Please do not reload the page when playing The Challenge.")
 
         clear_user_data()
-        return redirect(url_for("index"))
+        return redirect(url_for("main_page"))
 
 
 @app.route("/success/<userid>")
@@ -261,8 +261,8 @@ def success_specific(userid):
     try:
         success_time = success_times[userid]
     except KeyError:
-        flash("The desired user's info cannot be found.")
-        return redirect(url_for("index"))
+        # Raise a 404 error
+        return abort(404)
 
     # Render the template
     return render_template("the_challenge/success.html", uuid=userid, time=success_time)
@@ -270,8 +270,8 @@ def success_specific(userid):
 
 # Root Pages
 @app.route("/")
-def index():
-    response = make_response(render_template("index/index.html", version=__version__))
+def main_page():
+    response = make_response(render_template("index/mainPage.html", version=__version__))
     if not request.cookies.get("ChallengeUUID"):
         # Generate a unique UUID for the user and set it in a cookie
         response.set_cookie("ChallengeUUID", str(uuid.uuid4()), max_age=60 * 60 * 24 * 365 * 10)
@@ -285,6 +285,11 @@ def index():
 @app.route("/licenses")
 def licenses():
     return render_template("index/licenses.html")
+
+
+@app.route("/try-out-algebra-input")
+def algebra_input():
+    return render_template("index/algebraInput.html")
 
 
 # Error pages

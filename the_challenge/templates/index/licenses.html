@@ -1,16 +1,16 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-    Licenses - The Challenge
+    The Challenge - Licenses
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index/resources/css/licenses.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='resources/index/css/licenses.css') }}">
 {% endblock %}
 
 {% block content %}
     <div class="back-arrow-box">
-        <a href="{{ url_for('index') }}">&larr; Back to Main Page</a>
+        <a href="{{ url_for('main_page') }}">&larr; Back to Main Page</a>
     </div>
 
     <div class="row">
@@ -52,8 +52,8 @@
             <p class="long-copy">
                 The MIT License (MIT)<br><br>
 
-                Copyright (c) 2015-present Ionic (http://ionic.io/)<br><br>
-
+                Copyright (c) 2015-present Ionic (<a href="http://ionic.io/" target="_blank">http://ionic.io/</a>)
+                <br><br>
                 Permission is hereby granted, free of charge, to any person obtaining a copy
                 of this software and associated documentation files (the "Software"), to deal
                 in the Software without restriction, including without limitation the rights

@@ -37,6 +37,11 @@ footer a {
     margin: 0 auto;
 }
 
+.long-copy {
+    line-height: 145%;
+    text-align: justify;
+}
+
 #input-field {
     width: 90%;
     transform: translate(5%, 0%);

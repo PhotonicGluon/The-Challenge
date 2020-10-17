@@ -18,6 +18,8 @@
 
     <div class="row" id="math-input">
         <h1>Try Out The Algebra Input System!</h1>
+        <span>Try typing some algebra below!</span>
+
         <label for="input-field">
             <input id="input-field" type="text" placeholder="Try typing some MathLex here!" value="x^2 + 2*x + 1">
         </label>
@@ -28,9 +30,31 @@
     </div>
 
     <div class="row" id="latex-code-output-box">
-        <span>Equivalent $\LaTeX$ code:</span>
+        <span>Equivalent LaTeX code:</span>
         <br>
         <code><span id="latex-output"></span></code>
+    </div>
+
+    <div class="row long-copy">
+        <h1>Information About Algebraic Inputs</h1>
+        <p>
+            All algebraic inputs are to be typed in the MathLex language. The specifics of the MathLex language can be
+            found <a href="http://mathlex.org/doc/language" target="_blank">on this page</a>. The following are several
+            important pointers when entering algebraic expressions into the input field:
+        </p>
+
+        <ul>
+            <li>To enter the expression $ax$ you will need to enter the string <code>a*x</code> into the input field.
+            </li>
+            <li>To enter a fraction like $\frac pq$ you will need to enter the string <code>p/q</code> into the input
+                field.
+            </li>
+            <li>To enter $\sqrt{ax+b}$ you will need to enter the string <code>sqrt(a*x+b)</code> into the input field.
+            </li>
+            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string <code>(sec(a*x+b)**2)</code> or
+                <code>(sec(a*x+b)^2)</code> into the input field.
+            </li>
+        </ul>
     </div>
 {% endblock %}
 

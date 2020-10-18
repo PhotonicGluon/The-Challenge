@@ -2,7 +2,7 @@
 q13.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-18
 
 Copyright Ryan Kan 2020
 
@@ -25,13 +25,16 @@ class Q13(Question):
     """
 
     def calculations(self):
-        # Generate the three (expected) solutions
-        sol1 = self.random.choice([-1, 1, -2, 2])
-        sol2 = self.random.choice([self.random.randint(3, 10), self.random.randint(-10, -3)])
+        # CONSTANTS
+        non_trivial_solutions_ranges = [3, 20]  # If the range is [a, b] then a <= x <= b where x is a root
 
-        possible_sol3 = [x for x in range(3, 11)] + [-x for x in range(3, 11)]
-        possible_sol3.remove(sol2)
-        sol3 = self.random.choice(possible_sol3)  # Prevent the third solution from being the same as the second one
+        # CALCULATIONS
+        # Generate the three (expected) solutions
+        sol2_and_sol3_list = [x for x in range(non_trivial_solutions_ranges[0], non_trivial_solutions_ranges[1])] + \
+                             [-x for x in range(non_trivial_solutions_ranges[0], non_trivial_solutions_ranges[1])]
+
+        sol1 = self.random.choice([-1, 1, -2, 2])
+        sol2, sol3 = self.random.sample(sol2_and_sol3_list, k=2)
 
         self.answer = [sol1, sol2, sol3]
 

@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-10-13
+Updated on 2020-10-19
 
 Copyright Ryan Kan 2020
 
@@ -29,7 +29,7 @@ from the_challenge.misc import check_token, get_most_recent_version, check_inter
 def update_the_challenge():
     """
     Updates the local copy of The Challenge.
-    Usage: update_the_challenge [TOKEN]
+    Usage: update_the_challenge [GITHUB_TOKEN]
     """
 
     # Form the parser
@@ -59,7 +59,7 @@ def update_the_challenge():
 
     # Check if local version is smaller than the GitHub version
     if version.parse(local_version) < version.parse(most_recent_version):
-        print(f"There is a new version, {most_recent_version}, available.")
+        print(f"There is a new version, {most_recent_version}, available. (Installed Version: {__version__})")
 
         while True:
             print("Do you want to update to the new version?")
@@ -127,16 +127,37 @@ def update_the_challenge():
           "hosts The Challenge's server; and (c) are an administrator that can use the 'sudo' command.")
     while True:
         print("Would you like to restart the systemd service?")
-        want_to_restart = input("[Y]es or [N]o: ").upper()
+        confirm_systemd_name = input("[Y]es or [N]o: ").upper()
 
-        if want_to_restart not in ["Y", "N"]:
+        if confirm_systemd_name not in ["Y", "N"]:
             print("Please enter either 'Y' or 'N'.\n")
-        elif want_to_restart == "N":
+        elif confirm_systemd_name == "N":
             print("Quitting now.")
             sys.exit()
         else:
-            print("Please enter the systemd service name.")
-            systemd_service_name = input("?> ")
-            os.system(f"sudo systemctl restart {systemd_service_name}")
-            print("The systemd service has been restarted. Quitting.")
             break
+
+    # Ask user to input the systemd service name
+    while True:
+        print("Please enter the systemd service name.")
+        systemd_service_name = input("?> ")
+
+        if systemd_service_name == "":
+            print("Please enter the name.")
+        else:
+            print("Please confirm that you want to restart the systemd service named:")
+            print(f"'{systemd_service_name}'")
+
+            while True:
+                confirm_systemd_name = input("[Y]es or [N]o: ").upper()
+
+                if confirm_systemd_name not in ["Y", "N"]:
+                    print("Please enter either 'Y' or 'N'.\n")
+                    print("Please confirm the systemd service name.")
+                elif confirm_systemd_name == "N":
+                    print("Disregarding current input of the systemd service name.")
+                    break
+                else:
+                    os.system(f"sudo systemctl restart {systemd_service_name}")
+                    print("The systemd service has been restarted. Quitting.")
+                    sys.exit()

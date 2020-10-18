@@ -3,7 +3,7 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-10-16                                                         #
+# Updated on 2020-10-19                                                         #
 #                                                                               #
 # Copyright Ryan Kan 2020                                                       #
 #                                                                               #
@@ -21,18 +21,19 @@ export LC_ALL=$LANG
 COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 
 # Ask user whether or not to obfuscate Javascript scripts
+echo
 echo "'The Challenge' has an optional JavaScript Obfuscation System that can be activated."
-echo "If you do want to use the Obfuscation System, ensure that the instructions in 'Handle Obfuscator Installation.txt'
- have been followed strictly."
+echo "If you do want to use the Obfuscation System, ensure that the instructions in 'Handle Obfuscator" \
+"Installation.txt' have been followed strictly."
 
 while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
-[ "$obfuscationAnswer" != "n" ]; do
+    [ "$obfuscationAnswer" != "n" ]; do
     echo "Do you want to obfuscate the Javascript scripts in the production server?"
     echo "[Y]es or [N]o:"
     read -r obfuscationAnswer
 
     if [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
-    [ "$obfuscationAnswer" != "n" ]; then
+        [ "$obfuscationAnswer" != "n" ]; then
         echo "Please answer either 'Y' or 'N'."
         echo
     fi

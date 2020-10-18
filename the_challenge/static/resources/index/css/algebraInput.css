@@ -40,6 +40,13 @@ h1, h2 {
     min-height: 210px;
 }
 
+#input-field {
+    width: 100%;
+    height: 24pt;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+
 #latex-output {
     overflow-wrap: break-word;
     max-width: 100%;

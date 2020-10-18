@@ -62,6 +62,8 @@ h1 {
 /* Input Fields' Styling */
 .input-field input {
     width: 50%;
+    border-radius: 5px;
+    border: 1px black solid;
 }
 
 /* Question Slides' Styling */

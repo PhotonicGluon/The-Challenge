@@ -1,13 +1,41 @@
+/* Basic Styling */
 html {
     text-rendering: optimizeLegibility;
     font-size: 20px; /* This is the global font size */
     font-family: "Arial", sans-serif;
 }
 
+li {
+    margin-top: 4px;
+}
+
+/* Reusable Components */
+.row {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* Headings' Styling */
 h1, h2 {
     text-align: center;
 }
 
+/* Header's Styling */
+.back-arrow-box {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+/* Paragraphs' Styling */
+.long-copy {
+    line-height: 145%;
+    width: 90%;
+    margin-left: 5%;
+    text-align: justify;
+}
+
+/* Footer's Styling */
 footer {
     padding: 10px 0 10px 0;
     margin-top: 10px;
@@ -20,31 +48,10 @@ footer a {
     color: white;
 }
 
-li {
-    margin-top: 4px;
-}
-
-.back-arrow-box {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding-top: 10px;
-}
-
-.row {
-    max-width: 1080px;
-    margin: 0 auto;
-}
-
-.long-copy {
-    line-height: 145%;
-    width: 90%;
-    margin-left: 5%;
-    text-align: justify;
-}
-
+/* Styling For Mobile */
 @media screen and (max-width: 1080px) {
     .row, .back-arrow-box {
-      width: 90%;
-      margin: 0 auto;
+        width: 90%;
+        margin: 0 auto;
     }
 }

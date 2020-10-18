@@ -8,30 +8,34 @@
 
 {% block header_scripts %}
     <script>
-    function printDiv(divName) {
-     let printContents = document.getElementById(divName).innerHTML;
-     let originalContents = document.body.innerHTML;
-     document.body.innerHTML = printContents;
-     window.print();
-     document.body.innerHTML = originalContents;
-}
+        function printDiv(divName) {
+            let printContents = document.getElementById(divName).innerHTML;
+            let originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
     </script>
 {% endblock %}
+
 {% block content %}
-    <div class="page">
-        <div class="congrats" id="printableArea">
-        <img src="{{ url_for('static', filename='resources/base/img/favicon.png') }}" alt="The-Challenge-Logo">
-        <h1>Congratulations</h1>
-        <h1>User <code>{{ uuid }}</code></h1>
-        <h3>For Completing</h3>
-        <h1>The Challenge</h1>
-        <h3>With </h3>
-        <h1>{{ time }} Seconds</h1>
-        <h3>Left On The Clock</h3>
-        <span>* Please note that only the <strong>best time</strong> will be shown here.</span>
-    </div>
-        <br><br>
-    <input type="button" onclick="window.print()" value="Print The Success Message">
+    <div class="back-arrow-box">
+        <a href="{{ url_for('main_page') }}">&larr; Back to Main Page</a>
     </div>
 
+    <div class="page-content">
+        <div class="congrats" id="printable-area">
+            <img src="{{ url_for('static', filename='resources/base/img/favicon.png') }}" alt="The-Challenge-Logo">
+            <h1>Congratulations</h1>
+            <h1>User <code>{{ uuid }}</code></h1>
+            <h3>For Completing</h3>
+            <h1>The Challenge</h1>
+            <h3>With </h3>
+            <h1>{{ time }} Seconds</h1>
+            <h3>Left On The Clock</h3>
+            <span>* Please note that only the <strong>best time</strong> will be shown here.</span>
+        </div>
+        <br><br>
+        <input type="button" onclick="window.print()" value="Print The Success Message">
+    </div>
 {% endblock %}

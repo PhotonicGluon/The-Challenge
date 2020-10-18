@@ -1,14 +1,8 @@
+/* Basic Styling */
 html {
     text-rendering: optimizeLegibility;
     font-size: 14pt;
     font-family: "Arial", sans-serif;
-}
-
-h1 {
-    height: 40px;
-    padding: 10px 0;
-    margin: 0 0;
-    color: white;
 }
 
 .max-width-1080 {
@@ -16,6 +10,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Float Handling */
 .float-left {
     float: left;
 }
@@ -24,11 +19,30 @@ h1 {
     float: right;
 }
 
+/* Countdown Bar Styling */
+#loading-bar {
+    position: absolute;
+    transform: translate(0%, 25%);
+    color: white;
+    padding: 10px 0;
+    width: 400px;
+    height: 20px;
+}
+
+/* Headings' Styling */
+h1 {
+    height: 40px;
+    padding: 10px 0;
+    margin: 0 0;
+    color: white;
+}
+
 .head-box {
     padding-bottom: 60px;
     background-color: #000;
 }
 
+/* Questions' Styling */
 .question-container {
     margin-top: 12px;
     width: 100%;
@@ -40,24 +54,17 @@ h1 {
     width: 100%;
 }
 
-#loading-bar {
-    position: absolute;
-    transform: translate(0%, 25%);
-    color: white;
-    padding: 10px 0;
-    width: 400px;
-    height: 20px;
-}
-
 #q8-img {
     display: block;
     margin: 0 auto;
 }
 
+/* Input Fields' Styling */
 .input-field input {
     width: 50%;
 }
 
+/* Question Slides' Styling */
 .slide {
     position: absolute;
     left: auto;
@@ -74,6 +81,7 @@ h1 {
     z-index: 2;
 }
 
+/* Submit Button Styling */
 .submit-button {
     display: inline-block;
     z-index: 3;
@@ -99,12 +107,14 @@ h1 {
     background-color: #aaa;
 }
 
+/* Error Animation Handling */
 .error {
     position: relative;
     animation: shake .1s linear;
     animation-iteration-count: 3;
 }
 
+/* Handle Animations */
 @keyframes shake {
     0% {
         left: -3px;

@@ -1,8 +1,18 @@
+/* Basic Styling */
 html {
     text-rendering: optimizeLegibility;
     font-family: "Arial", sans-serif;
 }
 
+/* Header's Styling */
+.back-arrow-box {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 10px;
+    font-size: 14pt;
+}
+
+/* Buttons' Styling */
 input[type="button"] {
     border: 0;
     width: 400px;
@@ -16,10 +26,12 @@ input[type="button"]:enabled {
     background-color: #28b062;
 }
 
+/* Main Page's Styling */
 span {
     font-size: 10pt;
 }
-.page {
+
+.page-content {
     position: absolute;
     width: 1080px;
     left: 50%;
@@ -28,12 +40,18 @@ span {
     text-align: center;
 }
 
-.page img {
+/* Logo's Styling */
+img {
     width: 10%;
     height: 10%;
 }
 
+/* Print Handling */
 @media print {
+    .back-arrow-box {
+        display: none;
+    }
+
     input[type="button"] {
         display: none;
     }

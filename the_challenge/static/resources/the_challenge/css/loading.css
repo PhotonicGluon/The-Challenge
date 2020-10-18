@@ -1,12 +1,15 @@
+/* Basic Styling */
 html {
     text-rendering: optimizeLegibility;
     font-family: "Arial", sans-serif;
 }
 
+/* Headings' Styling */
 h1 {
     margin: 0;
 }
 
+/* Main Page's Styling */
 .loading-box {
     position: absolute;
     width: 100%;
@@ -22,7 +25,6 @@ h1 {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
-
     margin: 20px 0;
     width: 400px;
     height: 30px;

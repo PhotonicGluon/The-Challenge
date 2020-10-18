@@ -1,7 +1,12 @@
+/* Basic Styling */
 html {
     text-rendering: optimizeLegibility;
     font-size: 20px; /* This is the global font size */
     font-family: "Arial", sans-serif;
+}
+
+li {
+    margin-top: 4px;
 }
 
 code {
@@ -10,6 +15,7 @@ code {
     border-radius: 4px;
 }
 
+/* Headings' Styling */
 h1, h2 {
     text-align: center;
 }
@@ -22,22 +28,7 @@ h2 {
     margin-top: 8px;
 }
 
-footer {
-    padding: 10px 0 10px 0;
-    margin-top: 10px;
-    text-align: center;
-    background-color: #28b062;
-    color: white;
-}
-
-footer a {
-    color: white;
-}
-
-li {
-    margin-top: 4px;
-}
-
+/* Header Styling */
 .header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../img/header-background.png);
     background-size: cover;
@@ -53,14 +44,6 @@ li {
     transform: translate(0%, -50%);
     text-align: center;
     color: white;
-}
-
-#error-text {
-    color: #f44336;
-}
-
-.introduction {
-    text-align: center;
 }
 
 .start-button {
@@ -80,6 +63,15 @@ li {
     background-color: #999;
 }
 
+#error-text {
+    color: #f44336;
+}
+
+/* Main Page's Styling */
+.introduction {
+    text-align: center;
+}
+
 .information-box {
     max-width: 1080px;
     margin: 0 auto;
@@ -89,6 +81,20 @@ li {
     text-align: justify;
 }
 
+/* Footer's Styling */
+footer {
+    padding: 10px 0 10px 0;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #28b062;
+    color: white;
+}
+
+footer a {
+    color: white;
+}
+
+/* Styling For Mobile */
 @media screen and (max-width: 1080px) {
     .row, .introduction, #error-text {
       width: 90%;

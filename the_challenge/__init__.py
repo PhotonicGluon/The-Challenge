@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-17
+Updated on 2020-10-19
 
 Copyright Ryan Kan 2020
 
@@ -123,7 +123,7 @@ def setup_questions():
         # Save `questions` and `answers` to the session
         run_data = {"questions": generated_questions, "prefixes": input_field_prefixes, "answers": answers}
         session["RunData"] = json.dumps(run_data)
-        session["Q8_Image"] = q8_image_data
+        session["Q8_Image"] = q8_image_data  # Has to be handled separately due to its large size
 
         # Return the json object
         return jsonify(questions=generated_questions)
@@ -194,8 +194,19 @@ def success_handler():
         except KeyError:
             existing_time = 0
 
-        # Save the best time to the dictionary
-        success_times[user_id] = round(max(time_remaining, existing_time), 4)
+        # Round the obtained time
+        new_time = round(time_remaining, 4)
+
+        # Get the best time
+        best_time = max(new_time, existing_time)
+
+        # If the new time is not the best time show a popup
+        if best_time != new_time:
+            flash(f"The time left for this attempt is {new_time} seconds, which unfortunately did not beat your best "
+                  f"time.")
+
+        # Save the best time to the success times' dictionary
+        success_times[user_id] = best_time
 
         # Write the updated dictionary to the file
         with open(SUCCESS_TIMES_FILE, "w") as outfile:
@@ -203,7 +214,7 @@ def success_handler():
             outfile.close()
 
         # Return the success page
-        return url_for("success_specific", userid=user_id)
+        return url_for("success", userid=user_id)
 
     else:
         return abort(403)
@@ -251,7 +262,7 @@ def the_challenge():
 
 
 @app.route("/success/<userid>")
-def success_specific(userid):
+def success(userid):
     # Get the time left from the JSON file
     with open(SUCCESS_TIMES_FILE, "r") as f:
         success_times = json.load(f)

@@ -59,7 +59,7 @@ def update_the_challenge():
 
     # Check if local version is smaller than the GitHub version
     if version.parse(local_version) < version.parse(most_recent_version):
-        print(f"There is a new version, {most_recent_version}, available. (Installed Version: {__version__})")
+        print(f"There is a new version, {most_recent_version}, available.\n(Installed Version: {__version__})\n")
 
         while True:
             print("Do you want to update to the new version?")
@@ -145,7 +145,7 @@ def update_the_challenge():
         if systemd_service_name == "":
             print("Please enter the name.")
         else:
-            print("Please confirm that you want to restart the systemd service named:")
+            print("\nPlease confirm that you want to restart the systemd service named:")
             print(f"'{systemd_service_name}'")
 
             while True:

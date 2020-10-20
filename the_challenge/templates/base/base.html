@@ -33,10 +33,13 @@
                 }
             }
         });
+
     </script>
 
-    <script type="text/javascript" src={{ url_for('static', filename='vendors/js/progressbar.min.js') }}></script>
     <script type="text/javascript" src="{{ url_for('static', filename='vendors/js/jquery.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='vendors/js/jquery.waypoints.min.js') }}"></script>
+    <script type="text/javascript" src={{ url_for('static', filename='vendors/js/progressbar.min.js') }}></script>
     <script type="text/javascript" src="{{ url_for('static', filename='vendors/js/sha.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='resources/base/js/totp.js') }}"></script>

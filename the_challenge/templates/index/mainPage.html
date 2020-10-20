@@ -14,11 +14,24 @@
 
 {% block content %}
     <div class="header">
+        <nav>
+            <div class="row">
+                <img src="{{ url_for('static', filename='resources/base/img/favicon.png') }}" alt="The Challenge's Logo"
+                     class="logo">
+                <ul class="main-nav">
+                    <li><a href="#" id="js--scroll-to-practice-questions">Practice Questions</a></li>
+                    <li><a href="{{ url_for('algebra_input') }}">Try Out Algebra Input</a></li>
+                    <li><a href="{{ url_for('licenses') }}">Licences</a></li>
+                </ul>
+                <a class="nav-icon"><i class="ion-navicon-round"></i></a>
+            </div>
+        </nav>
+
         <div class="hero-box">
             <h1>The Challenge</h1>
             <p class="introduction">
-                Welcome to <strong>The Challenge</strong>, a gauntlet of 14 mathematics questions that
-                are to be solved within 15 minutes.
+                Welcome to <strong>The Challenge</strong>, a gauntlet of 14 mathematics questions that are to be solved
+                within 15 minutes.
                 <br><br>
                 <em>Ready to begin?</em>
                 <br>
@@ -81,8 +94,8 @@
                 </li>
             </ol>
             <p class="information">
-                Some <a href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}"
-                        download>practice questions</a> are provided for your reference, along with their answers.
+                Some <a href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}" id="js--practice-questions" download>
+                practice questions</a> are provided for your reference, along with their answers.
                 <br><br>
                 This version of The Challenge is <code>{{ version }}</code>.
             </p>

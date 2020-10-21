@@ -65,7 +65,9 @@
                 <li>Determine values of $a$, $b$ and $c$ in the expression $y = a \sin\left(\frac xb\right) + c$ or $y =
                     a \cos\left(\frac xb\right) + c$ when given a graph of that function.
                 </li>
-                <li>Application of the Polynomial Remainder Theorem on a given polynomial.</li>
+                <li>Application of the <a href="https://en.wikipedia.org/wiki/Polynomial_remainder_theorem">Polynomial
+                    Remainder Theorem</a> on a given polynomial.
+                </li>
                 <li>Identify, using the discriminant, which of the three given quadratic equations is possible to
                     produce real roots. Also tests on solving quadratic equations. It is guaranteed that both roots of
                     the quadratic equation with real roots are unique.
@@ -76,25 +78,26 @@
                 <li>Solve an equation involving two nested surds.</li>
                 <li>Solving of a logarithm-cum-modulus equation.</li>
                 <li>Derivative of $\sin \left(ax + b\right)$, $\cos \left(ax + b\right)$, $\tan \left(ax + b\right)$,
-                    $e^\left(ax + b\right)$, and $\ln \left(ax + b\right)$, together with sums and differences.
+                    $e^{ax + b}$, and $\ln \left(ax + b\right)$, together with sums and differences.
                 </li>
                 <li>Definite integral of a polynomial. It is guaranteed that the degree of the polynomial will
                     <strong>not</strong> exceed 5.
                 </li>
-                <li>Integral of $\left(ax + b\right)^n$ for any rational $n$ (including negative $n$), $\sin \left(ax +
-                    b\right)$, $\cos \left(ax + b\right)$, $\sec^2x$ and/or $e^{ax + b}$, together with constant
-                    multiples, sums and differences.
+                <li>Integral of $\left(ax + b\right)^n$ for any rational $n$ (including negative $n$, e.g. -1), $\sin
+                    \left(ax + b\right)$, $\cos \left(ax + b\right)$, $\sec^2x$ and/or $e^{ax + b}$, together with
+                    constant multiples, sums and differences.
                 </li>
                 <li>Combination of derivatives and solving of cubic equation for $x$. It is guaranteed that there will
-                    be at least one <em>trivial</em> solution, and that all solutions are integers. It is also
-                    guaranteed that all three roots of the cubic equation are unique.
+                    be at least one <em>trivial</em> (i.e. 1, 2, -1 or -2) solution, and that all solutions are
+                    integers. It is also guaranteed that all three roots of the cubic equation are unique.
                 </li>
                 <li>Simultaneous equations involving a linear equation (a chord of a circle) and the equation of that
                     circle. It is guaranteed that there are two unique solutions of $x$.
                 </li>
             </ol>
             <p class="information">
-                Some <a href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}" id="js--practice-questions" download>
+                Some <a href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}"
+                        id="js--practice-questions" download>
                 practice questions</a> are provided for your reference, along with their answers.
                 <br><br>
                 This version of The Challenge is <code>{{ version }}</code>.
@@ -139,14 +142,14 @@
                             <a href="https://en.wikipedia.org/wiki/Rounding#Round_half_to_even" target="_blank">banker's
                                 rounding</a> system</strong> which Python uses.
                         <ul>
-                            <li><strong>Exception</strong>: For question 5 leave the coefficient of your answer in
+                            <li><strong>Exception</strong>: For question 4 leave your answer in <strong>exact</strong>
+                                form.
+                            </li>
+                            <li><strong>Exception</strong>: For question 7 leave the coefficient of your answer in
                                 <strong>exact</strong> form. This includes the term which does not include an $x$ in it
                                 (i.e. the term independent of $x$).
                             </li>
-                            <li><strong>Exception</strong>: For question 8 leave your answer in <strong>exact</strong>
-                                form.
-                            </li>
-                            <li><strong>Exception</strong>: For question 9 and question 11 all coefficients of $x$ are
+                            <li><strong>Exception</strong>: For question 10 and question 12 all coefficients of $x$ are
                                 to be in <strong>exact</strong> form.
                             </li>
                         </ul>
@@ -161,6 +164,7 @@
                                 are co-prime integers
                             </li>
                             <li>Square root ($\sqrt{\ }$) function</li>
+                            <li>Natural log ($\ln$) function</li>
                             <li>Able to handle computations such as $p^q$ where $p$ is a real number and $q$ is a
                                 rational number
                             </li>

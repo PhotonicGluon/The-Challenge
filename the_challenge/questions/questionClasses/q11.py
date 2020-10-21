@@ -20,7 +20,7 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 # CLASSES
 class Q11(Question):
     """
-    Q12:
+    Q11:
     Definite integral of a polynomial.
     """
 

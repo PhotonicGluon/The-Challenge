@@ -2,7 +2,7 @@
 q9.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -10,9 +10,10 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from sympy import latex, diff
+from sympy import latex
 from sympy.parsing.sympy_parser import parse_expr
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -20,43 +21,35 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q9(Question):
     """
     Q9:
-    Derivative of "special functions" (sin x, cos x, tan x, e^x, and ln x).
+    Solving of a logarithm-cum-modulus equation.
     """
 
     def calculations(self):
-        # CONSTANTS
-        no_functions_to_test = 3  # How many functions' derivatives should be tested?
-        testable_functions = ["sin({} * x + {})", "cos({} * x + {})", "tan({} * x + {})", "exp({} * x + {})",
-                              "log({} * x + {})"]
+        # Generate the constants' values
+        a = self.random.randint(2, 9)
+        b = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
+        c = self.random.randint(2, 10)
+        d = self.random.randint(2, 9)
+        e = self.random.randint(-9, 9)
+        f = self.random.randint(1, 10)
 
-        # CALCULATIONS
-        # Choose 3 functions to test
-        functions_to_test = self.random.sample(testable_functions, k=no_functions_to_test)
+        # Generate the equation
+        self.question = latex(parse_expr(f"{a} * Abs({b} * log({d}*x, {c}) + {e}) - {f}")).replace("log", "ln") + " = 0"
 
-        # Decide the "inner functions"' coefficients
-        coefficients1 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
-                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
-        coefficients2 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
-                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
-        coefficients3 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
-                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
+        # Generate the answer
+        ans1 = mathematical_round(float(parse_expr(f"1/{d} * {c}**((-{f}/{a} - {e}) / {b})")), 3)
+        ans2 = mathematical_round(float(parse_expr(f"1/{d} * {c}**(({f}/{a} - {e}) / {b})")), 3)
 
-        # Form the expression to be differentiated
-        self.question = parse_expr(
-            (" + ".join(functions_to_test)).format(coefficients1[0], coefficients1[1], coefficients2[0],
-                                                   coefficients2[1], coefficients3[0], coefficients3[1]))
-
-        # Generate the differentiated expression
-        self.answer = diff(self.question)
+        self.answer = [ans1, ans2]
 
     def generate_question(self):
-        return f"Differentiate the following with respect to $x$:$${latex(self.question).replace('log', 'ln')}$$"
+        return f"Solve for the <strong>values</strong> of $x$:$${self.question}$$"
 
     def generate_answer(self):
-        return latex(self.answer).replace("log", "ln")
+        return self.answer
 
     def generate_input_fields_prefixes(self):
-        return ["Answer:"]
+        return ["$x_1=$", "$x_2=$"]
 
 
 # DEBUG CODE

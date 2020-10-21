@@ -2,7 +2,7 @@
 q10.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -10,10 +10,9 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from sympy import latex, integrate
+from sympy import latex, diff
 from sympy.parsing.sympy_parser import parse_expr
 
-from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -21,55 +20,40 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q10(Question):
     """
     Q10:
-    Definite integral of a polynomial.
+    Derivative of "special functions" (sin x, cos x, tan x, e^x, and ln x).
     """
 
     def calculations(self):
         # CONSTANTS
-        no_terms = 3  # How many terms should there be in the polynomial that the user has to integrate?
-        power_range = [1, 5]  # If `power_range` = [a, b] then a <= p <= b where p is the degree of the term
-        integral_limits = [-10, 10]  # If `integral_limits` = [a, b] then the limits of the integral are a to b.
+        no_functions_to_test = 3  # How many functions' derivatives should be tested?
+        testable_functions = ["sin({} * x + {})", "cos({} * x + {})", "tan({} * x + {})", "exp({} * x + {})",
+                              "log({} * x + {})"]
 
         # CALCULATIONS
-        # Determine the degree of the polynomial
-        deg = self.random.randint(no_terms, power_range[1])
+        # Choose 3 functions to test
+        functions_to_test = self.random.sample(testable_functions, k=no_functions_to_test)
 
-        # Generate the pre-integral terms
-        terms = []
-        for i in range(no_terms):
-            # Generate the coefficient
-            coefficient = self.random.randint(1, 9)
+        # Decide the "inner functions"' coefficients
+        coefficients1 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
+                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
+        coefficients2 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
+                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
+        coefficients3 = [self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)]),
+                         self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
 
-            # Generate the term
-            term = f"{coefficient} * x ** {deg - i}"
+        # Form the expression to be differentiated
+        self.question = parse_expr(
+            (" + ".join(functions_to_test)).format(coefficients1[0], coefficients1[1], coefficients2[0],
+                                                   coefficients2[1], coefficients3[0], coefficients3[1]))
 
-            # Append the term to the terms
-            terms.append(term)
-
-        # Sum all terms up
-        polynomial = parse_expr(" + ".join(terms))
-
-        # Calculate the integral of the polynomial
-        integral = integrate(polynomial)
-
-        # Calculate the definite integral
-        a = self.random.randint(integral_limits[0], integral_limits[1] - 1)  # Lower limit
-        b = self.random.randint(a + 1, integral_limits[1])  # Upper limit
-
-        ans = mathematical_round(float(integral.subs("x", b) - integral.subs("x", a)), 3)
-
-        # Set the values of `self.question` and `self.answer`
-        self.question = [latex(polynomial), a, b]
-        self.answer = ans
+        # Generate the differentiated expression
+        self.answer = diff(self.question)
 
     def generate_question(self):
-        string = f"Calculate: $$\\int_{{{self.question[1]}}}^{{{self.question[2]}}}\\left({self.question[0]}\\right)" \
-                 f"\\:{{dx}}$$"
-
-        return string
+        return f"Differentiate the following with respect to $x$:$${latex(self.question).replace('log', 'ln')}$$"
 
     def generate_answer(self):
-        return self.answer
+        return latex(self.answer).replace("log", "ln")
 
     def generate_input_fields_prefixes(self):
         return ["Answer:"]

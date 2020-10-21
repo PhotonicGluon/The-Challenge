@@ -2,7 +2,7 @@
 checkAnswers.py
 
 Created on 2020-09-11
-Updated on 2020-10-16
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -30,9 +30,13 @@ def handle_latex_preprocessing(latex_string):
         str:    The cleaned LaTeX string.
     """
 
-    # Remove any unneeded tags
     try:
+        # Remove any unneeded tags
         latex_string = latex_string.replace(" ", "").replace("\left", "").replace("\\right", "").replace("\\,", "")
+
+        # Convert some functions to the sympy form
+        latex_string = latex_string.replace("\ln", "\log")
+
     except AttributeError:
         pass
 

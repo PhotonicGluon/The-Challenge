@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-19
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -114,16 +114,16 @@ def setup_questions():
         # Setup the questions
         generated_questions, input_field_prefixes, answers = question_bank.setup_questions()
 
-        # Get the image from Q8
-        q8_image_data = generated_questions[7][1]
+        # Get the image from Q4
+        q4_image_data = generated_questions[3][1]
 
         # Fix that entry to be only the question string
-        generated_questions[7] = generated_questions[7][0]
+        generated_questions[3] = generated_questions[3][0]
 
         # Save `questions` and `answers` to the session
         run_data = {"questions": generated_questions, "prefixes": input_field_prefixes, "answers": answers}
         session["RunData"] = json.dumps(run_data)
-        session["Q8_Image"] = q8_image_data  # Has to be handled separately due to its large size
+        session["Q4_Image"] = q4_image_data  # Has to be handled separately due to its large size
 
         # Return the json object
         return jsonify(questions=generated_questions)

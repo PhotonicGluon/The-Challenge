@@ -2,7 +2,7 @@
 q8.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -10,12 +10,12 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-import base64
+import math
 
-import numpy as np
-import plotly.graph_objects as go
-from sympy import latex, symbols
+from sympy import latex
+from sympy.parsing.sympy_parser import parse_expr
 
+from the_challenge.misc import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -23,77 +23,35 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q8(Question):
     """
     Q8:
-    Determine values of a, b and c in the expression `y = a * sin(x/b) + c` or `y = a * cos(x/b) + c` when given a
-    graph of that function.
+    Solve an equation involving two nested surds.
     """
 
     def calculations(self):
-        # Generate values for a, b and c
-        a = self.random.choice([self.random.randint(-5, -1), self.random.randint(1, 5)])
-        b = self.random.randint(1, 4)
-        c = self.random.randint(-10, 10)
+        # Determine the constants a, b, c and d
+        a = self.random.randint(2, 10)
+        b = self.random.choice([2, 3, 5, 6, 7, 8, 10])  # Remove any perfect squares
+        c = self.random.randint(2, 100)
+        d = self.random.randint(math.ceil(math.sqrt(c)), 20)
 
-        # Choose a function to plot
-        sin_or_cos = self.random.choice([np.sin, np.cos])
+        # Form the surd equation
+        self.question = latex(parse_expr(f"sqrt({a} * sqrt({b} * x) + {c}) - {d}")) + " = 0"
 
-        # Generate the domain
-        x = np.arange(0, 360 * b + 0.5, 0.5)  # Add 0.5 to make the final point be 360 * b
-
-        # Generate the function
-        func = a * sin_or_cos(self.deg2rad(x) / b) + c
-
-        # Create a layout and a figure
-        layout = go.Layout(autosize=True, margin={"l": 20, "r": 20, "t": 20, "b": 20})
-        fig = go.Figure(layout=layout)
-
-        # Update theme
-        fig.update_layout(template="plotly_white")  # Make it bend in with the webpage
-
-        # Setup the axes
-        fig.update_xaxes(title_text="$x^\\circ$", tick0=0, dtick=360 * b / 4)
-        fig.update_yaxes(title_text="$y$", tick0=-a + c, dtick=abs(a))
-
-        # Plot the function
-        fig.add_trace(go.Scatter(x=x, y=func))
-
-        # Export the plot as a base 64 string
-        image_data = fig.to_image(width=600, height=350, scale=2)
-        image_data = str(base64.b64encode(image_data))[2:-1]
-
-        # Choose the correct equation to display for the question
-        if sin_or_cos == np.sin:
-            eqn = r"y = a \sin\left(\frac{x}{b}\right) + c"
-        else:
-            eqn = r"y = a \cos\left(\frac{x}{b}\right) + c"
-
-        # Start forming the answer
-        x, y, z = symbols("x y z")
-        answer = 2 ** x * 3 ** y * 5 ** z
-
-        # Set values for `self.question` and `self.answer`
-        self.question = [eqn, image_data]
-        self.answer = latex(answer.subs(x, a).subs(y, b).subs(z, c))
+        # Calculate the answer
+        self.answer = mathematical_round((((d ** 2 - c) / a) ** 2) / b, 3)
 
     def generate_question(self):
-        string = f"Determine the values of $a$, $b$ and $c$ in $${self.question[0]}$$ given the graph of that " \
-                 "equation as shown above, where $b > 0$. Hence state the exact value of $2^a \\times 3^b \\times 5^c$."
-
-        return string, self.question[1]
+        return f"Solve for $x$:$${self.question}$$"
 
     def generate_answer(self):
         return self.answer
 
     def generate_input_fields_prefixes(self):
-        return ["Answer:"]
-
-    @staticmethod
-    def deg2rad(deg):
-        return deg * np.pi / 180
+        return ["$x=$"]
 
 
 # DEBUG CODE
 if __name__ == "__main__":
     question = Q8(seed_value=1123581321)
     question.calculations()
-    print(question.generate_question()[0])
+    print(question.generate_question())
     print("[ANSWER]", question.generate_answer())

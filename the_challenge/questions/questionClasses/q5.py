@@ -1,8 +1,8 @@
 """
 q5.py
 
-Created on 2020-08-21
-Updated on 2020-10-16
+Created on 2020-10-05
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -10,9 +10,9 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from sympy import latex, binomial
-from sympy.parsing.sympy_parser import parse_expr
+from sympy import latex, symbols
 
+from the_challenge.misc.mathematicalRounding import mathematical_round
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
 
@@ -20,48 +20,50 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q5(Question):
     """
     Q5:
-    Determine the r-th term of a binomial expansion.
+    Application of the Polynomial Remainder Theorem on a given polynomial.
     """
 
     def calculations(self):
-        # Generate the binomial expression
-        a = self.random.randint(1, 9)
-        b = self.random.randint(1, 3)
-        c = self.random.randint(1, 9)
-        d = self.random.randint(1, 9)
-        e = self.random.randint(1, 3)
-        f = self.random.randint(4, 8)
+        # CONSTANTS
+        no_terms_in_polynomial = 8  # The number of terms inside the polynomial
 
-        sign = self.random.choice(["+", "-"])
+        # CALCULATIONS
+        # Set up variables
+        x = symbols("x")
 
-        binomial_expression = latex(parse_expr(f"({a}*x**{b} {sign} {c} / ({d} * x ** {e})) ** {f}"))
+        # Generate polynomial
+        polynomial = 0 * x  # Make it like an expression so that the IDEs will not complain
+        for degree in range(no_terms_in_polynomial):  # The first term will be the constant term
+            # Generate coefficients of the term
+            coefficient = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
 
-        # Generate the term which the user is supposed to calculate
-        r = self.random.randint(2, f - 1)
+            # Generate the term
+            term = coefficient * x ** degree
 
-        # Generate that term
-        rth_term = f"{binomial(f, r - 1)} * (({a}*x**{b}) ** {f - r + 1}) * (({sign} {c} / ({d} * x ** {e})) " \
-                   f"** {r - 1})"
-        rth_term = latex(parse_expr(rth_term))
+            # Add the term to the polynomial
+            polynomial += term
 
-        # Save variables to `self.question` and `self.answer`
-        self.question = [r, binomial_expression]
-        self.answer = rth_term
+        # Generate the linear expression for the polynomial to be divided by
+        coefficient1 = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
+        coefficient2 = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
+        linear = coefficient1 * x + coefficient2
+
+        # Generate the remainder when the polynomial is divided by the linear expression
+        remainder = polynomial.subs(x, -coefficient2 / coefficient1)
+
+        # Define `self.question` and `self.answer`
+        self.question = [latex(polynomial), latex(linear)]
+        self.answer = remainder
 
     def generate_question(self):
-        string = f"Determine the {self.ordinal(self.question[0])} term in the binomial expansion " \
-                 f"of:$${self.question[1]}$$"
+        string = f"State the remainder when $${self.question[0]}$$ is divided by ${self.question[1]}$."
         return string
 
     def generate_answer(self):
-        return self.answer
+        return mathematical_round(float(self.answer), 3)
 
     def generate_input_fields_prefixes(self):
         return ["Answer:"]
-
-    @staticmethod
-    def ordinal(n):
-        return "%d<sup>%s</sup>" % (n, "tsnrhtdd"[(n // 10 % 10 != 1) * (n % 10 < 4) * n % 10::4])
 
 
 # DEBUG CODE

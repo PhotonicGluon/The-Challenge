@@ -69,11 +69,11 @@ $(document).ready(async () => {
                 inputFields.push(inputField);
             });
 
-            // Check if the current question is the special question 8
+            // Check if the current question is the special question 4
             let slideContent = `<div class="slide">`
-            if (questionNo === 8) {
+            if (questionNo === 4) {
                 // Add the image above the slide content
-                slideContent += `<img id="q8-img" src="data:image/png;base64,${Q8_IMAGE_SOURCE}" width=600 height=350 alt="Question 8 Image">`
+                slideContent += `<img id="q8-img" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=600 height=350 alt="Question 4 Image">`
             }
 
             // Add this question and its input fields to the output

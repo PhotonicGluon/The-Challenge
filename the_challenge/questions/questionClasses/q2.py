@@ -2,7 +2,7 @@
 q2.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-21
 
 Copyright Ryan Kan 2020
 
@@ -30,7 +30,9 @@ class Q2(Question):
         b = self.random.randint(100, 999)
         c = self.random.randint(100, 999)
 
-        self.question = f"{a} {self.random.choice(operators)} {b} {self.random.choice(operators)} {c}"
+        chosen_operators = self.random.sample(operators, k=2)
+
+        self.question = f"{a} {chosen_operators[0]} {b} {chosen_operators[1]} {c}"
         self.answer = mathematical_round(eval(self.question), 3)
 
     def generate_question(self):

@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-10-19
+Updated on 2020-10-22
 
 Copyright Ryan Kan 2020
 
@@ -29,7 +29,7 @@ from the_challenge.misc import check_token, get_most_recent_version, check_inter
 def update_the_challenge():
     """
     Updates the local copy of The Challenge.
-    Usage: update_the_challenge [GITHUB_TOKEN]
+    Usage:  update_the_challenge [GITHUB_TOKEN]
     """
 
     # Form the parser
@@ -122,9 +122,11 @@ def update_the_challenge():
     shutil.rmtree("./extracted")
 
     # Offer to automatically restart the service
-    print()
+    print("\n!!! IMPORTANT !!!")
     print("Only answer 'Y' to the following prompt if you (a) are on Ubuntu; (b) have a systemd service that "
           "hosts The Challenge's server; and (c) are an administrator that can use the 'sudo' command.")
+    print("!!! IMPORTANT !!!\n")
+
     while True:
         print("Would you like to restart the systemd service?")
         confirm_systemd_name = input("[Y]es or [N]o: ").upper()

@@ -2,7 +2,7 @@
 q14.py
 
 Created on 2020-08-21
-Updated on 2020-10-18
+Updated on 2020-10-22
 
 Copyright Ryan Kan 2020
 
@@ -29,8 +29,8 @@ class Q14(Question):
 
     def calculations(self):
         # CONSTANTS
-        x_range = [-30, 30]  # If `x_range` = [a, b] then a <= x <= b
-        y_range = [-30, 30]  # If `y_range` = [p, q] then p <= y <= q
+        x_range = [-40, 40]  # If `x_range` = [a, b] then a <= x <= b
+        y_range = [-40, 40]  # If `y_range` = [p, q] then p <= y <= q
 
         # CALCULATIONS
         # Generate the solutions

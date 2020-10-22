@@ -2,7 +2,7 @@
 q13.py
 
 Created on 2020-08-21
-Updated on 2020-10-18
+Updated on 2020-10-22
 
 Copyright Ryan Kan 2020
 
@@ -33,7 +33,7 @@ class Q13(Question):
         sol2_and_sol3_list = [x for x in range(non_trivial_solutions_ranges[0], non_trivial_solutions_ranges[1])] + \
                              [-x for x in range(non_trivial_solutions_ranges[0], non_trivial_solutions_ranges[1])]
 
-        sol1 = self.random.choice([-1, 1, -2, 2])
+        sol1 = self.random.choice([-1, 1, -2, 2])  # These are the "trivial" solutions
         sol2, sol3 = self.random.sample(sol2_and_sol3_list, k=2)
 
         self.answer = [sol1, sol2, sol3]
@@ -45,7 +45,7 @@ class Q13(Question):
         cubic_eqn = expand(cubic_factorised)
 
         # Take the integral of the cubic equation
-        integral_eqn = latex(integrate(cubic_eqn) + self.random.randint(-100, 100))
+        integral_eqn = latex(integrate(cubic_eqn) + self.random.randint(-1000, 1000))
         self.question = integral_eqn
 
     def generate_question(self):

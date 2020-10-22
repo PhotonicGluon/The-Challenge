@@ -2,7 +2,7 @@
 q12.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-22
 
 Copyright Ryan Kan 2020
 
@@ -10,7 +10,7 @@ Description: A file which holds the designated question class.
 """
 
 # IMPORTS
-from sympy import latex, symbols, integrate, sin, cos, sec, exp
+from sympy import latex, symbols, integrate, sin, cos, sec, exp, Rational
 
 from the_challenge.questions.questionClasses.questionBaseClass import Question
 
@@ -37,12 +37,25 @@ class Q12(Question):
         # Assign the constants for each of the functions
         assigned_functions = []
         for func in functions_to_test:
-            # Substitute values for A, B, N and K
+            # Substitute values for A, B and K
             val_a = self.random.randint(1, 9)
             val_b = self.random.randint(1, 9)
-            val_n = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
             val_k = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
-            assigned_function = func.subs(a, val_a).subs(b, val_b).subs(n, val_n).subs(k, val_k)
+            assigned_function = func.subs(a, val_a).subs(b, val_b).subs(k, val_k)
+
+            # Generate the rational value of N
+            val_n_numerator = self.random.choice([self.random.randint(1, 20), -self.random.randint(1, 20)])
+
+            possible_denominators = [x for x in range(1, 21)] + [-x for x in range(1, 21)]
+            possible_denominators.remove(val_n_numerator)
+            possible_denominators.remove(-val_n_numerator)
+
+            val_n_denominator = self.random.choice(possible_denominators)
+
+            val_n = Rational(val_n_numerator, val_n_denominator)
+
+            # Substitute value of N
+            assigned_function = assigned_function.subs(n, val_n)
 
             # Append the formed function to all the other functions
             assigned_functions.append(assigned_function)

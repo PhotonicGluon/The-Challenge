@@ -36,14 +36,16 @@ function checkIfCanStartTheChallenge() {
     let isOnMobileOrTablet = checkIfOnMobileOrTablet();
 
     // Show an appropriate error message for each case
+    let errorText = $("#js--error-text");
+
     if (!cookiesEnabled) {
-        $("#error-text").html("You cannot play The Challenge if cookies are not enabled.");
+        errorText.html("You cannot play The Challenge if cookies are not enabled.");
     } else if (isOnMobileOrTablet) {
-        $("#error-text").html("You cannot play The Challenge on mobile or on tablet.");
+        errorText.html("You cannot play The Challenge on mobile or on tablet.");
     } else if (!windowSizeOkay) {
-        $("#error-text").html("You cannot play The Challenge when the screen width is too small.");
+        errorText.html("You cannot play The Challenge when the screen width is too small.");
     } else {
-        $("#error-text").html("")  // Clear the text field
+        errorText.html("");  // Clear the text field
     }
 
     // Check if can start the challenge
@@ -54,11 +56,11 @@ $(document).ready(() => {
     // Check if start button should be disabled
     if (!checkIfCanStartTheChallenge()) {
         console.log("Unacceptable conditions; disabling button.");
-        document.getElementById("start-button").disabled = true;
+        document.getElementById("js--start-button").disabled = true;
     }
 
     // Create a click event for the start button
-    $("#start-button").on("click", () => {
+    $("#js--start-button").on("click", () => {
         console.log("Start button clicked.")
         $.get("/secret/start-challenge", {key: generate_otp("START2CHALLENGE3")}, (output) => {
             console.log(output);
@@ -71,10 +73,10 @@ $(document).ready(() => {
         // Check if can re-enable the start button
         if (!checkIfCanStartTheChallenge()) {
             console.log("Unacceptable conditions; disabling button.");
-            document.getElementById("start-button").disabled = true;
+            document.getElementById("js--start-button").disabled = true;
         } else {
             console.log("Acceptable conditions; enabling button.");
-            document.getElementById("start-button").disabled = false;
+            document.getElementById("js--start-button").disabled = false;
         }
     });
 

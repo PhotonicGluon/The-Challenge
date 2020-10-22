@@ -7,8 +7,9 @@ A.  PRELIMINARIES
     compressed file.
     - Once you have done so, you should move all the extracted files to that directory.
 
-IMPORTANT: READ THE WHOLE STEP FIRST BEFORE RUNNING ANY COMMANDS. THERE MAY BE SOME COMMANDS THAT MAY NEED TO BE RUN
-           BEFORE RUNNING THE MAIN COMMAND.
+IMPORTANT: READ THE WHOLE STEP'S INSTRUCTIONS FIRST BEFORE RUNNING ANY COMMANDS.
+           THERE MAY BE SOME COMMANDS THAT MAY NEED TO BE RUN BEFORE RUNNING THE MAIN COMMAND.
+
 
 B.  SETTING UP UWSGI
 1.  Open a console/terminal.
@@ -287,3 +288,6 @@ These instructions ONLY APPLY TO UBUNTU SERVERS.
         sudo systemctl daemon-reload
         sudo systemctl restart the-challenge
         ```
+
+Congratulations! You have set up a production server for The Challenge. You may now navigate to the website to try out
+The Challenge.

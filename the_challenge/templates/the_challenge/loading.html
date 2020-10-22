@@ -11,13 +11,11 @@
         <div class="preparing-questions">
             <h1>Preparing Questions...</h1>
         </div>
-        <div id="loading-bar"></div>
+        <div class="loading-bar" id="js--loading-bar"></div>
     </div>
 
-    <audio id="audio"
-           preload="auto"
+    <audio id="js--audio-loading" preload="auto"
            src="{{ url_for('static', filename='resources/the_challenge/audio/audio-loading.mp3') }}">
-
         <p>Your browser does not support the audio element.</p>
     </audio>
 {% endblock %}

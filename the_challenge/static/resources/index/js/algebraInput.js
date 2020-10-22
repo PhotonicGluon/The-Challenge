@@ -2,7 +2,7 @@ $(document).ready(() => {
     // Get the display box
     let mjDisplayBox = null;
     MathJax.Hub.Queue(() => {
-        mjDisplayBox = MathJax.Hub.getAllJax("math-display")[0];
+        mjDisplayBox = MathJax.Hub.getAllJax("js--math-display")[0];
     });
 
     // Get the input field
@@ -22,7 +22,7 @@ $(document).ready(() => {
                 let latex = MathLex.render(tree, "latex");  // Render the math as latex
 
                 // Output the latex code to the span element
-                $("#latex-output").text(latex);
+                $("#js--latex-output").text(latex);
 
                 // Render the latex code using MathJax
                 MathJax.Hub.Queue(["Text", mjDisplayBox, latex]);

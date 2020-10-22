@@ -18,33 +18,29 @@
 {% endblock %}
 
 {% block content %}
-    <audio id="audio"
-           preload="auto"
+    <audio id="js--audio-questions" preload="auto"
            src="{{ url_for('static', filename='resources/the_challenge/audio/audio-questions.mp3') }}">
-
         <p>Your browser does not support the audio element.</p>
     </audio>
 
-    <audio id="success-audio"
-           preload="auto"
-           src="{{ url_for('static', filename='vendors/audio/success.mp3') }}">
-
+    <audio id="js--audio-success" preload="auto"
+           src="{{ url_for('static', filename='vendors/audio/audio-success.mp3') }}">
         <p>Your browser does not support the audio element.</p>
     </audio>
 
     <div class="head-box">
         <div class="max-width-1080">
             <h1 class="float-left">The Challenge</h1>
-            <div class="float-right" id="loading-bar"></div>
+            <div class="float-right loading-bar" id="js--countdown-bar"></div>
         </div>
     </div>
 
-        <div class="body-container max-width-1080">
-            <div class="question-container" id="question-container"></div>
-            <div class="submit-button">
-                <button id="submit">Submit Answer</button>
-            </div>
+    <div class="body-container max-width-1080">
+        <div class="question-container" id="question-container"></div>
+        <div class="submit-button">
+            <button id="submit">Submit Answer</button>
         </div>
+    </div>
 {% endblock %}
 
 {% block body_scripts %}

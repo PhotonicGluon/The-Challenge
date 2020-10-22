@@ -7,7 +7,7 @@ $(document).ready(async () => {
     const submitButton = $("#submit");
 
     // Configure success audio
-    let successAudio = document.getElementById("success-audio");
+    let successAudio = document.getElementById("js--audio-success");
     successAudio.volume = 0.1;
 
     // Disable the submit button
@@ -45,7 +45,7 @@ $(document).ready(async () => {
         warnings: true
     };
 
-    let progressBar = new ProgressBar.Line("#loading-bar", options);
+    let progressBar = new ProgressBar.Line("#js--countdown-bar", options);
 
     // Get the number of questions
     const noQuestions = QUESTIONS_AND_ANSWERS.questions.length
@@ -65,7 +65,7 @@ $(document).ready(async () => {
             // For each prefix, make a new input field
             let inputFields = [];
             inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
-                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Your answer here"><div id="question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`
+                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="js--question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Your answer here"><div id="js--question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`
                 inputFields.push(inputField);
             });
 
@@ -73,7 +73,7 @@ $(document).ready(async () => {
             let slideContent = `<div class="slide">`
             if (questionNo === 4) {
                 // Add the image above the slide content
-                slideContent += `<img id="q8-img" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=600 height=350 alt="Question 4 Image">`
+                slideContent += `<img class="q4-image" id="js--q4-image" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=600 height=350 alt="Question 4 Image">`
             }
 
             // Add this question and its input fields to the output
@@ -121,7 +121,7 @@ $(document).ready(async () => {
                 let inputFieldPrefixes = QUESTIONS_AND_ANSWERS.prefixes[q];
                 inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
                     MathJax.Hub.Queue(() => {
-                        mjDisplayBoxes[`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
+                        mjDisplayBoxes[`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
                     });
                 });
             }
@@ -161,7 +161,7 @@ $(document).ready(async () => {
             // Form the input fields' ids
             let inputFieldsIDs = [];
             for (let i = 0; i < noInputFields; i++) {
-                inputFieldsIDs.push(`question_${currentSlide + 1}-iField_${i}`);
+                inputFieldsIDs.push(`js--question_${currentSlide + 1}-iField_${i}`);
             }
 
             // Get data from the input fields
@@ -239,7 +239,7 @@ $(document).ready(async () => {
         });
 
         // Play the audio
-        let myAudio = document.getElementById("audio");  // Get the DOM element
+        let myAudio = document.getElementById("js--audio-questions");
         myAudio.play();
 
         // Show the first slide

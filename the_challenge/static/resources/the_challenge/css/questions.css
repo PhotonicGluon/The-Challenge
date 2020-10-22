@@ -20,7 +20,7 @@ html {
 }
 
 /* Countdown Bar Styling */
-#loading-bar {
+.loading-bar {
     position: absolute;
     transform: translate(0%, 25%);
     color: white;
@@ -54,7 +54,7 @@ h1 {
     width: 100%;
 }
 
-#q8-img {
+.q4-image {
     display: block;
     margin: 0 auto;
 }

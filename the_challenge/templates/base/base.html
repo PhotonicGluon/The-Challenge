@@ -1,5 +1,15 @@
+<!--
+The Challenge
+
+Created on 2020-08-21
+Updated on 2020-10-22
+
+Copyright Ryan Kan 2020
+-->
+
 <!DOCTYPE html>
 <html lang="en-gb">
+
 <head>
     <!-- Set meta tags -->
     <meta charset="UTF-8">
@@ -60,7 +70,7 @@
         {% for message in messages %}
             <script>
                 console.log("{{ message }}");
-                create_alert("{{ message }}", document.body);  // Will show an alert
+                create_alert("{{ message }}", document.body);  // Will show an alert on the page
             </script>
         {% endfor %}
     {% endif %}

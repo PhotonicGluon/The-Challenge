@@ -11,7 +11,7 @@ async function loadQuestions() {
 
 $(document).ready(async () => {
     // Audio
-    let myAudio = document.getElementById("audio");  // Get the DOM element
+    let myAudio = document.getElementById("js--audio-loading");
     myAudio.play();
 
     // Progress Bar
@@ -32,7 +32,7 @@ $(document).ready(async () => {
         warnings: true
     };
 
-    let progressBar = new ProgressBar.Line("#loading-bar", options);
+    let progressBar = new ProgressBar.Line("#js--loading-bar", options);
     progressBar.animate(1.0);
 
     // Run Async functions

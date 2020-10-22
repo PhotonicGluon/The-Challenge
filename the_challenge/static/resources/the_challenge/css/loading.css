@@ -21,7 +21,7 @@ h1 {
     text-align: center;
 }
 
-#loading-bar {
+.loading-bar {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);

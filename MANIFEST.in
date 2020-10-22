@@ -6,3 +6,4 @@ graft the_challenge/templates
 
 global-exclude *.pyc
 global-exclude *_original.js
+global-exclude **/.DS_Store

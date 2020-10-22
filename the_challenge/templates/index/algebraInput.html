@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 
-{% block title %}The Challenge - Algebra Input Demo{% endblock %}
+{% block title %}The Challenge - Try Out The Algebra Input{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css"
@@ -16,23 +16,23 @@
         <a href="{{ url_for('main_page') }}">&larr; Back to Main Page</a>
     </div>
 
-    <div class="row" id="math-input">
+    <div class="row math-input" id="math-input">
         <h1>Try Out The Algebra Input System!</h1>
         <span>Try typing some algebra below!</span>
 
         <label for="input-field">
-            <input id="input-field" type="text" placeholder="Try typing some MathLex here!" value="x^2 + 2*x + 1">
+            <input class="input-field" id="input-field" type="text" placeholder="Try typing some MathLex here!" value="x^2 + 2*x + 1">
         </label>
 
-        <div id="math-display">
+        <div id="js--math-display">
             $$$$
         </div>
     </div>
 
-    <div class="row" id="latex-code-output-box">
+    <div class="row">
         <span>Equivalent LaTeX code:</span>
         <br>
-        <code><span id="latex-output"></span></code>
+        <code><span class="latex-output" id="js--latex-output"></span></code>
     </div>
 
     <div class="row long-copy">
@@ -51,8 +51,7 @@
             </li>
             <li>To enter $\sqrt{ax+b}$ you will need to enter the string <code>sqrt(a*x+b)</code> into the input field.
             </li>
-            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string <code>(sec(a*x+b)**2)</code> or
-                <code>(sec(a*x+b)^2)</code> into the input field.
+            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string <code>(sec(a*x+b))**2</code> or <code>(sec(a*x+b))^2</code> into the input field.
             </li>
         </ul>
     </div>

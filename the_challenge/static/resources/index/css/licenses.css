@@ -48,6 +48,7 @@ footer a {
     color: white;
 }
 
+/* QUERIES */
 /* Styling For Mobile */
 @media screen and (max-width: 1080px) {
     .row, .back-arrow-box {

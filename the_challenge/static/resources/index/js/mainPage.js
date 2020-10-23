@@ -61,8 +61,8 @@ $(document).ready(() => {
 
     // Create a click event for the start button
     $("#js--start-button").on("click", () => {
-        console.log("Start button clicked.")
-        $.get("/secret/start-challenge", {key: generate_otp("START2CHALLENGE3")}, (output) => {
+        console.log("Start button clicked.");
+        $.get("/secret/start-challenge", {key: generateOTP("START2CHALLENGE3")}, (output) => {
             console.log(output);
             window.location.replace(output);
         });
@@ -83,9 +83,9 @@ $(document).ready(() => {
     // Handle sticky navigation
     $(".information-box").waypoint((direction) => {
         if (direction === "down") {
-            $("nav").addClass("sticky")
+            $("nav").addClass("sticky");
         } else {
-            $("nav").removeClass("sticky")
+            $("nav").removeClass("sticky");
         }
     });
 
@@ -95,9 +95,9 @@ $(document).ready(() => {
     });
 
     // Handle clicking of menu icon
-    $(".nav-icon").click(function () {
+    $("#js--nav-icon").click(function () {
         let nav = $(".main-nav");
-        let icon = $(".nav-icon i");
+        let icon = $("#js--nav-icon i");
 
         nav.slideToggle(200);
 

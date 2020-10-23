@@ -21,7 +21,8 @@
         <span>Try typing some algebra below!</span>
 
         <label for="input-field">
-            <input class="input-field" id="input-field" type="text" placeholder="Try typing some MathLex here!" value="x^2 + 2*x + 1">
+            <input class="input-field" id="input-field" type="text" placeholder="Try typing some MathLex here!"
+                   value="x^2 + 2*x + 1">
         </label>
 
         <div id="js--math-display">
@@ -44,17 +45,27 @@
         </p>
 
         <ul>
-            <li>To enter the expression $ax$ you will need to enter the string <code>a*x</code> into the input field.
+            <li>To enter a number like "one million, two hundred and thirty-four thousand, five hundred and sixty-seven"
+                do not enter any commas or periods (e.g.<code>1,234,567</code> or <code>1.234.567</code>). Instead, put
+                all the digits of the number together (<code>1234567</code>).
             </li>
-            <li>To enter a fraction like $\frac pq$ you will need to enter the string <code>p/q</code> into the input
+            <li>To enter $xy$ you will need to enter the string <code>x*y</code> into the input field.
+            </li>
+            <li>To enter a fraction such as $\frac pq$ you will need to enter the string <code>p/q</code> into the input
                 field.
             </li>
             <li>To enter $\sqrt{ax+b}$ you will need to enter the string <code>sqrt(a*x+b)</code> into the input field.
             </li>
-            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string <code>(sec(a*x+b))**2</code> or <code>(sec(a*x+b))^2</code> into the input field.
+            <li>To enter $\sec^2 \left(ax+b\right)$ you will need to enter the string <code>(sec(a*x+b))**2</code> or
+                <code>(sec(a*x+b))^2</code> into the input field.
             </li>
         </ul>
     </div>
+
+    <footer>
+        <p>Made with &heartsuit; by <a href="https://github.com/Ryan-Kan" target="_blank">Ryan Kan</a>. &copy; Copyright
+            Ryan Kan</p>
+    </footer>
 {% endblock %}
 
 {% block body_scripts %}

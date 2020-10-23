@@ -8,7 +8,7 @@ $(document).ready(async () => {
 
     // Configure success audio
     let successAudio = document.getElementById("js--audio-success");
-    successAudio.volume = 0.1;
+    successAudio.volume = 0.1;  // 10% the original volume
 
     // Disable the submit button
     submitButton.prop("disabled", true);
@@ -65,20 +65,20 @@ $(document).ready(async () => {
             // For each prefix, make a new input field
             let inputFields = [];
             inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
-                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="js--question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Your answer here"><div id="js--question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`
+                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="js--question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Your answer here"><div id="js--question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`;
                 inputFields.push(inputField);
             });
 
             // Check if the current question is the special question 4
-            let slideContent = `<div class="slide">`
+            let slideContent = `<div class="slide">`;
             if (questionNo === 4) {
                 // Add the image above the slide content
-                slideContent += `<img class="q4-image" id="js--q4-image" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=600 height=350 alt="Question 4 Image">`
+                slideContent += `<img class="q4-image" id="js--q4-image" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=700 height=auto alt="Question 4 Image">`;
             }
 
             // Add this question and its input fields to the output
-            slideContent += `<div class="question"><strong>Question ${questionNo}.</strong> ${question}</div><br><div class="input-fields">${inputFields.join("")}</div></div>`
-            output.push(slideContent)
+            slideContent += `<div class="question"><strong>Question ${questionNo}.</strong> ${question}</div><br><div class="input-fields">${inputFields.join("")}</div></div>`;
+            output.push(slideContent);
         }
 
         // Finally combine our output list into one string of HTML and put it on the page
@@ -191,7 +191,7 @@ $(document).ready(async () => {
                     // Remove the class after the animation completes
                     setTimeout(() => {
                         selector.removeClass("error");
-                    }, 300);  // 300 ms
+                    }, 300);
 
                     // Change the flag of whether to check answers to false
                     checkAnswer = false;
@@ -201,7 +201,7 @@ $(document).ready(async () => {
             // Submit latex value to server
             if (checkAnswer) {
                 $.get("/secret/check-answer", {
-                    key: generate_otp("I2WANT3TO4CHECK5MY6ANSWER7CAN2YOU3CHECK4"),
+                    key: generateOTP("I2WANT3TO4CHECK5MY6ANSWER7CAN2YOU3CHECK4"),
                     question_no: currentSlide + 1,
                     user_answer: userAnswer
                 }, (output) => {
@@ -210,7 +210,7 @@ $(document).ready(async () => {
                         if (currentSlide + 1 === 14) {  // The last slide
                             let timeLeft = DURATION_OF_THE_CHALLENGE * (1 - progressBar.value());
                             $.get("/secret/success-handler", {
-                                key: generate_otp("CONGRATULATIONS2YOU3COMPLETED4THE5CHALLENGE6YAY7"),
+                                key: generateOTP("CONGRATULATIONS2YOU3COMPLETED4THE5CHALLENGE6YAY7"),
                                 user_id: getUUIDCookie(),
                                 time_remaining: timeLeft
                             }, (output) => {
@@ -248,18 +248,18 @@ $(document).ready(async () => {
         // Start the progress bar
         progressBar.animate(1.0);
 
-        // Just in case, change the height of the question container to avoid the submit button issue from ever
-        // occurring again.
+        // Change the height of the question container to at least 170 px to avoid the submit button from covering any
+        // input fields
         questionContainer.height(Math.max(170, questionContainer.height()));
 
-        // Activate submit button
+        // Activate the submit button
         submitButton.prop("disabled", false);
 
-        // Run Async functions
+        // Run async functions
         let sleepFunc = asyncSleep(DURATION_OF_THE_CHALLENGE);  // Start the sleep counter
         await sleepFunc;  // If timer has yet to expire, wait until timer expires
 
-        // If the user can't complete The Challenge in time, bring the user back to the home page
+        // If the user can't complete The Challenge in time, forcefully bring the user back to the home page
         $.get("/secret/failure", {key: "0h-n0-y0u-f41l3d"}, (output) => {
             window.location.replace(output);
         });

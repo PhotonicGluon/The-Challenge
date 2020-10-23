@@ -1,7 +1,6 @@
 async function loadQuestions() {
     let promise = new Promise((resolve, reject) => {
-        $.get("/secret/setup-questions", {key: generate_otp("SETUP2QUESTIONS3")}, (output) => {
-            console.log(output);
+        $.get("/secret/setup-questions", {key: generateOTP("SETUP2QUESTIONS3")}, (output) => {
             resolve(output);
         });
     });
@@ -16,9 +15,7 @@ $(document).ready(async () => {
 
     // Progress Bar
     let options = {
-        from: {
-            color: "#28b062"
-        },
+        from: {color: "#28b062"},
         to: {color: "#28b062"},
         step: function (state, bar, _) {
             bar.path.setAttribute("stroke", state.color);
@@ -35,15 +32,17 @@ $(document).ready(async () => {
     let progressBar = new ProgressBar.Line("#js--loading-bar", options);
     progressBar.animate(1.0);
 
-    // Run Async functions
+    // Run async functions
     let sleepFunc = asyncSleep(5);  // Start the sleep counter
+
     await loadQuestions();  // Wait till the questions are loaded
     await sleepFunc;  // If timer has yet to expire, wait until timer expires
+
     console.log("Done!");
 
     // Redirect to question pages
     console.log("Redirecting to question pages.")
-    $.get("/secret/redirect-to-the-challenge", {key: generate_otp("REDIRECTING2TO3THE4CHALLENGE5NOW")}, (output) => {
+    $.get("/secret/redirect-to-the-challenge", {key: generateOTP("REDIRECTING2TO3THE4CHALLENGE5NOW")}, (output) => {
         window.location.replace(output);
     });
 });

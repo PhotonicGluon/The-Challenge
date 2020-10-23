@@ -18,7 +18,7 @@ from flask import Flask, request, redirect, url_for, render_template, session, j
 from flask_session import Session
 
 from the_challenge.misc import verify_otp
-from the_challenge.questions import QuestionBank, process_user_answer, check_user_answer
+from the_challenge.questions import QuestionHandler, process_user_answer, check_user_answer
 from the_challenge.version import __version__
 
 # FLASK SETUP
@@ -109,10 +109,10 @@ def setup_questions():
     # Check the key
     if verify_otp(key, "SETUP2QUESTIONS3"):
         # Setup question bank
-        question_bank = QuestionBank()
+        question_handler = QuestionHandler()
 
         # Setup the questions
-        generated_questions, input_field_prefixes, answers = question_bank.setup_questions()
+        generated_questions, input_field_prefixes, answers = question_handler.setup_questions()
 
         # Get the image from Q4
         q4_image_data = generated_questions[3][1]

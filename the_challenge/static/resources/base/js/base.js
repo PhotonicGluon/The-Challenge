@@ -26,7 +26,7 @@ function create_alert(alert_info, parent_element = document.body) {
             div.style.display = "none";
 
             // Remove the div after the `div`'s display has been set to "none".
-            div.remove()
+            div.remove();
         }, 600);
     }
 }
@@ -52,7 +52,7 @@ function toDecimalPlace(x, decimalPlace) {
 
 async function asyncSleep(timeInSeconds) {
     let promise = new Promise((resolve, _) => {
-        setTimeout(() => resolve("Slept for " + timeInSeconds * 1000 + " seconds"), timeInSeconds * 1000)
+        setTimeout(() => resolve("Slept for " + timeInSeconds * 1000 + " seconds"), timeInSeconds * 1000);
     });
     await promise; // wait until the promise resolves (*)
     return 1;
@@ -61,13 +61,12 @@ async function asyncSleep(timeInSeconds) {
 // BASE CODE (JS code that will run on every page on The Challenge)
 $(document).ready(() => {
     // Setup alert system
-    let close = document.getElementsByClassName("alert-box-close-button")
+    let close = document.getElementsByClassName("alert-box-close-button");
 
     // Loop through all close buttons
     for (let i = 0; i < close.length; i++) {
         // When someone clicks on a close button
         close[i].onclick = function () {
-
             // Get the parent of the close button element (the div element)
             let div = this.parentElement;
 
@@ -80,7 +79,7 @@ $(document).ready(() => {
                 div.style.display = "none";
 
                 // Remove the div after the `div`'s display has been set to `none`.
-                div.remove()
+                div.remove();
             }, 600);
         }
     }

@@ -1,6 +1,6 @@
 $(document).ready(() => {
     // Get the display box
-    let mjDisplayBox = null;
+    let mjDisplayBox = null;  // Set null for now; will need to use it later
     MathJax.Hub.Queue(() => {
         mjDisplayBox = MathJax.Hub.getAllJax("js--math-display")[0];
     });
@@ -28,7 +28,6 @@ $(document).ready(() => {
                 MathJax.Hub.Queue(["Text", mjDisplayBox, latex]);
 
             } catch (err) {
-                console.log(err);
                 $(target).css("color", "red");
             }
 

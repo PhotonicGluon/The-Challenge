@@ -2,7 +2,7 @@
 q1.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-23
 
 Copyright Ryan Kan 2020
 
@@ -18,7 +18,7 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q1(Question):
     """
     Q1:
-    Just simple adding/subtracting.
+    Addition, subtraction, multiplication or division of two small numbers.
     """
 
     def calculations(self):

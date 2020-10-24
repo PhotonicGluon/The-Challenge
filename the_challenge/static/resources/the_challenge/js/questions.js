@@ -48,7 +48,7 @@ $(document).ready(async () => {
     let progressBar = new ProgressBar.Line("#js--countdown-bar", options);
 
     // Get the number of questions
-    const noQuestions = QUESTIONS_AND_ANSWERS.questions.length
+    const noQuestions = QUESTIONS_AND_INPUT_FIELD_PREFIXES.questions.length
 
     // Define functions
     function buildQuiz() {
@@ -59,8 +59,8 @@ $(document).ready(async () => {
         for (let q = 0; q < noQuestions; q++) {
             // Get the essential info from the JSON object
             let questionNo = q + 1;
-            let question = QUESTIONS_AND_ANSWERS.questions[q];
-            let inputFieldPrefixes = QUESTIONS_AND_ANSWERS.prefixes[q];
+            let question = QUESTIONS_AND_INPUT_FIELD_PREFIXES.questions[q];
+            let inputFieldPrefixes = QUESTIONS_AND_INPUT_FIELD_PREFIXES.prefixes[q];
 
             // For each prefix, make a new input field
             let inputFields = [];
@@ -118,7 +118,7 @@ $(document).ready(async () => {
             // Get all display boxes
             let mjDisplayBoxes = {};
             for (let q = 0; q < noQuestions; q++) {
-                let inputFieldPrefixes = QUESTIONS_AND_ANSWERS.prefixes[q];
+                let inputFieldPrefixes = QUESTIONS_AND_INPUT_FIELD_PREFIXES.prefixes[q];
                 inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
                     MathJax.Hub.Queue(() => {
                         mjDisplayBoxes[`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
@@ -155,7 +155,7 @@ $(document).ready(async () => {
         // Prepare Submit button functionality
         submitButton.on("click", () => {
             // Get the number of input fields for the current question
-            let currentPrefixes = QUESTIONS_AND_ANSWERS.prefixes[currentSlide];
+            let currentPrefixes = QUESTIONS_AND_INPUT_FIELD_PREFIXES.prefixes[currentSlide];
             let noInputFields = currentPrefixes.length;
 
             // Form the input fields' ids

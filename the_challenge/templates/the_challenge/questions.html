@@ -9,7 +9,7 @@
 
 {% block header_scripts %}
     <script>
-        const QUESTIONS_AND_ANSWERS = JSON.parse({{ session["RunData"]|tojson|safe }});
+        const QUESTIONS_AND_INPUT_FIELD_PREFIXES = JSON.parse({{ session["RunData"]|tojson|safe }});
         const Q4_IMAGE_SOURCE = "{{ session["Q4_Image"] }}";
     </script>
 

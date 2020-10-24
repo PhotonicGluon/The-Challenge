@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -120,8 +120,9 @@ def setup_questions():
         # Fix that entry to be only the question string
         generated_questions[3] = generated_questions[3][0]
 
-        # Save `questions` and `answers` to the session
-        run_data = {"questions": generated_questions, "prefixes": input_field_prefixes, "answers": answers}
+        # Save `generated_questions` and `input_field_prefixes` to the session
+        run_data = {"questions": generated_questions, "prefixes": input_field_prefixes}
+
         session["RunData"] = json.dumps(run_data)
         session["Q4_Image"] = q4_image_data  # Has to be handled separately due to its large size
 

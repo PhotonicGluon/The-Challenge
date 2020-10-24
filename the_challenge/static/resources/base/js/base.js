@@ -1,10 +1,13 @@
 // GLOBAL FUNCTIONS (Functions that are available to all JS files)
-function create_alert(alert_info, parent_element = document.body) {
-    // Craft alert HTML
-    let alertHTML = `<div class="alert"><span class="alert-box-close-button" id="alert-temp">&times;</span>${alert_info}</div>`;
+function create_alert(alertInfo, parentElement = document.body) {
+    // Prevent XSS by replacing angled brackets with special characters
+    alertInfo = alertInfo.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    // Prepend the HTML code to the `parent_element`
-    parent_element.insertAdjacentHTML("afterbegin", alertHTML);
+    // Craft alert HTML
+    let alertHTML = `<div class="alert"><span class="alert-box-close-button" id="alert-temp">&times;</span>${alertInfo}</div>`;
+
+    // Prepend the HTML code to the `parentElement`
+    parentElement.insertAdjacentHTML("afterbegin", alertHTML);
 
     // Get the new alert close button element
     let alertCloseButton = document.getElementById("alert-temp");
@@ -52,7 +55,7 @@ function toDecimalPlace(x, decimalPlace) {
 
 async function asyncSleep(timeInSeconds) {
     let promise = new Promise((resolve, _) => {
-        setTimeout(() => resolve("Slept for " + timeInSeconds * 1000 + " seconds"), timeInSeconds * 1000);
+        setTimeout(() => resolve("Slept for " + timeInSeconds + " seconds"), timeInSeconds * 1000);
     });
     await promise; // wait until the promise resolves (*)
     return 1;

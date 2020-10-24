@@ -2,7 +2,7 @@
 q11.py
 
 Created on 2020-08-21
-Updated on 2020-10-22
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -63,8 +63,8 @@ class Q11(Question):
         self.answer = ans
 
     def generate_question(self):
-        string = f"Calculate: $$\\int_{{{self.question[1]}}}^{{{self.question[2]}}}\\left({self.question[0]}\\right)" \
-                 f"\\:{{dx}}$$"
+        string = f"State the value of $$\\int_{{{self.question[1]}}}^{{{self.question[2]}}}\\left({self.question[0]}" \
+                 f"\\right)\\:{{\mathrm{{d}}x}}$$"
 
         return string
 

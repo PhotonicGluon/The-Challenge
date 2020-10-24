@@ -2,7 +2,7 @@
 q4.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -75,8 +75,9 @@ class Q4(Question):
         self.answer = latex(answer.subs(x, a).subs(y, b).subs(z, c))
 
     def generate_question(self):
-        string = f"Determine the values of $a$, $b$ and $c$ in $${self.question[0]}$$ given the graph of that " \
-                 "equation as shown above, where $b > 0$. Hence state the exact value of $2^a \\times 3^b \\times 5^c$."
+        string = f"Determine the values of $a$, $b$ and $c$ of the function $${self.question[0]}$$ given the graph " \
+                 "of that function as shown above, where $b > 0$. Hence state the exact value of $2^a \\times 3^b " \
+                 "\\times 5^c$."
 
         return string, self.question[1]
 

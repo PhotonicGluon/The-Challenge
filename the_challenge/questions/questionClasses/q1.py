@@ -2,7 +2,7 @@
 q1.py
 
 Created on 2020-08-21
-Updated on 2020-10-23
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -34,7 +34,7 @@ class Q1(Question):
 
     def generate_question(self):
         treated_expr = self.question.replace("*", "\\times").replace("/", "\\div")
-        string = f"State the value of:$${treated_expr}$$"
+        string = f"State the value of $${treated_expr}$$"
 
         return string
 

@@ -2,7 +2,7 @@
 q14.py
 
 Created on 2020-08-21
-Updated on 2020-10-22
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -86,7 +86,7 @@ class Q14(Question):
 
     def generate_question(self):
         string = f"Solve for the <strong>values</strong> of $x$ in the following simultaneous equations " \
-                 f"(Equation \\eqref{{q14:eqn1}} and Equation \\eqref{{q14:eqn2}}):"
+                 f"(Equation \\eqref{{q14:eqn1}} and Equation \\eqref{{q14:eqn2}})."
 
         for i, q in enumerate(self.question):
             string += f"$$\\begin{{equation}}{q}\\label{{q14:eqn{i + 1}}}\\end{{equation}}"

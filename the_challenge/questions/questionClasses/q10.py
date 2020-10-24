@@ -2,7 +2,7 @@
 q10.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -50,7 +50,8 @@ class Q10(Question):
         self.answer = diff(self.question)
 
     def generate_question(self):
-        return f"Differentiate the following with respect to $x$:$${latex(self.question).replace('log', 'ln')}$$"
+        return "Differentiate the following expression with respect to $x$. " \
+               f"$${latex(self.question).replace('log', 'ln')}$$"
 
     def generate_answer(self):
         return latex(self.answer).replace("log", "ln")

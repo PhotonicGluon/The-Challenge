@@ -70,14 +70,14 @@ $(document).ready(async () => {
             });
 
             // Check if the current question is the special question 4
-            let slideContent = `<div class="slide">`;
+            let slideContent = `<div class="slide"><div class="question"><strong>Question ${questionNo}.</strong> `;
             if (questionNo === 4) {
                 // Add the image above the slide content
                 slideContent += `<img class="q4-image" id="js--q4-image" src="data:image/png;base64,${Q4_IMAGE_SOURCE}" width=700 height=auto alt="Question 4 Image">`;
             }
 
             // Add this question and its input fields to the output
-            slideContent += `<div class="question"><strong>Question ${questionNo}.</strong> ${question}</div><br><div class="input-fields">${inputFields.join("")}</div></div>`;
+            slideContent += `${question}</div><br><div class="input-fields">${inputFields.join("")}</div></div>`;
             output.push(slideContent);
         }
 

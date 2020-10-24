@@ -2,7 +2,7 @@
 q13.py
 
 Created on 2020-08-21
-Updated on 2020-10-22
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -49,7 +49,8 @@ class Q13(Question):
         self.question = integral_eqn
 
     def generate_question(self):
-        return f"Solve for the <strong>values</strong> of $x$:$$\\frac{{d}}{{dx}}\\left({self.question}\\right) = 0$$"
+        return "Solve for the <strong>values</strong> of $x$ in the equation $$\\frac{\mathrm{d}}{\mathrm{d}" \
+               f"x}}\\left({self.question}\\right) = 0$$"
 
     def generate_answer(self):
         return self.answer

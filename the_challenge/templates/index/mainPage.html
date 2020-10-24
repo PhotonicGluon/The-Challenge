@@ -135,14 +135,22 @@
                         </ul>
                         You may try out the MathLex language <a href="{{ url_for('algebra_input') }}">here</a>.
                     </li>
-                    <li><strong>You are not permitted to refer to any assisting websites or hard-copy
-                        documents.</strong></li>
-                    <li>Answers which are not exact are to be rounded to 3 decimal places. Round all values which
-                        4<sup>th</sup> decimal place is more than or equal to 5 <strong>up</strong>. This means that
-                        you should round <code>1.23456</code> to <code>1.235</code> and round <code>6.54321</code> to
-                        <code>6.543</code>. <strong>Do not follow the
-                            <a href="https://en.wikipedia.org/wiki/Rounding#Round_half_to_even" target="_blank">banker's
-                                rounding</a> system</strong> which Python uses.
+                    <li><strong>You are not permitted to refer to any assisting websites or hard-copy documents.
+                    </strong> The following is a non-exhaustive list of some of the things you are not permitted to
+                        refer to:
+                        <ul>
+                            <li>An algebraic manipulation tool</li>
+                            <li>A hard-copy formula sheet for differentiation and integration</li>
+                            <li>A Computer Algebra System (CAS) or a Symbolic Algebra System (SAS)</li>
+                            <li>A calculator which has symbolic differentiation and symbolic integration abilities</li>
+                        </ul>
+                    </li>
+                    <li>Answers which are not exact are to be rounded to 3 decimal places. You should round all values
+                        which 4<sup>th</sup> decimal place is more than or equal to 5 <strong>up</strong>. This means
+                        that you should round <code>1.23456</code> to <code>1.235</code> and round <code>6.54321</code>
+                        to <code>6.543</code>. <strong>Do not follow the <a
+                                href="https://en.wikipedia.org/wiki/Rounding#Round_half_to_even" target="_blank">banker's
+                            rounding</a> system</strong> which Python uses.
                         <ul>
                             <li><strong>Exception</strong>: For question 4 leave your answer in <strong>exact</strong>
                                 form.
@@ -166,17 +174,21 @@
                                 are co-prime integers
                             </li>
                             <li>Square root ($\sqrt{\ }$) function</li>
-                            <li>Natural log ($\ln$) function</li>
                             <li>Able to handle computations such as $p^q$ where $p$ is a real number and $q$ is a
                                 rational number
                             </li>
+                            <li>Able to compute the binomial coefficient $n \choose r$</li>
                         </ol>
-                    </li>
-                    <li>The working for the answers are <strong>optional</strong>. Only the final answer will be
-                        checked.
+                        It should not, however, have <strong>any</strong> of the following features:
                         <ul>
-                            <li>However, you are advised to prepare a blank sheet of A4 or US Letter paper for the rough
-                                working for the questions.
+                            <li>Symbolic differentiation and symbolic integration abilities</li>
+                        </ul>
+                    </li>
+                    <li>Only the final answer for each question will be checked. <strong>Rough working for each question
+                        is optional.</strong>
+                        <ul>
+                            <li>However, it is recommended to prepare a blank sheet of A4 or US Letter paper to do some
+                                rough working for the more difficult questions.
                             </li>
                         </ul>
                     </li>

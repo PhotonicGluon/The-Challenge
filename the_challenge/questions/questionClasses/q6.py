@@ -2,7 +2,7 @@
 q6.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -55,7 +55,7 @@ class Q6(Question):
 
     def generate_question(self):
         string = "Solve the quadratic equation with real roots (Equation \\eqref{q12:eqn1}, Equation " \
-                 "\\eqref{q12:eqn2} or Equation \\eqref{q12:eqn3}) for $x$:"
+                 "\\eqref{q12:eqn2} or Equation \\eqref{q12:eqn3}) for the <strong>values</strong> of $x$."
 
         for i, q in enumerate(self.question):
             string += f"$$\\begin{{equation}}{q}\\label{{q12:eqn{i + 1}}}\\end{{equation}}$$"

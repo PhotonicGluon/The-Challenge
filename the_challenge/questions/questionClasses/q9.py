@@ -2,7 +2,7 @@
 q9.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -43,7 +43,7 @@ class Q9(Question):
         self.answer = [ans1, ans2]
 
     def generate_question(self):
-        return f"Solve for the <strong>values</strong> of $x$:$${self.question}$$"
+        return f"Solve for the <strong>values</strong> of $x$ in the equation $${self.question}$$"
 
     def generate_answer(self):
         return self.answer

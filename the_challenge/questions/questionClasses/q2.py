@@ -37,7 +37,7 @@ class Q2(Question):
 
     def generate_question(self):
         treated_expr = self.question.replace("*", "\\times").replace("/", "\\div")
-        string = f"State the value of:$${treated_expr}$$"
+        string = f"State the value of $${treated_expr}$$"
 
         return string
 

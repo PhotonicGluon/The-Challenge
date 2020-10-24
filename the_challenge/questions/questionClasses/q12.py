@@ -2,7 +2,7 @@
 q12.py
 
 Created on 2020-08-21
-Updated on 2020-10-22
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -71,8 +71,8 @@ class Q12(Question):
         self.answer = integral
 
     def generate_question(self):
-        string = f"Integrate the following with respect to $x$, leaving out the constant of integration ($C$) in " \
-                 f"your answer:$${self.question}$$"
+        string = "Integrate the following expression with respect to $x$, leaving out the constant of integration " \
+                 f"($C$) in your answer. $${self.question}$$"
 
         return string
 

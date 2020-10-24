@@ -2,7 +2,7 @@
 q7.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -49,8 +49,8 @@ class Q7(Question):
         self.answer = rth_term
 
     def generate_question(self):
-        string = f"Determine the {self.ordinal(self.question[0])} term in the binomial expansion " \
-                 f"of:$${self.question[1]}$$"
+        string = f"Determine the {self.ordinal(self.question[0])} term in the binomial expansion of " \
+                 f"$${self.question[1]}$$"
         return string
 
     def generate_answer(self):

@@ -2,7 +2,7 @@
 q5.py
 
 Created on 2020-10-05
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -56,7 +56,8 @@ class Q5(Question):
         self.answer = remainder
 
     def generate_question(self):
-        string = f"State the remainder when $${self.question[0]}$$ is divided by ${self.question[1]}$."
+        string = f"State the remainder when the polynomial $$\\mathrm{{P}}(x) = {self.question[0]}$$ is divided by " \
+                 f"the linear function $\\mathrm{{L}}(x) = {self.question[1]}$."
         return string
 
     def generate_answer(self):

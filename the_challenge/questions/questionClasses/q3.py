@@ -2,7 +2,7 @@
 q3.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -36,7 +36,7 @@ class Q3(Question):
         self.answer = mathematical_round((-eval(f"{s}{b}") + c) / a, 3)
 
     def generate_question(self):
-        string = f"Solve for $x$:$${self.question}$$"
+        string = f"Solve for the value of $x$ in the equation $${self.question}$$"
         return string
 
     def generate_answer(self):

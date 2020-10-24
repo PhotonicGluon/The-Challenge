@@ -2,7 +2,7 @@
 q8.py
 
 Created on 2020-08-21
-Updated on 2020-10-21
+Updated on 2020-10-24
 
 Copyright Ryan Kan 2020
 
@@ -40,7 +40,7 @@ class Q8(Question):
         self.answer = mathematical_round((((d ** 2 - c) / a) ** 2) / b, 3)
 
     def generate_question(self):
-        return f"Solve for $x$:$${self.question}$$"
+        return f"Solve for the value of $x$ in the equation $${self.question}$$"
 
     def generate_answer(self):
         return self.answer

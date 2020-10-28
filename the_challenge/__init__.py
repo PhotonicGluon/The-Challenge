@@ -77,7 +77,7 @@ def check_connection():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "4r3-y0u-c0nn3c73d":
+    if verify_otp(key, "INTERNET2CONNECT"):
         # Check if the user can access the example domain by IANA
         if check_internet_connection():
             return "y0u-4r3-c0nn3c73d!"

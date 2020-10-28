@@ -1,7 +1,7 @@
 // GLOBAL FUNCTIONS (Functions that are available to all JS files)
 async function checkIfOnline(showAlert = false) {
     let result = null;
-    await $.get("/secret/check-connection", {key: "4r3-y0u-c0nn3c73d"}, (output) => {
+    await $.get("/secret/check-connection", {key: generateOTP("INTERNET2CONNECT")}, (output) => {
         // If the response is incorrect display the "network error" alert
         if (output !== "y0u-4r3-c0nn3c73d!") {
             console.log("User is NOT connected.");

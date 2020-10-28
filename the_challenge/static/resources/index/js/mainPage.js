@@ -38,7 +38,9 @@ function checkIfCanStartTheChallenge() {
     // Show an appropriate error message for each case
     let errorText = $("#js--error-text");
 
-    if (!cookiesEnabled) {
+    if (!currentlyOnline) {
+        errorText.html("You cannot play The Challenge if you are offline.");
+    } else if (!cookiesEnabled) {
         errorText.html("You cannot play The Challenge if cookies are not enabled.");
     } else if (isOnMobileOrTablet) {
         errorText.html("You cannot play The Challenge on mobile or on tablet.");
@@ -49,7 +51,7 @@ function checkIfCanStartTheChallenge() {
     }
 
     // Check if can start the challenge
-    return !(!cookiesEnabled || !windowSizeOkay || isOnMobileOrTablet);
+    return !(!currentlyOnline || !cookiesEnabled || !windowSizeOkay || isOnMobileOrTablet);
 }
 
 $(document).ready(() => {
@@ -91,7 +93,14 @@ $(document).ready(() => {
 
     // Scroll handlers
     $("#js--scroll-to-practice-questions").click(() => {
-        $('html, body').animate({scrollTop: $("#js--practice-questions").offset().top - 75});
+        // Get nav element
+        let nav = $("#js--nav");
+
+        // Calculate offset amount based on height of navigation element
+        let offsetAmount = Math.ceil(nav.height());
+
+        // Scroll to the perfect height
+        $("html, body").animate({scrollTop: $("#js--practice-questions").offset().top - offsetAmount});
     });
 
     // Handle clicking of menu icon

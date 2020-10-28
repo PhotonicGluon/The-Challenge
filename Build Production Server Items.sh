@@ -3,7 +3,7 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-10-19                                                         #
+# Updated on 2020-10-28                                                         #
 #                                                                               #
 # Copyright Ryan Kan 2020                                                       #
 #                                                                               #
@@ -23,8 +23,9 @@ COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
 # Ask user whether or not to obfuscate Javascript scripts
 echo
 echo "'The Challenge' has an optional JavaScript Obfuscation System that can be activated."
-echo "If you do want to use the Obfuscation System, ensure that the instructions in 'Handle Obfuscator" \
-"Installation.txt' have been followed strictly."
+
+echo "If you do want to use the Obfuscation System, ensure that the instructions in the section 'B. Building From " \
+"Source (Development Server)' in 'README.md' have been followed strictly."
 
 while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
     [ "$obfuscationAnswer" != "n" ]; do

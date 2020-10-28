@@ -1,3 +1,6 @@
+// GLOBAL VARIABLES
+let currentlyOnline = false;
+
 // GLOBAL FUNCTIONS (Functions that are available to all JS files)
 function create_alert(alertInfo, parentElement = document.body) {
     // Prevent XSS by replacing angled brackets with special characters
@@ -57,7 +60,7 @@ async function asyncSleep(timeInSeconds) {
     let promise = new Promise((resolve, _) => {
         setTimeout(() => resolve("Slept for " + timeInSeconds + " seconds"), timeInSeconds * 1000);
     });
-    await promise; // wait until the promise resolves (*)
+    await promise;  // Wait until the promise resolves
     return 1;
 }
 
@@ -81,7 +84,7 @@ $(document).ready(() => {
                 // Hide the div
                 div.style.display = "none";
 
-                // Remove the div after the `div`'s display has been set to `none`.
+                // Remove the div after the div has been set to none
                 div.remove();
             }, 600);
         }
@@ -93,9 +96,11 @@ $(document).ready(() => {
         $.get("/secret/check-connection", {key: "4r3-y0u-c0nn3c73d"}, (output) => {
             // If the response is incorrect display the "network error" alert
             if (output !== "y0u-4r3-c0nn3c73d!") {
-                create_alert("You are not connected to the webpage. Please check your connection.");
+                create_alert("You are not connected to the internet or to the webpage. Please check your internet connection.");
+                currentlyOnline = false;
             } else {
                 console.log("User is connected.");
+                currentlyOnline = true;
             }
         });
     });

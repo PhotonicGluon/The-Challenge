@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-24
+Updated on 2020-10-28
 
 Copyright Ryan Kan 2020
 
@@ -17,7 +17,7 @@ import simplejson as json
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response, abort
 from flask_session import Session
 
-from the_challenge.misc import verify_otp
+from the_challenge.misc import verify_otp, check_internet_connection
 from the_challenge.questions import QuestionHandler, process_user_answer, check_user_answer
 from the_challenge.version import __version__
 
@@ -78,8 +78,11 @@ def check_connection():
 
     # Check the key
     if key == "4r3-y0u-c0nn3c73d":
-        # Since the user is able to access this page they are online
-        return "y0u-4r3-c0nn3c73d!"
+        # Check if the user can access the example domain by IANA
+        if check_internet_connection():
+            return "y0u-4r3-c0nn3c73d!"
+        else:
+            return "y0u-4r3-n07-c0nn3c73d"
     else:
         return abort(403)
 

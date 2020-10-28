@@ -25,7 +25,7 @@ function checkIfOnMobileOrTablet() {
     return isMobile;
 }
 
-function checkIfCanStartTheChallenge() {
+async function checkIfCanStartTheChallenge() {
     // Check if cookies are enabled
     let cookiesEnabled = checkIfCookiesAreEnabled();
 
@@ -35,10 +35,13 @@ function checkIfCanStartTheChallenge() {
     // Check if on mobile/tablet
     let isOnMobileOrTablet = checkIfOnMobileOrTablet();
 
+    // Check if user is online
+    let isOnline = await checkIfOnline();
+
     // Show an appropriate error message for each case
     let errorText = $("#js--error-text");
 
-    if (!currentlyOnline) {
+    if (!isOnline) {
         errorText.html("You cannot play The Challenge if you are offline.");
     } else if (!cookiesEnabled) {
         errorText.html("You cannot play The Challenge if cookies are not enabled.");
@@ -51,15 +54,12 @@ function checkIfCanStartTheChallenge() {
     }
 
     // Check if can start the challenge
-    return !(!currentlyOnline || !cookiesEnabled || !windowSizeOkay || isOnMobileOrTablet);
+    return !(!isOnline || !cookiesEnabled || !windowSizeOkay || isOnMobileOrTablet);
 }
 
-$(document).ready(() => {
-    // Check if start button should be disabled
-    if (!checkIfCanStartTheChallenge()) {
-        console.log("Unacceptable conditions; disabling button.");
-        document.getElementById("js--start-button").disabled = true;
-    }
+$(document).ready(async () => {
+    // Disable button first
+    document.getElementById("js--start-button").disabled = true;
 
     // Create a click event for the start button
     $("#js--start-button").on("click", () => {
@@ -70,10 +70,16 @@ $(document).ready(() => {
         });
     });
 
+    // Check if start button should be enabled
+    if (await checkIfCanStartTheChallenge()) {
+        console.log("Acceptable conditions; enabling button.");
+        document.getElementById("js--start-button").disabled = false;
+    }
+
     // Create a resize event
-    $(window).resize(() => {
+    $(window).resize(async () => {
         // Check if can re-enable the start button
-        if (!checkIfCanStartTheChallenge()) {
+        if (!(await checkIfCanStartTheChallenge())) {
             console.log("Unacceptable conditions; disabling button.");
             document.getElementById("js--start-button").disabled = true;
         } else {

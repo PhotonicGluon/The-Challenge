@@ -123,11 +123,12 @@ def setup_questions():
         # Fix that entry to be only the question string
         generated_questions[3] = generated_questions[3][0]
 
-        # Save `generated_questions` and `input_field_prefixes` to the session
-        run_data = {"questions": generated_questions, "prefixes": input_field_prefixes}
+        # Save questions' data to the session
+        questions_and_prefixes = {"questions": generated_questions, "prefixes": input_field_prefixes}
 
-        session["RunData"] = json.dumps(run_data)
-        session["Q4_Image"] = q4_image_data  # Has to be handled separately due to its large size
+        session["questions_and_prefixes"] = json.dumps(questions_and_prefixes)  # Will be used in the JS script
+        session["Q4_image"] = q4_image_data  # Has to be handled separately due to its large size
+        session["answers"] = answers  # Needs to be kept separate to prevent security leaks
 
         # Return the json object
         return jsonify(questions=generated_questions)
@@ -160,7 +161,7 @@ def check_answer():
     # Check the key
     if verify_otp(key, "I2WANT3TO4CHECK5MY6ANSWER7CAN2YOU3CHECK4"):
         # Get the correct answer
-        answer = json.loads(session["RunData"])["answers"][question_no - 1]
+        answer = session["answers"][question_no - 1]
 
         # Process the user's answer
         processed_user_answer = process_user_answer(user_answer)

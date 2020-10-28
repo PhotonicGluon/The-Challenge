@@ -9,8 +9,8 @@
 
 {% block header_scripts %}
     <script>
-        const QUESTIONS_AND_INPUT_FIELD_PREFIXES = JSON.parse({{ session["RunData"]|tojson|safe }});
-        const Q4_IMAGE_SOURCE = "{{ session["Q4_Image"] }}";
+        const QUESTIONS_AND_INPUT_FIELD_PREFIXES = JSON.parse({{ session["questions_and_prefixes"]|tojson|safe }});
+        const Q4_IMAGE_SOURCE = "{{ session["Q4_image"] }}";
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>

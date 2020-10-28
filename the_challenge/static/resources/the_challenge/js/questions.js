@@ -13,7 +13,7 @@ $(document).ready(async () => {
     // Disable the submit button
     submitButton.prop("disabled", true);
 
-    // Progress Bar
+    // Set up the progress Bar
     let options = {
         from: {color: "#28b062"},
         to: {color: "#d74f4f"},
@@ -38,7 +38,7 @@ $(document).ready(async () => {
         },
         strokeWidth: 10,
         easing: "linear",
-        duration: DURATION_OF_THE_CHALLENGE * 1000,  // 10 min 30 s
+        duration: DURATION_OF_THE_CHALLENGE * 1000,
         trailColor: "#555",
         trailWidth: 1,
         svgStyle: {width: "100%", height: "100%"},
@@ -50,7 +50,7 @@ $(document).ready(async () => {
     // Get the number of questions
     const noQuestions = QUESTIONS_AND_INPUT_FIELD_PREFIXES.questions.length
 
-    // Define functions
+    // Define pagination functions
     function buildQuiz() {
         // Variable to store output
         let output = []; // Empty array
@@ -108,49 +108,44 @@ $(document).ready(async () => {
     const slides = $.find(".slide");
     let currentSlide = STARTING_QUESTION_NO - 1;
 
-    // Load MathJax again
+    // Typeset the new math equations
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
-    // Continue once MathJax has finished loading
-    MathJax.Hub.Register.StartupHook("End", async function () {
-        // Prepare input fields' math displays
-        function prepareInputFields() {
-            // Get all display boxes
-            let mjDisplayBoxes = {};
-            for (let q = 0; q < noQuestions; q++) {
-                let inputFieldPrefixes = QUESTIONS_AND_INPUT_FIELD_PREFIXES.prefixes[q];
-                inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
-                    MathJax.Hub.Queue(() => {
-                        mjDisplayBoxes[`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
-                    });
+    // Continue once MathJax has finished typesetting all the equations
+    MathJax.Hub.Register.StartupHook("End", async () => {
+        // Get all display boxes
+        let mjDisplayBoxes = {};
+        for (let q = 0; q < noQuestions; q++) {
+            let inputFieldPrefixes = QUESTIONS_AND_INPUT_FIELD_PREFIXES.prefixes[q];
+            inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
+                MathJax.Hub.Queue(() => {
+                    mjDisplayBoxes[`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`] = MathJax.Hub.getAllJax(`js--question_${q + 1}-iField_${inputFieldNo}-mathDisplay`)[0];
                 });
-            }
-
-            // "Live update" MathJax whenever a key is pressed
-            $(".math-input").on("keyup", (event) => { // When a keyboard key has been hit & the finger is removed, this code will run
-                let target = event.target;
-                let math = $(target).val(); // This gets the value of the inputted string
-                $(target).css("color", "black"); // Set the string's colour to black
-
-                // Get the id of the element
-                if (math.length > 0) { // If there is something typed in
-                    try {
-                        let tree = MathLex.parse(math); // Try to parse the math
-                        let latex = MathLex.render(tree, "latex"); // Render the math as latex
-
-                        MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], latex]);
-                    } catch (err) {
-                        $(target).css("color", "red");
-                    }
-
-                } else {
-                    // Clear display and output boxes if input is empty
-                    MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], ""]);
-                }
             });
         }
 
-        prepareInputFields();
+        // "Live update" the math inputs' displays whenever a key is pressed
+        $(".math-input").on("keyup", (event) => { // When a keyboard key has been hit & the finger is removed, this code will run
+            let target = event.target;
+            let math = $(target).val(); // This gets the value of the inputted string
+            $(target).css("color", "black"); // Set the string's colour to black
+
+            // Get the id of the element
+            if (math.length > 0) { // If there is something typed in
+                try {
+                    let tree = MathLex.parse(math); // Try to parse the math
+                    let latex = MathLex.render(tree, "latex"); // Render the math as latex
+
+                    MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], latex]);
+                } catch (err) {
+                    $(target).css("color", "red");
+                }
+
+            } else {
+                // Clear display and output boxes if input is empty
+                MathJax.Hub.Queue(["Text", mjDisplayBoxes[target.id + "-mathDisplay"], ""]);
+            }
+        });
 
         // Prepare Submit button functionality
         submitButton.on("click", () => {

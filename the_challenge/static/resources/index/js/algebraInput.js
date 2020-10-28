@@ -1,6 +1,6 @@
 $(document).ready(() => {
     // Get the display box
-    let mjDisplayBox = null;  // Set null for now; will need to use it later
+    let mjDisplayBox = null;  // Set null for now; will be defined right below
     MathJax.Hub.Queue(() => {
         mjDisplayBox = MathJax.Hub.getAllJax("js--math-display")[0];
     });

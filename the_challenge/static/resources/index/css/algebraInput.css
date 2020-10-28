@@ -38,12 +38,11 @@ h1, h2 {
 
 /* Applet's Styling */
 .math-input {
-    min-height: 210px;
+    min-height: 240px;
 }
 
 .input-field {
     width: 100%;
-    height: 24pt;
     border-radius: 5px;
     border: 1px black solid;
 }

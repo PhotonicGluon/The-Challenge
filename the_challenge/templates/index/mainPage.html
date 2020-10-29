@@ -67,8 +67,8 @@
                 <li>Determine values of $a$, $b$ and $c$ in the expression $y = a \sin\left(\frac xb\right) + c$ or $y =
                     a \cos\left(\frac xb\right) + c$ when given a graph of that function.
                 </li>
-                <li>Application of the <a href="https://en.wikipedia.org/wiki/Polynomial_remainder_theorem">Polynomial
-                    Remainder Theorem</a> on a given polynomial.
+                <li>Application of the <a href="https://en.wikipedia.org/wiki/Polynomial_remainder_theorem"
+                                          target="_blank">Polynomial Remainder Theorem</a> on a given polynomial.
                 </li>
                 <li>Identify, using the discriminant, which of the three given quadratic equations is possible to
                     produce real roots. Also tests on solving quadratic equations. It is guaranteed that both roots of
@@ -93,15 +93,15 @@
                     be at least one <em>trivial solution</em> (i.e. 1, 2, -1 or -2), all solutions are integers, and all
                     three roots of the cubic equation are unique.
                 </li>
-                <li>Simultaneous equations involving a linear equation (a chord of a circle) and the equation of that
-                    circle. It is guaranteed that there are two unique solutions of $x$.
+                <li>Simultaneous equations involving an equation of a circle and a linear equation (a chord of that
+                    circle). It is guaranteed that there are two unique solutions of $x$.
                 </li>
             </ol>
             <p class="information">
-                Some <a href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}"
-                        id="js--practice-questions" download>
-                practice questions</a> are provided for your reference, along with their answers. You are encouraged to
-                look at them before attempting The Challenge.
+                You can download the provided <a
+                    href="{{ url_for('static', filename='resources/index/pdf/Practice-Questions.pdf') }}"
+                    id="js--practice-questions" download>practice questions</a>, along with their answers. You are
+                encouraged to look at them before attempting The Challenge.
                 <br><br>
                 The version of The Challenge that is running on this website is <code>{{ version }}</code>.
             </p>
@@ -113,13 +113,15 @@
                 <ul>
                     <li><strong>Do not reload the page when playing The Challenge.</strong></li>
                     <li><strong>All answers are to be typed in the MathLex language, as specified
-                        <a href="http://mathlex.org/doc/language" target="_blank">here</a>.</strong> The following are
-                        several important pointers when entering your answer:
+                        <a href="http://mathlex.org/doc/language" target="_blank">here</a>.</strong> You may try out the
+                        MathLex language <a href="{{ url_for('algebra_input') }}">here</a>.<br>
+
+                        Here are several important pointers when entering your answer:
                         <ul>
                             <li>To enter a number like "one million, two hundred and thirty-four thousand, five hundred
-                                and sixty-seven" do not enter any commas or periods (e.g.<code>1,234,567</code> or
-                                <code>1.234.567</code>). Instead, put all the digits of the number together
-                                (<code>1234567</code>).
+                                and sixty-seven", do not enter any commas, periods or spaces (e.g.
+                                <code>1,234,567</code>, <code>1.234.567</code> or <code>1 234 567</code>). Instead, put
+                                all the digits of the number together (<code>1234567</code>).
                             </li>
                             <li>To enter $xy$ you will need to enter the string <code>x*y</code> into the input
                                 field.
@@ -134,7 +136,6 @@
                                 <code>(sec(a*x+b))**2</code> or <code>(sec(a*x+b))^2</code> into the input field.
                             </li>
                         </ul>
-                        You may try out the MathLex language <a href="{{ url_for('algebra_input') }}">here</a>.
                     </li>
                     <li><strong>You are not permitted to refer to any assisting websites or hard-copy documents.
                     </strong> The following is a non-exhaustive list of some of the things you are not permitted to
@@ -168,21 +169,23 @@
                     <li>A (scientific) calculator is to be used, whenever it is appropriate to do so. The calculator
                         should have the following minimum features:
                         <ol>
-                            <li>Four arithmetic operations ($+$, $-$, $\times$, $\div$) including the order of
+                            <li>Four arithmetic operations ($+$, $-$, $\times$ and $\div$) including the order of
                                 operations and use of brackets/parentheses
                             </li>
                             <li>Fractional function which retains the fraction in the form $\frac pq$ where $p$ and $q$
-                                are co-prime integers
+                                are coprime integers
                             </li>
-                            <li>Square root ($\sqrt{\ }$) function</li>
                             <li>Able to handle computations such as $p^q$ where $p$ is a real number and $q$ is a
-                                rational number
+                                rational number, and, as a result, contain or implement the square root ($\sqrt{\ }$)
+                                function directly or indirectly
                             </li>
-                            <li>Able to compute the binomial coefficient $n \choose r$</li>
+                            <li>Able to compute the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient"
+                                                       target="_blank">binomial coefficient</a> $n \choose r$
+                            </li>
                         </ol>
-                        It should not, however, have <strong>any</strong> of the following features:
+                        However, it should <strong>not</strong> have any of the following features:
                         <ul>
-                            <li>Symbolic differentiation and symbolic integration abilities</li>
+                            <li>Symbolic differentiation and symbolic integration capabilities</li>
                         </ul>
                     </li>
                     <li>Only the final answer for each question will be checked. <strong>Rough working for each question

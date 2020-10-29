@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-28
+Updated on 2020-10-29
 
 Copyright Ryan Kan 2020
 
@@ -231,7 +231,7 @@ def failure():
     key = request.args.get("key", None, type=str)
 
     # Check the key
-    if key == "0h-n0-y0u-f41l3d":
+    if verify_otp(key, "OH2NO3YOU4FAILED"):
         flash("You ran out of time! Try again.")
         return url_for("main_page")
 

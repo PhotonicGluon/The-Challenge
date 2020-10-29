@@ -65,7 +65,7 @@ $(document).ready(async () => {
             // For each prefix, make a new input field
             let inputFields = [];
             inputFieldPrefixes.forEach((prefix, inputFieldNo) => {
-                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="js--question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Your answer here"><div id="js--question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`;
+                let inputField = `<div class="input-field"><span>${prefix} </span><input class="math-input" id="js--question_${questionNo}-iField_${inputFieldNo}" type="text" placeholder="Type your answer here!"><div id="js--question_${questionNo}-iField_${inputFieldNo}-mathDisplay">$$$$</div></div>`;
                 inputFields.push(inputField);
             });
 
@@ -255,7 +255,7 @@ $(document).ready(async () => {
         await sleepFunc;  // If timer has yet to expire, wait until timer expires
 
         // If the user can't complete The Challenge in time, forcefully bring the user back to the home page
-        $.get("/secret/failure", {key: "0h-n0-y0u-f41l3d"}, (output) => {
+        $.get("/secret/failure", {key: generateOTP("OH2NO3YOU4FAILED")}, (output) => {
             window.location.replace(output);
         });
     });

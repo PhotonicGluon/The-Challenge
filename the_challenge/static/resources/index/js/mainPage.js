@@ -105,6 +105,11 @@ $(document).ready(async () => {
         // Calculate offset amount based on height of navigation element
         let offsetAmount = Math.ceil(nav.height());
 
+        // Deal with the annoying case that when the nav element is more than 900 px and it is not sticky
+        if (nav.width() > 900 && !nav.hasClass("sticky")) {
+            offsetAmount -= 40;
+        }
+
         // Scroll to the perfect height
         $("html, body").animate({scrollTop: $("#js--practice-questions").offset().top - offsetAmount});
     });

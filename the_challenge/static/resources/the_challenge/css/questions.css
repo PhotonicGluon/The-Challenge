@@ -61,9 +61,10 @@ h1 {
 
 /* Input Fields' Styling */
 .input-field input {
-    width: 50%;
+    width: 75%;
     border-radius: 5px;
     border: 1px black solid;
+    font-family: monospace;
 }
 
 /* Question Slides' Styling */

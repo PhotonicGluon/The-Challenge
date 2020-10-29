@@ -2,7 +2,7 @@
 q14.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-29
 
 Copyright Ryan Kan 2020
 
@@ -23,8 +23,8 @@ from the_challenge.questions.questionClasses.questionBaseClass import Question
 class Q14(Question):
     """
     Q14:
-    Simultaneous equations involving a linear equation (a chord of a circle) and the equation of that circle.
-    It is guaranteed that there are two unique solutions for x and y.
+    Simultaneous equations involving an equation of a circle and a linear equation (a chord of that circle).
+    It is guaranteed that there are two unique solutions of x.
     """
 
     def calculations(self):

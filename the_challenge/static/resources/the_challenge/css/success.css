@@ -48,6 +48,10 @@ img {
 
 /* Print Handling */
 @media print {
+    .alert {
+        display: none;
+    }
+
     .back-arrow-box {
         display: none;
     }

@@ -2,7 +2,7 @@
 q9.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-29
 
 Copyright Ryan Kan 2020
 
@@ -30,7 +30,7 @@ class Q9(Question):
         b = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
         c = self.random.randint(2, 10)
         d = self.random.randint(2, 9)
-        e = self.random.randint(-9, 9)
+        e = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])
         f = self.random.randint(1, 10)
 
         # Generate the equation

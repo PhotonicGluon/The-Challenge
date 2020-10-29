@@ -1,13 +1,8 @@
 """
-baseConfig.py
+This is the base configuration file of The Challenge.
 
-Created on 2020-09-20
-Updated on 2020-10-22
-
-Copyright Ryan Kan 2020
-
-Description: Base configuration file.
+Note that the `SESSION_TYPE` should NOT be changed.
 """
 
 SESSION_TYPE = "filesystem"  # Makes each session generate a file
-SECRET_KEY = b"1123581321345589144"  # SECURITY NOTICE: Please update this key in your instance's `config.py` file!
+SECRET_KEY = b"1123581321345589144233"  # SECURITY NOTICE: Please update this key in your instance's `config.py` file!

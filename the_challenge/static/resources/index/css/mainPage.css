@@ -191,7 +191,7 @@ footer a {
     .main-nav {
         float: left;
         margin-top: 40px;
-        margin-left: 25px;
+        /*margin-left: 25px;*/ /* TODO: SEE IF THIS IS NEEDED */
     }
 
     .main-nav li {

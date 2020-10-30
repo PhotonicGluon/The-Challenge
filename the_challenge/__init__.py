@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-29
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -248,6 +248,8 @@ def load_challenge():
     else:
         if "quiz_starting" in session:
             flash("Please do not reload the page when playing The Challenge.")
+        else:
+            flash("Please access The Challenge by clicking the button on the main page.")
 
         clear_user_data()
         return redirect(url_for("main_page"))
@@ -261,6 +263,8 @@ def the_challenge():
     else:
         if "starting_challenge" in session:
             flash("Please do not reload the page when playing The Challenge.")
+        else:
+            flash("Please access The Challenge by clicking the button on the main page.")
 
         clear_user_data()
         return redirect(url_for("main_page"))

@@ -2,7 +2,7 @@
 q13.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -26,7 +26,7 @@ class Q13(Question):
 
     def calculations(self):
         # CONSTANTS
-        non_trivial_solutions_ranges = [3, 20]  # If the range is [a, b] then a <= x <= b where x is a root
+        non_trivial_solutions_ranges = [3, 20]  # If the range is [a, b] then a <= |x| <= b where x is a root
 
         # CALCULATIONS
         # Generate the three (expected) solutions

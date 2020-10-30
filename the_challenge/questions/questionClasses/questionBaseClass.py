@@ -2,7 +2,7 @@
 questionBaseClass.py
 
 Created on 2020-08-21
-Updated on 2020-10-16
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -66,7 +66,7 @@ class Question:
         This method returns the prefixes to all the input fields for answers.
 
         Returns:
-            List[str]:  List of prefix(es) for the input fields.
+            List[str]:  List of prefixes for the input fields.
         """
 
         # This method is to be overwritten by the questions themselves.

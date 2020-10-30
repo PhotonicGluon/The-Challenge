@@ -2,7 +2,7 @@
 q7.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -34,13 +34,13 @@ class Q7(Question):
 
         sign = self.random.choice(["+", "-"])
 
-        binomial_expression = latex(parse_expr(f"({a}*x**{b} {sign} {c} / ({d} * x ** {e})) ** {f}"))
+        binomial_expression = latex(parse_expr(f"({a} * x ** {b} {sign} {c} / ({d} * x ** {e})) ** {f}"))
 
         # Generate the term which the user is supposed to calculate
         r = self.random.randint(2, f - 1)
 
         # Generate that term
-        rth_term = f"{binomial(f, r - 1)} * (({a}*x**{b}) ** {f - r + 1}) * (({sign} {c} / ({d} * x ** {e})) " \
+        rth_term = f"{binomial(f, r - 1)} * (({a} * x ** {b}) ** {f - r + 1}) * (({sign} {c} / ({d} * x ** {e})) " \
                    f"** {r - 1})"
         rth_term = latex(parse_expr(rth_term))
 
@@ -61,7 +61,13 @@ class Q7(Question):
 
     @staticmethod
     def ordinal(n):
-        return "%d<sup>%s</sup>" % (n, "tsnrhtdd"[(n // 10 % 10 != 1) * (n % 10 < 4) * n % 10::4])
+        n = int(n)
+        suffix = ["th", "st", "nd", "rd", "th"][min(n % 10, 4)]
+
+        if 11 <= n % 100 <= 13:
+            suffix = "th"
+
+        return f"{n}<sup>{suffix}</sup>"
 
 
 # DEBUG CODE

@@ -2,7 +2,7 @@
 q5.py
 
 Created on 2020-10-05
-Updated on 2020-10-24
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -32,7 +32,7 @@ class Q5(Question):
         x = symbols("x")
 
         # Generate polynomial
-        polynomial = 0 * x  # Make it like an expression so that the IDEs will not complain
+        polynomial = 0 * x  # Make it look like an expression so that the IDEs will not complain
         for degree in range(no_terms_in_polynomial):  # The first term will be the constant term
             # Generate coefficients of the term
             coefficient = self.random.choice([self.random.randint(1, 9), -self.random.randint(1, 9)])

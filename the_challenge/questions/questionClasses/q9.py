@@ -2,7 +2,7 @@
 q9.py
 
 Created on 2020-08-21
-Updated on 2020-10-29
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -34,11 +34,12 @@ class Q9(Question):
         f = self.random.randint(1, 10)
 
         # Generate the equation
-        self.question = latex(parse_expr(f"{a} * Abs({b} * log({d}*x, {c}) + {e}) - {f}")).replace("log", "ln") + " = 0"
+        self.question = latex(parse_expr(f"{a} * Abs({b} * log({d} * x, {c}) + {e}) - {f}")).replace("log", "ln") + \
+                        " = 0"
 
         # Generate the answer
-        ans1 = mathematical_round(float(parse_expr(f"1/{d} * {c}**((-{f}/{a} - {e}) / {b})")), 3)
-        ans2 = mathematical_round(float(parse_expr(f"1/{d} * {c}**(({f}/{a} - {e}) / {b})")), 3)
+        ans1 = mathematical_round(float(parse_expr(f"1 / {d} * {c} ** ((-{f}/{a} - {e}) / {b})")), 3)
+        ans2 = mathematical_round(float(parse_expr(f"1 / {d} * {c} ** (({f}/{a} - {e}) / {b})")), 3)
 
         self.answer = [ans1, ans2]
 

@@ -2,7 +2,7 @@
 q6.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -139,7 +139,7 @@ class Q6(Question):
                 pass
 
         # Generate the question
-        q = f"\t{a} * x**2 {'-' if b < 0 else '+'} {abs(b)} * x {'-' if c < 0 else '+'} {abs(c)}"
+        q = f"\t{a} * x ** 2 {'-' if b < 0 else '+'} {abs(b)} * x {'-' if c < 0 else '+'} {abs(c)}"
         q = latex(parse_expr(q)) + " = 0"
 
         # Return the values

@@ -2,7 +2,7 @@
 answersHandler.py
 
 Created on 2020-09-11
-Updated on 2020-10-23
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -55,6 +55,7 @@ def process_user_answer(user_answer):
         Union[str, int, float, List[Union[int, float]], Tuple[Union[int, float]]]:  The processed answer
     """
 
+    # Cast the answer to the correct type
     processed_answer = []
     for x in user_answer:
         # Check if the string can be expressed as a integer
@@ -67,8 +68,10 @@ def process_user_answer(user_answer):
             except ValueError:
                 processed_answer.append(handle_latex_preprocessing(x))
 
+    # Check if the answer is only one element
     if len(processed_answer) == 1:
         return processed_answer[0]
+
     else:
         return processed_answer
 
@@ -127,7 +130,9 @@ def check_user_answer(user_answer, calculated_answer):
                 evaluated = (evaluated.subs(variable, testcases[(i + j) % len(testcases)])).evalf()
 
             # Round the final answer to 3 decimal places
-            calculated_values.append(round(evaluated, 3))  # NOTE: 'Mathematical' rounding does not need to be used here
+            # NOTE: 'Mathematical' rounding does not need to be used here as both answers' checking systems will use the
+            #       same rounding system.
+            calculated_values.append(round(evaluated, 3))
 
         # Parse the user's LaTeX input
         user_answer = parse_latex(handle_latex_preprocessing(str(user_answer)))  # Cast to string just in case
@@ -148,7 +153,7 @@ def check_user_answer(user_answer, calculated_answer):
             # Round the final answer to 3 decimal places
             user_values.append(round(evaluated, 3))
 
-        # Compare the calculated testcase values
+        # Compare the calculated answer's values with the user's answer's values
         if calculated_values == user_values:
             return True
         else:

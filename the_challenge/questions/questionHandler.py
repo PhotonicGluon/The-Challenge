@@ -2,7 +2,7 @@
 questionHandler.py
 
 Created on 2020-08-26
-Updated on 2020-10-23
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -55,11 +55,11 @@ class QuestionHandler:
         Sets up the questions in The Challenge.
 
         Returns:
-            List[str]:  A list of stings, which are the questions.
+            List[str]:  The questions.
 
-            List[str]:  A list of strings, which are the prefixes to all the input fields.
+            List[str]:  The prefixes to all the input fields.
 
-            List[Union[str, int, float, List[Union[int, float]]]]:  A list of answers.
+            List[Union[str, int, float, List[Union[int, float]]]]:  The answers to the answers.
         """
 
         # Perform calculations for all questions

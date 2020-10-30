@@ -70,24 +70,6 @@ $(document).ready(async () => {
         });
     });
 
-    // Check if start button should be enabled
-    if (await checkIfCanStartTheChallenge()) {
-        console.log("Acceptable conditions; enabling button.");
-        document.getElementById("js--start-button").disabled = false;
-    }
-
-    // Create a resize event
-    $(window).resize(async () => {
-        // Check if can re-enable the start button
-        if (!(await checkIfCanStartTheChallenge())) {
-            console.log("Unacceptable conditions; disabling button.");
-            document.getElementById("js--start-button").disabled = true;
-        } else {
-            console.log("Acceptable conditions; enabling button.");
-            document.getElementById("js--start-button").disabled = false;
-        }
-    });
-
     // Handle sticky navigation
     $(".information-box").waypoint((direction) => {
         if (direction === "down") {
@@ -127,6 +109,24 @@ $(document).ready(async () => {
         } else {
             icon.addClass("ion-navicon-round");
             icon.removeClass("ion-close-round");
+        }
+    });
+
+    // Check if start button should be enabled
+    if (await checkIfCanStartTheChallenge()) {
+        console.log("Acceptable conditions; enabling button.");
+        document.getElementById("js--start-button").disabled = false;
+    }
+
+    // Create a resize event
+    $(window).resize(async () => {
+        // Check if can re-enable the start button
+        if (!(await checkIfCanStartTheChallenge())) {
+            console.log("Unacceptable conditions; disabling button.");
+            document.getElementById("js--start-button").disabled = true;
+        } else {
+            console.log("Acceptable conditions; enabling button.");
+            document.getElementById("js--start-button").disabled = false;
         }
     });
 });

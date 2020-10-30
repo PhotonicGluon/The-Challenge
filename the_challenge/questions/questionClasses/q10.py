@@ -2,7 +2,7 @@
 q10.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2020-10-30
 
 Copyright Ryan Kan 2020
 
@@ -42,9 +42,9 @@ class Q10(Question):
                          self.random.choice([self.random.randint(-9, -1), self.random.randint(1, 9)])]
 
         # Form the expression to be differentiated
-        self.question = parse_expr(
-            (" + ".join(functions_to_test)).format(coefficients1[0], coefficients1[1], coefficients2[0],
-                                                   coefficients2[1], coefficients3[0], coefficients3[1]))
+        self.question = parse_expr((" + ".join(functions_to_test)).format(coefficients1[0], coefficients1[1],
+                                                                          coefficients2[0], coefficients2[1],
+                                                                          coefficients3[0], coefficients3[1]))
 
         # Generate the differentiated expression
         self.answer = diff(self.question)

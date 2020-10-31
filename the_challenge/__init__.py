@@ -2,7 +2,7 @@
 __init__.py
 
 Created on 2020-09-19
-Updated on 2020-10-30
+Updated on 2020-10-31
 
 Copyright Ryan Kan 2020
 
@@ -12,6 +12,7 @@ Description: This file contains the main Flask application for The Challenge.
 # IMPORTS
 import os
 import uuid
+from time import time
 
 import simplejson as json
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify, flash, make_response, abort
@@ -71,6 +72,18 @@ def clear_user_data():
 
 # WEBSITE'S PAGES
 # 'Functional' Pages
+@app.route("/secret/get-live-server-time", methods=["GET"])
+def get_live_server_time():
+    # Get the page's arguments
+    key = request.args.get("key", None, type=str)
+
+    # Check the key
+    if key == "637-7h3-l1v3-71m3-0f-7h3-53rv3r-pl3453":
+        return str(int(time() * 1000))
+    else:
+        return abort(403)
+
+
 @app.route("/secret/check-connection", methods=["GET"])
 def check_connection():
     # Get the page's arguments

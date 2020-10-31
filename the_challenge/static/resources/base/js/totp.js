@@ -30,10 +30,19 @@ let base32toHex = function (base32) {
     return hex;
 };
 
-function generateOTP(secret, interval = 5) {
+async function getServerTime() {
+    let liveTime = null;
+    await $.get("/secret/get-live-server-time", {key: "637-7h3-l1v3-71m3-0f-7h3-53rv3r-pl3453"}, (output) => {
+        liveTime = output
+    });
+    return liveTime;
+}
+
+async function generateOTP(secret, interval = 5) {
     let otp = "";
     try {
-        let epoch = Math.round(new Date().getTime() / 1000.0);
+        let liveEpoch = await getServerTime();
+        let epoch = Math.round(new Date(parseInt(liveEpoch)).getTime() / 1000.0);
         let time = leftPad(decToHex(Math.floor(epoch / interval)), 16, "0");
 
         let hmacObj = new jsSHA("SHA-1", "TEXT");

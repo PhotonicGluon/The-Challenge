@@ -33,7 +33,7 @@ let base32toHex = function (base32) {
 async function getServerTime() {
     let liveTime = null;
     await $.get("/secret/get-live-server-time", {key: "637-7h3-l1v3-71m3-0f-7h3-53rv3r-pl3453"}, (output) => {
-        liveTime = output
+        liveTime = output;
     });
     return liveTime;
 }

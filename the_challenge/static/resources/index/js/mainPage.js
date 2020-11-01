@@ -17,6 +17,14 @@ function checkIfWindowSizeOkay() {
     return $(window).width() >= 720;
 }
 
+async function checkUserTime() {
+    let result = null;
+    await $.get("/secret/check-user-time", {key: generateOTP("THE2TIME3IS4NOW5")}, (output) => {
+        result = output === "7h3-u53r5-71m3-15-c0rr3c7";
+    });
+    return result;
+}
+
 async function checkIfCanStartTheChallenge() {
     // Check if cookies are enabled
     let cookiesEnabled = checkIfCookiesAreEnabled();
@@ -24,13 +32,18 @@ async function checkIfCanStartTheChallenge() {
     // Check if the screen width is acceptable
     let windowSizeOkay = checkIfWindowSizeOkay();
 
+    // Check if the user's time was set correctly
+    let userTimeCorrect = await checkUserTime();
+
     // Check if user is online
     let isOnline = await checkIfOnline();
 
     // Show an appropriate error message for each case
     let errorText = $("#js--error-text");
 
-    if (!isOnline) {
+    if (!userTimeCorrect) {
+        errorText.html("You cannot play The Challenge if your system time is not set correctly.");
+    } else if (!isOnline) {
         errorText.html("You cannot play The Challenge if you are offline.");
     } else if (!cookiesEnabled) {
         errorText.html("You cannot play The Challenge if cookies are not enabled.");
@@ -41,7 +54,7 @@ async function checkIfCanStartTheChallenge() {
     }
 
     // Check if can start the challenge
-    return !(!isOnline || !cookiesEnabled || !windowSizeOkay);
+    return !(!userTimeCorrect || !isOnline || !cookiesEnabled || !windowSizeOkay);
 }
 
 $(document).ready(async () => {

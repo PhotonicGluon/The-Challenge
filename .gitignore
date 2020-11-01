@@ -125,7 +125,7 @@ dmypy.json
 
 # Folders to be excluded
 **/.idea/
-flask_session/
+**/flask_session/
 
 # Files to be excluded
 **/.DS_Store

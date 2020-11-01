@@ -51,7 +51,7 @@ async function checkIfCanStartTheChallenge() {
     let errorText = $("#js--error-text");
 
     if (!userTimeCorrect) {
-        errorText.html("You cannot play The Challenge if your system time is not set correctly.");
+        errorText.html("You cannot play The Challenge if your system time is not correctly set.");
     } else if (!isOnline) {
         errorText.html("You cannot play The Challenge if you are offline.");
     } else if (!cookiesEnabled) {

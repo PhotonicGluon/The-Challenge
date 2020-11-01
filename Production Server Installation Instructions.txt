@@ -1,28 +1,34 @@
-                                        SETTING UP THE PRODUCTION SERVER
-------------------------------------------------------------------------------------------------------------------------
-A.  PRELIMINARIES
-1.  If you haven't already, extract the contents of "The-Challenge-Production-Server.tar.gz".
+                                            SETTING UP THE PRODUCTION SERVER
+                                                   FOR THE CHALLENGE
 
-2.  If a directory was not automatically created, you are recommended to create one to store all the files of this
-    compressed file.
+                                       **********   A. PRELIMINARIES   **********
+1.  If you haven't already, extract the contents of "The-Challenge-Production-Server_[VERSION].tar.gz".
+
+2.  If a directory was not automatically created, you should create one to store all the files of this compressed file.
     - Once you have done so, you should move all the extracted files to that directory.
+
+3.  You should have Python 3.8 installed. If you do not have Python 3.8 installed, you should go to
+    https://www.python.org/downloads/ to download the latest version of Python 3.8.
 
 IMPORTANT: READ THE WHOLE STEP'S INSTRUCTIONS FIRST BEFORE RUNNING ANY COMMANDS.
            THERE MAY BE SOME COMMANDS THAT MAY NEED TO BE RUN BEFORE RUNNING THE MAIN COMMAND.
 
 
-B.  SETTING UP UWSGI
-1.  Open a console/terminal.
+                                     **********   B. SETTING UP UWSGI   **********
+1.  Open a command prompt/console/terminal.
+    - To keep things consistent, let's call this the terminal.
+
 
 2.  Navigate to the folder which contains all the items of The Challenge.
-    - If the path to the folder is `FOLDER_PATH`, then run:
+    - Let the path to the folder is `FOLDER_PATH`. To navigate there from the terminal, run:
         ```
         cd FOLDER_PATH
         ```
     - IMPORTANT: Ensure that the `FOLDER_PATH` contains NO SPACES. If there are spaces, you should replace ALL of them
-      with an underscore "_" or a dash/hyphen "-".
+      with an underscore ("_") or a dash/hyphen ("-").
 
-3.  Create a virtual environment (venv) using the following command:
+
+3.  Create a virtual environment (venv) by running the following command:
         ```
         python3 -m venv venv --prompt NAME_OF_VIRTUAL_ENV
         ```
@@ -32,19 +38,23 @@ B.  SETTING UP UWSGI
         ```
       before creating the virtual environment.
 
-4.  Activate the environment by running:
+
+4.  Activate the venv by running:
         ```
         source venv/bin/activate
         ```
     You should now see the prefix "(NAME_OF_VIRTUAL_ENV)" on the terminal. If this is the case, you are inside the venv.
 
-5.  Update the virtual environment's pip by running the following command:
+
+5.  Update the venv's pip by running the following command:
         ```
         python -m pip install -U pip
         ```
 
+
 6.  Inside the main folder (which contains the "venv" folder) should be a file which ends in ".whl". This is the
-    `WHEEL_FILE` which will be referenced below.
+    `WHEEL_FILE` that will be referenced below.
+
     First install wheel by running:
         ```
         pip install -U wheel
@@ -54,11 +64,13 @@ B.  SETTING UP UWSGI
         pip install -U WHEEL_FILE
         ```
     This may take some time.
+
     Check that the installation was successful by executing the following command:
         ```
         python3 -c "import the_challenge;print('Successfully installed The Challenge. (Version: {})'.format(the_challenge.__version__))"
         ```
     If the last line of the output was 'Successfully installed The Challenge' with a version number, it was installed successfully.
+
 
 7.  Install "OpenSSL".
     - On Mac, run:
@@ -71,7 +83,9 @@ B.  SETTING UP UWSGI
         sudo apt-get install libssl-dev
         ```
 
-8.  This only applies if you are on Ubuntu.
+
+8.  NOTE: This step only applies if you are on Ubuntu.
+
     Install pcre using:
         ```
         sudo apt-get install libpcre3 libpcre3-dev
@@ -85,6 +99,7 @@ B.  SETTING UP UWSGI
         sudo apt install gcc
         ```
 
+
 9.  Install uWSGI with WebSocket support using the following command:
         ```
         CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi==2.0.19.1 -Iv --no-binary :all:
@@ -94,6 +109,7 @@ B.  SETTING UP UWSGI
         Successfully installed uwsgi-2.0.19.1
         """
       in the terminal output.
+
 
 10. Run the following commands:
         ```
@@ -107,6 +123,7 @@ B.  SETTING UP UWSGI
         secretKey=$(python -c 'import secrets;print(bytes(str(secrets.token_bytes(32)), "utf-8")[2:-1])')
         printf "\"\"\"\nconfig.py\n\nDescription: The configuration for this particular instance.\n\"\"\"\n\nSECRET_KEY = $secretKey \n" > config.py
         ```
+
     This is what the above commands did:
         a. Created an instance folder ("the_challenge-instance")
         b. Created a configuration file that is unique to your instance.
@@ -118,19 +135,23 @@ B.  SETTING UP UWSGI
         cat config.py
         ```
 
-10. Navigate back to the root directory by running this command:
+
+11. Navigate back to the root directory by running this command:
         ```
         cd ../../..
         ```
 
-11. Start the uWSGI server using the following commands:
+
+12. Start the uWSGI server using the following commands:
         ```
         uwsgi --ini "uWSGI_Configuration.ini"
         ```
+    Ensure that there are no errors in the terminal's logs.
+
     You can terminate the process by pressing CONTROL + C.
 
 
-C.  SETTING UP NGINX
+                                     **********   C. SETTING UP NGINX   **********
 1.  Install Nginx.
     - For Mac, install it using Homebrew by running this command:
         ```
@@ -141,6 +162,7 @@ C.  SETTING UP NGINX
         sudo apt update
         sudo apt install nginx
         ```
+
 
 2.  Navigate to the Nginx directory.
     - For Mac, run the following commands:
@@ -154,11 +176,13 @@ C.  SETTING UP NGINX
         cd /etc/nginx/
         ```
 
-3.  Create two directories, "sites-available" and "sites-enabled", by running:
+
+3.  Create two directories, "sites-available" and "sites-enabled", by running the following commands:
         ```
         mkdir -p "sites-available"
         mkdir -p "sites-enabled"
         ```
+
 
 4.  Navigate into the "sites-available" directory:
         ```
@@ -175,7 +199,7 @@ C.  SETTING UP NGINX
         sudo apt-get install vim
         ```
 
-7.  This only applies if you are on Ubuntu.
+7.  NOTE: This steps only applies if you are on Ubuntu.
     Edit the main "nginx.conf" file by running:
         ```
         sudo vim "../nginx.conf"
@@ -200,7 +224,7 @@ C.  SETTING UP NGINX
         ```
         sudo vim "The-Challenge.conf"
         ```
-    Edit "The-Challenge.conf" to so that it contains the following:
+    Edit "The-Challenge.conf" to so that it has the following inside it:
         """
         server {
             listen 80;  # This will be the port to listen from
@@ -214,12 +238,12 @@ C.  SETTING UP NGINX
         }
         """
 
-9.  Symlink "The-Challenge.conf" to the "sites-enabled" directory:
+9.  Symlink "The-Challenge.conf" to the "sites-enabled" directory by running this command:
         ```
         sudo ln -sf "$(pwd)/The-Challenge.conf" "$(dirname $(pwd))/sites-enabled/The-Challenge.conf"
         ```
 
-10.  Test for syntax errors in the Nginx files.
+10. Test for syntax errors in the Nginx files.
       - On Mac, run:
         ```
         sudo nginx -t
@@ -228,7 +252,9 @@ C.  SETTING UP NGINX
         ```
         sudo service nginx configtest
         ```
-    If this returns without indicating any issues, restart the Nginx process to read the new configuration:
+
+    If running the command returns without indicating any issues, you should restart the Nginx process to read the new
+    configuration:
       - On Mac, run:
         ```
         sudo nginx -s reload
@@ -239,8 +265,12 @@ C.  SETTING UP NGINX
         ```
 
 
-D.  CREATING A SYSTEMD SERVICE
-These instructions ONLY APPLY TO UBUNTU SERVERS.
+11. Check that The Challenge is accessible using the Nginx link by connecting to your server's ip address with port
+    number 80.
+
+
+                                **********   D. CREATING A SYSTEMD SERVICE   **********
+                             !!! NOTE: THESE INSTRUCTIONS ONLY APPLY TO UBUNTU SERVERS !!!
 1.  While you are still in the virtual environment, run:
         ```
         echo $PATH
@@ -248,10 +278,12 @@ These instructions ONLY APPLY TO UBUNTU SERVERS.
     Copy the output of the command to the clipboard. Let the output be represented by the variable
     `PATH_STRING_FROM_STEP_1`. We will need this for later.
 
+
 2.  Create a unit file ending in .service within the /etc/systemd/system directory to begin:
         ```
         sudo vim /etc/systemd/system/the-challenge.service
         ```
+
 
 3.  Edit the file so that it contains the following:
         """
@@ -271,7 +303,8 @@ These instructions ONLY APPLY TO UBUNTU SERVERS.
         """
     Save and close the file.
 
-4.  Now, start and enable the newly created service:
+
+4.  Now, start and then enable the newly created systemd service:
         ```
         sudo systemctl start the-challenge
         sudo systemctl enable the-challenge
@@ -289,5 +322,7 @@ These instructions ONLY APPLY TO UBUNTU SERVERS.
         sudo systemctl restart the-challenge
         ```
 
+
+                                        **********   E. FINAL WORDS   **********
 Congratulations! You have set up a production server for The Challenge. You may now navigate to the website to try out
 The Challenge.

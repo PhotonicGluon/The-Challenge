@@ -3,26 +3,26 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-10-28                                                         #
+# Updated on 2020-11-01                                                         #
 #                                                                               #
 # Copyright Ryan Kan 2020                                                       #
 #                                                                               #
-# Description: A script that assists in building the files of The Challenge.    #
+# Description: This file will run all the necessary commands to compile The     #
+#              Challenge and to include all necessary files.                    #
 #################################################################################
 
-# This file will run all the necessary commands to compile The-Challenge and to include all necessary files.
 echo "Starting the build script..."
 
-# Config
+# Configuration
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 
 # Constants
-COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"
+COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"  # What should be the name of the compressed directory?
 
 # Ask user whether or not to obfuscate Javascript scripts
 echo
-echo "'The Challenge' has an optional JavaScript Obfuscation System that can be activated."
+echo "The Challenge has an optional JavaScript Obfuscation System that can be activated."
 
 echo "If you do want to use the Obfuscation System, ensure that the instructions in the section 'B. Building From " \
 "Source (Development Server)' in 'README.md' have been followed strictly."
@@ -45,7 +45,7 @@ cd "$(dirname "$0")" || exit 1
 
 # Run obfuscation commands (if selected)
 if [ "$obfuscationAnswer" = "Y" ] || [ "$obfuscationAnswer" = "y" ]; then
-    # Obfuscate the files
+    # Obfuscate the files using the python script
     echo
     echo "Obfuscating JavaScript files..."
     python3 -c "import the_challenge; the_challenge.misc.obfuscate_js_files()"
@@ -58,13 +58,13 @@ rm -rf "dist"
 # Create a "compilation" directory
 mkdir "$COMPRESSED_DIRECTORY_NAME"
 
-# Compile "The Challenge"
+# Compile The Challenge
 echo
 echo "Building The Challenge..."
 python setup.py bdist_wheel
 echo "Built The Challenge successfully."
 
-# Undo the obfuscation (if selected)
+# Undo the obfuscation (if it was selected earlier)
 if [ "$obfuscationAnswer" = "Y" ] || [ "$obfuscationAnswer" = "y" ]; then
     # Fix the names of the files
     echo
@@ -82,7 +82,8 @@ done
 
 cd .. || exit
 
-# Make a copy of the "Production Server Installation Instructions.txt" and "uWSGI_Configuration.ini" files
+# Make a copy of the "Production Server Installation Instructions.txt" and "uWSGI_Configuration.ini" files and place
+# them into the compressed directory
 cp "Production Server Installation Instructions.txt" "$COMPRESSED_DIRECTORY_NAME"
 cp "uWSGI_Configuration.ini" "$COMPRESSED_DIRECTORY_NAME"
 
@@ -94,12 +95,14 @@ echo
 echo "Compressing the generated files..."
 tar -czvf "The-Challenge-Production-Server_${version}.tar.gz" "$COMPRESSED_DIRECTORY_NAME"
 
-# Move generated tar file to the dist folder
+# Place the generated tar.gz file into the dist folder
 mv "The-Challenge-Production-Server_${version}.tar.gz" "dist"
-echo
-echo "Done! The generated file can be found in the 'dist' folder."
 
-# Delete temporary folders
+# Delete the temporary folders
 rm -rf "$COMPRESSED_DIRECTORY_NAME"
 rm -rf "build"
 rm -rf "The_Challenge.egg-info"
+
+# Report successes
+echo
+echo "Done! The generated file can be found in the 'dist' folder."

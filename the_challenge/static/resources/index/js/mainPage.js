@@ -19,9 +19,14 @@ function checkIfWindowSizeOkay() {
 
 async function checkUserTime() {
     let result = null;
-    await $.get("/secret/check-user-time", {key: generateOTP("THE2TIME3IS4NOW5")}, (output) => {
-        result = output === "7h3-u53r5-71m3-15-c0rr3c7";
-    });
+    try {
+        await $.get("/secret/check-user-time", {key: generateOTP("THE2TIME3IS4NOW5")}, (output) => {
+            result = output === "7h3-u53r5-71m3-15-c0rr3c7";
+        });
+    } catch (error) {
+        console.log("Caught error:", error);
+        result = false;
+    }
     return result;
 }
 

@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-10-22
+Updated on 2020-11-01
 
 Copyright Ryan Kan 2020
 
@@ -91,9 +91,11 @@ def update_the_challenge():
         download_request.raise_for_status()
         print("Done!")
 
+        print("Writing distribution package contents to file...")
         with open("./The-Challenge_Latest-Dist.tar.gz", "wb+") as f:
             f.write(b64decode(json.loads(download_request.text)["content"]))
             f.close()
+        print("Done!")
 
     else:
         print("Can't get the latest distribution. Try again later.")

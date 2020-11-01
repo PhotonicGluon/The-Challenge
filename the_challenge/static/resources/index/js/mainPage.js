@@ -41,7 +41,11 @@ async function checkIfCanStartTheChallenge() {
     let userTimeCorrect = await checkUserTime();
 
     // Check if user is online
-    let isOnline = await checkIfOnline();
+    let isOnline = null;
+
+    if (userTimeCorrect) {
+        isOnline = await checkIfOnline();
+    }
 
     // Show an appropriate error message for each case
     let errorText = $("#js--error-text");

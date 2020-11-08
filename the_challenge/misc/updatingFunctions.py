@@ -24,7 +24,7 @@ def check_internet_connection():
     Checks whether the user is connected to the internet or not.
 
     Returns:
-        bool: Whether the user is connected to the internet or not.
+        bool:   Whether the user is connected to the internet or not.
     """
 
     try:
@@ -41,9 +41,9 @@ def get_most_recent_version_and_files():
     Gets the most recent version of The Challenge from GitHub and its files.
 
     Returns:
-        Union[None, str]: The most recent version.
+        Union[None, str]:   The most recent version.
 
-        Union[None, dict]: The files of the most recent version.
+        Union[None, dict]:  The files of the most recent version.
     """
 
     # Get the latest commit's SHA

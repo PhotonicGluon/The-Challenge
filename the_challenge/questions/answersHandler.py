@@ -2,7 +2,7 @@
 answersHandler.py
 
 Created on 2020-09-11
-Updated on 2020-10-30
+Updated on 2020-11-08
 
 Copyright Ryan Kan 2020
 
@@ -86,7 +86,7 @@ def check_user_answer(user_answer, calculated_answer):
         calculated_answer (Union[str, int, float, List[Union[int, float]]]):    The computed answer.
 
     Returns:
-        bool: Returns True then the user's answer is correct. If it is wrong it will return False instead.
+        bool:   Returns True then the user's answer is correct. If it is wrong it will return False instead.
     """
 
     # CONSTANTS

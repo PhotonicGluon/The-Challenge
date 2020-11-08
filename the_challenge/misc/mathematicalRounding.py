@@ -2,7 +2,7 @@
 mathematicalRounding.py
 
 Created on 2020-09-20
-Updated on 2020-10-16
+Updated on 2020-11-08
 
 Copyright Ryan Kan 2020
 
@@ -23,6 +23,7 @@ def ceiling(n, decimals=0):
         n (Union[int, float]):  The number to be rounded up.
 
         decimals (int):         The number of decimal places to be rounded up to.
+                                (Default = 0)
 
     Returns:
         Union[int, float]:  The rounded up version of the number `n`.
@@ -62,6 +63,7 @@ def floor(n, decimals=0):
         n (Union[int, float]):  The number to be rounded down.
 
         decimals (int):         The number of decimal places to be rounded down to.
+                                (Default = 0)
 
     Returns:
         Union[int, float]:  The rounded down version of the number `n`.
@@ -102,6 +104,7 @@ def mathematical_round(n, decimals=0):
         n (Union[int, float]):  The number to be rounded.
 
         decimals (int):         The number of decimal places the number should be rounded to.
+                                (Default = 0)
 
     Returns:
         Union[int, float]:  The rounded version of the number `n`.

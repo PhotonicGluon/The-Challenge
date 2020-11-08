@@ -18,7 +18,7 @@ from flask import Flask, request, redirect, url_for, render_template, session, j
 from flask_session import Session
 
 from the_challenge.misc import verify_otp, check_internet_connection
-from the_challenge.questions import QuestionHandler, process_user_answer, check_user_answer
+from the_challenge.questions import QuestionsHandler, process_user_answer, check_user_answer
 from the_challenge.version import __version__
 
 # FLASK SETUP
@@ -124,7 +124,7 @@ def setup_questions():
     # Check the key
     if verify_otp(key, "SETUP2QUESTIONS3"):
         # Setup question bank
-        question_handler = QuestionHandler()
+        question_handler = QuestionsHandler()
 
         # Setup the questions
         generated_questions, input_field_prefixes, answers = question_handler.setup_questions()

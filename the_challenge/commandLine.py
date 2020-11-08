@@ -61,6 +61,8 @@ def update_the_challenge():
         print("You are already on the latest version. Quitting the program now.")
         sys.exit()
 
+    print()
+
     # Get the latest distribution file
     distribution_url = ""
     for file in most_recent_files:

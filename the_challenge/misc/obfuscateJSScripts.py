@@ -2,7 +2,7 @@
 obfuscateJSScripts.py
 
 Created on 2020-10-10
-Updated on 2020-10-15
+Updated on 2020-11-08
 
 Copyright Ryan Kan 2020
 
@@ -33,10 +33,10 @@ def get_all_files_to_obfuscate(base_path="the_challenge"):
     Gets the paths of all the javascript files in the "the_challenge" directory that needs to be obfuscated.
 
     Args:
-        base_path (str): The path to the main folder, "the_challenge".
+        base_path (str):    The path to the main folder, "the_challenge".
 
     Returns:
-        List[str]: Path of all the JavaScript files that are to be obfuscated.
+        List[str]:  Path of all the JavaScript files that are to be obfuscated.
     """
 
     # Iterate through every directory in the base path and find all files which ends in ".js"
@@ -57,7 +57,8 @@ def obfuscate_js_files(base_path="the_challenge"):
     Obfuscates the javascript files.
 
     Args:
-        base_path (str): The path to the main folder, "the_challenge".
+        base_path (str):    The path to the main folder, "the_challenge".
+                            (Default = "the_challenge")
     """
 
     # Get all needed javascript files
@@ -80,7 +81,8 @@ def undo_obfuscation_renaming(base_path=".."):
     Undoes the renaming of the original files (which occurred during obfuscation).
 
     Args:
-        base_path (str): The path to the main folder, "the_challenge".
+        base_path (str):    The path to the main folder, "the_challenge".
+                            (Default = "..")
     """
 
     # Get all javascript files

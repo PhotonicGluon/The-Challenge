@@ -59,7 +59,7 @@ def update_the_challenge():
                 print("Starting update process...")
                 break
     else:
-        print("You are already on the latest version. Quitting now.")
+        print("You are already on the latest version. Quitting the program now.")
         sys.exit()
 
     # Get the latest distribution file

@@ -36,35 +36,6 @@ def check_internet_connection():
     return True
 
 
-# def check_token(token):
-#     """
-#     Checks whether the given is correct or not.
-#
-#     Args:
-#         token (Optional[str]): The github access token.
-#
-#     Returns:
-#         bool: Whether the token is correct or not.
-#     """
-#
-#     # Check if token is None
-#     if token is None:
-#         return False
-#
-#     # Form header
-#     header = {"Authorization": "token %s" % token}
-#
-#     request = requests.get("https://api.github.com/repos/Ryan-Kan/The-Challenge/commits/master", headers=header)
-#
-#     # Check if got response
-#     try:
-#         request.raise_for_status()
-#         return True
-#
-#     except requests.HTTPError:
-#         return False
-
-
 def get_most_recent_version_and_files():
     """
     Gets the most recent version of The Challenge from GitHub and its files.

@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-11-09
+Updated on 2020-11-08
 
 Copyright Ryan Kan 2020
 
@@ -28,7 +28,6 @@ from the_challenge.misc import get_most_recent_version_and_files, check_internet
 def update_the_challenge():
     """
     Updates the local copy of The Challenge.
-    Usage:  update_the_challenge
     """
 
     # Check if the user is online

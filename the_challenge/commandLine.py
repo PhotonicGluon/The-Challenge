@@ -10,7 +10,6 @@ Description: Contains all the command line commands that could be run.
 """
 
 # IMPORTS
-import argparse
 import glob
 import os
 import shutil
@@ -22,37 +21,23 @@ import simplejson as json
 from packaging import version
 
 from the_challenge import __version__
-from the_challenge.misc import check_token, get_most_recent_version, check_internet_connection
+from the_challenge.misc import get_most_recent_version_and_files, check_internet_connection
 
 
 # FUNCTIONS
 def update_the_challenge():
     """
     Updates the local copy of The Challenge.
-    Usage:  update_the_challenge [GITHUB_TOKEN]
+    Usage:  update_the_challenge
     """
-
-    # Form the parser
-    parser = argparse.ArgumentParser(description="Updates The Challenge, when provided the valid access key.")
-    parser.add_argument("access_token", type=str, help="The GitHub access token.", default=None)
-
-    args = parser.parse_args()
 
     # Check if the user is online
     if not check_internet_connection():
         print("You are not connected to the internet. Try again later.")
         sys.exit()
 
-    # Check the provided token
-    access_token = args.access_token
-    if not check_token(access_token):
-        print("The provided token is not valid.")
-        sys.exit()
-
-    print("The provided token is valid.\nGetting most recent version...")
-
-    # Get the GitHub version
-    most_recent_version, most_recent_files = get_most_recent_version(access_token)
+    # Get the latest version
+    most_recent_version, most_recent_files = get_most_recent_version_and_files()
 
     # Get local version
     local_version = __version__
@@ -87,7 +72,7 @@ def update_the_challenge():
     # Download the latest distribution
     if distribution_url != "":
         print("Downloading latest distribution...")
-        download_request = requests.get(distribution_url, headers={"Authorization": "token %s" % access_token})
+        download_request = requests.get(distribution_url)
         download_request.raise_for_status()
         print("Done!")
 

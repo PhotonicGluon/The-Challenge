@@ -36,41 +36,38 @@ def check_internet_connection():
     return True
 
 
-def check_token(token):
+# def check_token(token):
+#     """
+#     Checks whether the given is correct or not.
+#
+#     Args:
+#         token (Optional[str]): The github access token.
+#
+#     Returns:
+#         bool: Whether the token is correct or not.
+#     """
+#
+#     # Check if token is None
+#     if token is None:
+#         return False
+#
+#     # Form header
+#     header = {"Authorization": "token %s" % token}
+#
+#     request = requests.get("https://api.github.com/repos/Ryan-Kan/The-Challenge/commits/master", headers=header)
+#
+#     # Check if got response
+#     try:
+#         request.raise_for_status()
+#         return True
+#
+#     except requests.HTTPError:
+#         return False
+
+
+def get_most_recent_version_and_files():
     """
-    Checks whether the given is correct or not.
-
-    Args:
-        token (Optional[str]): The github access token.
-
-    Returns:
-        bool: Whether the token is correct or not.
-    """
-
-    # Check if token is None
-    if token is None:
-        return False
-
-    # Form header
-    header = {"Authorization": "token %s" % token}
-
-    request = requests.get("https://api.github.com/repos/Ryan-Kan/The-Challenge/commits/master", headers=header)
-
-    # Check if got response
-    try:
-        request.raise_for_status()
-        return True
-
-    except requests.HTTPError:
-        return False
-
-
-def get_most_recent_version(token):
-    """
-    Gets the most recent version of The Challenge from GitHub.
-
-    Args:
-        token (Optional[str]): The github access token.
+    Gets the most recent version of The Challenge from GitHub and its files.
 
     Returns:
         Union[None, str]: The most recent version.
@@ -78,17 +75,13 @@ def get_most_recent_version(token):
         Union[None, dict]: The files of the most recent version.
     """
 
-    # Generate the header
-    header = {"Authorization": "token %s" % token}
-
     # Get the latest commit's SHA
-    latest_commit = requests.get("https://api.github.com/repos/Ryan-Kan/The-Challenge/commits/master", headers=header)
+    latest_commit = requests.get("https://api.github.com/repos/Ryan-Kan/The-Challenge/commits/master")
     latest_commit_sha = json.loads(latest_commit.text)["sha"]
 
     # Get the latest commit's files
     latest_commit_files = requests.get(
-        f"https://api.github.com/repos/Ryan-Kan/The-Challenge/git/trees/{latest_commit_sha}?recursive=true",
-        headers=header)
+        f"https://api.github.com/repos/Ryan-Kan/The-Challenge/git/trees/{latest_commit_sha}?recursive=true")
     latest_commit_files = json.loads(latest_commit_files.text)["tree"]
 
     # Find the url to the latest version file
@@ -101,7 +94,7 @@ def get_most_recent_version(token):
     # Check if the version file's url was found
     if version_file != "":
         # Get the contents of the version file
-        version_file_content = requests.get(version_file, headers=header)
+        version_file_content = requests.get(version_file)
         version_file_content = str(b64decode(json.loads(version_file_content.text)["content"]), encoding="UTF-8")
 
         # Find the version that is in the file
@@ -110,21 +103,3 @@ def get_most_recent_version(token):
 
     else:
         return None, None
-
-
-def get_most_recent_version_updated():
-    """
-    Gets the most recent version of The Challenge from GitHub.
-
-    Returns:
-        Union[None, str]: The most recent version.
-    """
-
-    # Get the contents of the version file
-    version_file_content = requests.get(
-        "https://raw.githubusercontent.com/Ryan-Kan/The-Challenge/master/the_challenge/version.py")
-    version_file_content = version_file_content.text
-
-    # Find the version that is in the file
-    most_recent_version = re.findall('"([^"]*)"', version_file_content)[0]
-    return most_recent_version

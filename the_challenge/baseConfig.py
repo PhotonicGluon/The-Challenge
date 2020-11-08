@@ -1,7 +1,7 @@
 """
 This is the base configuration file of The Challenge.
 
-Note that the `SESSION_TYPE` should NOT be changed.
+Note that the value of the variable `SESSION_TYPE` should NOT be changed.
 """
 
 SESSION_TYPE = "filesystem"  # Makes each session generate a file

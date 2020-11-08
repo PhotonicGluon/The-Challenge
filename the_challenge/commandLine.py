@@ -2,7 +2,7 @@
 commandLine.py
 
 Created on 2020-10-07
-Updated on 2020-11-01
+Updated on 2020-11-09
 
 Copyright Ryan Kan 2020
 
@@ -34,7 +34,7 @@ def update_the_challenge():
 
     # Form the parser
     parser = argparse.ArgumentParser(description="Updates The Challenge, when provided the valid access key.")
-    parser.add_argument("access_token", type=str, help="The GitHub access token.")
+    parser.add_argument("access_token", type=str, help="The GitHub access token.", default=None)
 
     args = parser.parse_args()
 

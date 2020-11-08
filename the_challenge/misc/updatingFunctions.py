@@ -2,7 +2,7 @@
 updatingFunctions.py
 
 Created on 2020-10-07
-Updated on 2020-10-16
+Updated on 2020-11-08
 
 Copyright Ryan Kan 2020
 
@@ -110,3 +110,21 @@ def get_most_recent_version(token):
 
     else:
         return None, None
+
+
+def get_most_recent_version_updated():
+    """
+    Gets the most recent version of The Challenge from GitHub.
+
+    Returns:
+        Union[None, str]: The most recent version.
+    """
+
+    # Get the contents of the version file
+    version_file_content = requests.get(
+        "https://raw.githubusercontent.com/Ryan-Kan/The-Challenge/master/the_challenge/version.py")
+    version_file_content = version_file_content.text
+
+    # Find the version that is in the file
+    most_recent_version = re.findall('"([^"]*)"', version_file_content)[0]
+    return most_recent_version

@@ -3,7 +3,7 @@ flask==1.1.2
 flask-session==0.3.2
 gevent-websocket==0.10.1
 kaleido==0.0.3.post1
-numpy==1.19.3
+numpy==1.22.0
 packaging==20.4
 plotly==4.12.0
 simplejson==3.17.2

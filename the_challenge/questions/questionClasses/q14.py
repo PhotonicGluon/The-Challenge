@@ -2,9 +2,9 @@
 q14.py
 
 Created on 2020-08-21
-Updated on 2020-10-29
+Updated on 2021-12-04
 
-Copyright Ryan Kan 2020
+Copyright Ryan Kan 2021
 
 Description: A file which holds the designated question class.
 """
@@ -29,8 +29,8 @@ class Q14(Question):
 
     def calculations(self):
         # CONSTANTS
-        x_range = [-40, 40]  # If `x_range` = [a, b] then a <= x <= b
-        y_range = [-40, 40]  # If `y_range` = [p, q] then p <= y <= q
+        x_range = [-25, 25]  # If `x_range` = [a, b] then a <= x <= b
+        y_range = [-25, 25]  # If `y_range` = [p, q] then p <= y <= q
 
         # CALCULATIONS
         # Generate the solutions

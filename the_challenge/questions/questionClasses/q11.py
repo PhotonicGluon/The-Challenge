@@ -2,9 +2,9 @@
 q11.py
 
 Created on 2020-08-21
-Updated on 2020-10-24
+Updated on 2021-12-04
 
-Copyright Ryan Kan 2020
+Copyright Ryan Kan 2021
 
 Description: A file which holds the designated question class.
 """
@@ -27,7 +27,7 @@ class Q11(Question):
     def calculations(self):
         # CONSTANTS
         no_terms = 3  # How many terms should there be in the polynomial that the user has to integrate?
-        power_range = [1, 9]  # If `power_range` = [a, b] then a <= p <= b where p is the degree of the term
+        power_range = [1, 5]  # If `power_range` = [a, b] then a <= p <= b where p is the degree of the term
         integral_limits = [-20, 20]  # If `integral_limits` = [a, b] then the limits of the integral are a to b.
 
         # CALCULATIONS

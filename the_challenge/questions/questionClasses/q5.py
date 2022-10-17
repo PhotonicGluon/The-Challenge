@@ -2,9 +2,9 @@
 q5.py
 
 Created on 2020-10-05
-Updated on 2020-10-30
+Updated on 2021-12-04
 
-Copyright Ryan Kan 2020
+Copyright Ryan Kan 2021
 
 Description: A file which holds the designated question class.
 """
@@ -25,7 +25,7 @@ class Q5(Question):
 
     def calculations(self):
         # CONSTANTS
-        no_terms_in_polynomial = 8  # The number of terms inside the polynomial
+        no_terms_in_polynomial = 6  # The number of terms inside the polynomial
 
         # CALCULATIONS
         # Set up variables

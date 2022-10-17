@@ -1,11 +1,11 @@
 antlr4-python3-runtime==4.7.1
-flask==1.1.2
+flask~=2.1.2
 flask-session==0.3.2
 gevent-websocket==0.10.1
-kaleido==0.0.3.post1
+kaleido==0.2.1
 numpy==1.22.0
-packaging==20.4
-plotly==4.12.0
+packaging~=20.9
+plotly~=4.14.3
 simplejson==3.17.2
 sympy==1.6.2
 requests==2.24.0

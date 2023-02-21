@@ -50,7 +50,7 @@ class Q7(Question):
 
     def generate_question(self):
         string = f"Determine the {self.ordinal(self.question[0])} term in the binomial expansion of " \
-                 f"$${self.question[1]}$$"
+                 f"$${self.question[1]},$$ where the 1<sup>st</sup> term is the term with the highest power of $x$."
         return string
 
     def generate_answer(self):

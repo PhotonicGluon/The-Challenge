@@ -1,4 +1,4 @@
-![The-Challenge Cover Image](https://user-images.githubusercontent.com/25820201/93889162-7493a980-fd1b-11ea-98d9-c6604751ab25.png)
+![The-Challenge Cover Image](Banner.png)
 
 <p align="center">
     <b>The Challenge</b>: A gauntlet of 14 mathematics questions that are to be solved within 15 minutes.

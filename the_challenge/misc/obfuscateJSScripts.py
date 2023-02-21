@@ -76,13 +76,13 @@ def obfuscate_js_files(base_path="the_challenge"):
         os.rename(file[:-3] + "-obfuscated.js", file)
 
 
-def undo_obfuscation_renaming(base_path=".."):
+def undo_obfuscation_renaming(base_path="the_challenge"):
     """
     Undoes the renaming of the original files (which occurred during obfuscation).
 
     Args:
         base_path (str):    The path to the main folder, "the_challenge".
-                            (Default = "..")
+                            (Default = "the_challenge")
     """
 
     # Get all javascript files

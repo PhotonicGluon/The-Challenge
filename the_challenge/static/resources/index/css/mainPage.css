@@ -135,6 +135,10 @@ h2 {
     color: white;
 }
 
+.start-button:hover {
+    cursor: pointer;
+}
+
 .start-button:enabled {
     background-color: #28b062;
 }

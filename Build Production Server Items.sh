@@ -3,9 +3,9 @@
 # Build Production Server Items.sh                                              #
 #                                                                               #
 # Created on 2020-09-21                                                         #
-# Updated on 2020-11-01                                                         #
+# Updated on 2023-02-21                                                         #
 #                                                                               #
-# Copyright Ryan Kan 2020                                                       #
+# Copyright Ryan Kan 2020 - 2023                                                #
 #                                                                               #
 # Description: This file will run all the necessary commands to compile The     #
 #              Challenge and to include all necessary files.                    #
@@ -24,8 +24,8 @@ COMPRESSED_DIRECTORY_NAME="The-Challenge-Server-Items"  # What should be the nam
 echo
 echo "The Challenge has an optional JavaScript Obfuscation System that can be activated."
 
-echo "If you do want to use the Obfuscation System, ensure that the instructions in the section 'B. Building From " \
-"Source (Development Server)' in 'README.md' have been followed strictly."
+echo "If you do want to use the Obfuscation System, ensure that the instructions in the section 'B. Building From" \
+"Source (Development Server)' in 'README.md' have been followed."
 
 while [ "$obfuscationAnswer" != "Y" ] && [ "$obfuscationAnswer" != "N" ] && [ "$obfuscationAnswer" != "y" ] &&
     [ "$obfuscationAnswer" != "n" ]; do

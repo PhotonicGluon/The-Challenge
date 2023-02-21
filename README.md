@@ -5,18 +5,27 @@
 </p>
 
 ## What is The Challenge?
-The Challenge is a web app which creates 14 mathematics questions which is to be solved within 15 minutes, whilst the tune of [Edvard Grieg's Peer Gynt Suite No. 1, Op. 46](https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)#Suite_No._1,_Op._46) plays in the background.
 
-The 14 questions will test on different aspects of mathematics, ranging from simple arithmetic to algebra to logarithms to basic calculus.
+The Challenge is a web app which creates 14 mathematics questions which is to be solved within 15 minutes, whilst the
+tune
+of [Edvard Grieg's Peer Gynt Suite No. 1, Op. 46](https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)#Suite_No._1,_Op._46)
+plays in the background.
+
+The 14 questions will test on different aspects of mathematics, ranging from simple arithmetic to algebra to logarithms
+to basic calculus.
 
 ## Installation
+
 ### A. Installing It Pre-Built (Production Server)
+
 1. Navigate to [this folder](dist) (`dist`) that is in the root directory.
 2. Download the `.tar.gz` file that is in that folder. (e.g. `The-Challenge-Production-Server_1.0.0a0.dev0.tar.gz`)
 3. Extract the contents of that `.tar.gz` file.
-4. Follow the instructions of `Production Server Installation Instructions.txt` which can be found in the extracted contents of the `.tar.gz` file.
+4. Follow the instructions of `Production Server Installation Instructions.txt` which can be found in the extracted
+   contents of the `.tar.gz` file.
 
 ### B. Building From Source (Development Server)
+
 1. Download the whole repository as a `.zip` file.
     * You can do so by clicking [this link](https://github.com/Ryan-Kan/The-Challenge/archive/master.zip)
 2. Extract the contents of that `.zip` file.
@@ -42,7 +51,9 @@ The 14 questions will test on different aspects of mathematics, ranging from sim
     python3 the_challenge/__init__.py
     ```
 
-**(Optional)** If you want to use the JavaScript Obfuscator System that is built-into The Challenge, you will need to follow the following instructions.
+**(Optional)** If you want to use the JavaScript Obfuscator System that is built-into The Challenge, you will need to
+follow the following instructions.
+
 1. Install the NodeJS Package Manager (`npm`).
     * Installation instructions can be found [here](https://nodejs.org/en/).
 2. Install the `javascript-obfuscator` package from the `npm` by running:
@@ -57,13 +68,15 @@ The 14 questions will test on different aspects of mathematics, ranging from sim
     ```bash
     printf "function hi(){console.log('Hello World!');}hi();" >> sample.js
     ```
-    and then by running:
+   and then by running:
     ```bash
     javascript-obfuscator sample.js
     ```
-    If a file named `sample-obfuscated.js` was created, you are good to go. If not, review the steps again.
+   If a file named `sample-obfuscated.js` was created, you are good to go. If not, review the steps again.
 
 ## Licenses
+
 This project is licensed under the MIT license.
 
-The licenses of the software used can be found in the [`licenses.html`](the_challenge/templates/index/licenses.html) file.
+The licenses of the software used can be found in the [`licenses.html`](the_challenge/templates/index/licenses.html)
+file.

@@ -1,4 +1,4 @@
-![The-Challenge Cover Image](Banner.png)
+![The-Challenge Cover Image](Banner.webp)
 
 <p align="center">
     <b>The Challenge</b>: A gauntlet of 14 mathematics questions that are to be solved within 15 minutes.
